@@ -1,0 +1,28 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/ScrollView01"
+    android:layout_marginTop="65dp"
+    android:layout_marginBottom="163dp"
+    android:scrollbarStyle="insideInset"
+    >
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/framelayout_view_clocks_day"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_bg_rounded"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
+    tools:context="org.jesteban.clockomatic.fragments.register_page.ViewClocksDayFragment"
+    android:orientation="horizontal">
+
+
+
+
+</RelativeLayout>
+    </ScrollView>

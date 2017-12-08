@@ -1,0 +1,36 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.jesteban.clockomatic.fragments.ReportPageFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <fragment
+            android:id="@+id/fragment_report_page_date_picker"
+            android:name="org.jesteban.clockomatic.fragments.register_page.MyDatePickerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_my_date_picker"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <fragment
+            android:id="@+id/fragment_view_clocks_month"
+            android:name="org.jesteban.clockomatic.fragments.report_page.ViewClocksMonthFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_view_clocks_month" />
+
+    </LinearLayout>
+
+</FrameLayout>
