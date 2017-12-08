@@ -17,6 +17,10 @@ public class EntrySet extends Object implements Iterable<Entry> {
         // Create a empty EntrySet
     }
 
+    public EntrySet(ArrayList<Entry> list) {
+        this.entries = list;
+    }
+
     @Override
     public int hashCode() {
         return entries.hashCode();

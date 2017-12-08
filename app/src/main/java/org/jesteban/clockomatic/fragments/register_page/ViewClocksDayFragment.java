@@ -33,7 +33,7 @@ public class ViewClocksDayFragment extends Fragment implements Observer,Dependen
 
     private String showBelongingDayPrefix = "";
     private RelativeLayout layout = null;
-    DynamicWidgets<Button> buttonWidgets = null;
+    private DynamicWidgets<Button> buttonWidgets = null;
 
     @Override //DependencyInjector.Injectable<StateController>
     public boolean setDependency(StateController dependency) {
@@ -167,8 +167,6 @@ public class ViewClocksDayFragment extends Fragment implements Observer,Dependen
         buttonWidgets.setAllWidgetAsUnused();
         EntrySet entries = state.getEntries().getEntriesBelongingDayStartWith(showBelongingDayPrefix);
         for (Entry entry : entries){
-
-
             Button button = buttonWidgets.getWidget(buttonIdx);
             button.setText(aux.getJustHoursPlain(entry));
             button.setTag(entry);
