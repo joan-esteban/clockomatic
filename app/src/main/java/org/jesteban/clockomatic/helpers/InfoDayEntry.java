@@ -1,6 +1,5 @@
 package org.jesteban.clockomatic.helpers;
 
-import org.jesteban.clockomatic.fragments.report_page.ViewClocksMonthFragment;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
 

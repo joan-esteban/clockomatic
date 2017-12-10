@@ -1,28 +1,20 @@
-package org.jesteban.clockomatic.fragments.report_page;
+package org.jesteban.clockomatic.fragments.reportpage.showlistdaysclocks;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.text.Spannable;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.jesteban.clockomatic.R;
-import org.jesteban.clockomatic.StateController;
-import org.jesteban.clockomatic.helpers.DependencyInjector;
 import org.jesteban.clockomatic.helpers.DynamicWidgets;
 import org.jesteban.clockomatic.helpers.Entry2Html;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
-import org.jesteban.clockomatic.model.State;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -31,27 +23,40 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class ViewClocksMonthFragment extends Fragment implements Observer,DependencyInjector.Injectable<StateController> {
-    private static final Logger  LOGGER = Logger.getLogger(ViewClocksMonthFragment.class.getName());
+public class ShowListDaysClocksFragment extends Fragment implements ShowListDaysClocksContract.View{
+    private static final Logger  LOGGER = Logger.getLogger(ShowListDaysClocksFragment.class.getName());
     private String showBelongingMonthPrefix = null;
-    private StateController stateController = null;
+    private ShowListDaysClocksContract.Presenter presenter = null;
     private View view = null;
     private LinearLayout layout = null;
     private DynamicWidgets<TextView> dynamicTextViews =new DynamicWidgets<>(new DynamicTextViewsActions());
-    public ViewClocksMonthFragment() {
+
+
+
+    public ShowListDaysClocksFragment() {
         // Required empty public constructor
     }
 
-    public static ViewClocksMonthFragment newInstance() {
-        return new ViewClocksMonthFragment();
+    public static ShowListDaysClocksFragment newInstance() {
+        return new ShowListDaysClocksFragment();
     }
+
+    @Override
+    public void showTitle(String title) {
+
+    }
+
+    @Override
+    public void showEntries(EntrySet entries) {
+        syncWithState(entries);
+    }
+
+
 
     protected class DynamicTextViewsActions implements DynamicWidgets.OnMyActions<TextView>{
         @Override
@@ -81,43 +86,24 @@ public class ViewClocksMonthFragment extends Fragment implements Observer,Depend
         //TextView textView = (TextView) view.findViewById(R.id.month_text_view);
         //textView.setMovementMethod(new ScrollingMovementMethod());
         layout = (LinearLayout) view.findViewById(R.id.month_main_layout);
-        if (stateController!= null) syncWithState(stateController.getState());
+        //if (presenter != null) syncWithState(presenter.getState());
+
         return view;
     }
 
     public void setShowBelongingMonthPrefix(String dayPrefix) {
         LOGGER.log(Level.INFO,String.format("setShowBelongingDayPrefix dayPrefix = %s" , dayPrefix));
         this.showBelongingMonthPrefix = dayPrefix;
-        if (stateController!= null) syncWithState(stateController.getState());
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (stateController!= null) stateController.addObserver(this);
+        //if (presenter != null) syncWithState(presenter.getState());
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        if (stateController!= null) stateController.deleteObserver(this);
+    public void setPresenter(ShowListDaysClocksContract.Presenter presenter) {
+        assert(presenter!=null);
+        this.presenter = presenter;
+        presenter.startUi();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (stateController!= null) stateController.deleteObserver(this);
-    }
-
-    @Override // DependencyInjector.Injectable<StateController>
-    public boolean setDependency(StateController dependency) {
-        if (dependency==null) return false;
-        stateController = dependency;
-        stateController.addObserver(this);
-        syncWithState(stateController.getState());
-        return true;
-    }
 
 
     private String getBelongingMonthPretty(){
@@ -143,8 +129,8 @@ public class ViewClocksMonthFragment extends Fragment implements Observer,Depend
         };
         return sb.toString();
     }
-    public void syncWithState(State state){
-        EntrySet entries = state.getEntries().getEntriesBelongingDayStartWith(this.showBelongingMonthPrefix);
+    public void syncWithState(EntrySet entries){
+        //EntrySet entries = state.getEntries().getEntriesBelongingDayStartWith(this.showBelongingMonthPrefix);
         Set<String> days = entries.getDistintBelongingDays();
         dynamicTextViews.setAllWidgetAsUnused();
         int idx=0;
@@ -177,14 +163,6 @@ public class ViewClocksMonthFragment extends Fragment implements Observer,Depend
         */
     }
 
-    @Override
-    public void update(Observable observable, Object arg) {
-        LOGGER.log(Level.FINE, "update from a Observable");
-        if (observable instanceof StateController) {
-            StateController state = (StateController) observable;
-            LOGGER.log(Level.FINE, "update from StateController");
-            syncWithState(state.getState());
-        }
-    }
+
 
 }

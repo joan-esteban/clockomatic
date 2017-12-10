@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.fragments.register_page;
+package org.jesteban.clockomatic.views;
 
 import android.content.Context;
 import android.os.Build;

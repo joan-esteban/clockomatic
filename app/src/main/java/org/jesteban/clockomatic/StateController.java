@@ -15,6 +15,10 @@ public class StateController extends Observable {
         public void setStateController(StateController stateController);
     }
 
+    public interface EventsListener{
+        void onChangeEntries(StateController owner);
+    }
+
     private static Logger LOGGER = Logger.getLogger(StateController.class.getName());
 
     private State state = new State();

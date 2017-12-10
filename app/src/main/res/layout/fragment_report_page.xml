@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.jesteban.clockomatic.fragments.ReportPageFragment">
+    tools:context=".fragments.reportpage.ReportPageFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -15,7 +15,7 @@
 
         <fragment
             android:id="@+id/fragment_report_page_date_picker"
-            android:name="org.jesteban.clockomatic.fragments.register_page.MyDatePickerFragment"
+            android:name="org.jesteban.clockomatic.views.MyDatePickerFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_my_date_picker"/>
@@ -26,7 +26,7 @@
 
         <fragment
             android:id="@+id/fragment_view_clocks_month"
-            android:name="org.jesteban.clockomatic.fragments.report_page.ViewClocksMonthFragment"
+            android:name="org.jesteban.clockomatic.fragments.reportpage.showlistdaysclocks.ShowListDaysClocksFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_view_clocks_month" />

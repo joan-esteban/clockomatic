@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.jesteban.clockomatic.fragments.RegisterPageFragment">
+    tools:context="org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -13,7 +13,7 @@
 
         <fragment
             android:id="@+id/fragment_my_date_time_picker"
-            android:name="org.jesteban.clockomatic.fragments.register_page.MyDateTimePickerFragment"
+            android:name="org.jesteban.clockomatic.views.MyDateTimePickerFragment"
             android:layout_width="359dp"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_my_date_time_picker" />
@@ -26,7 +26,7 @@
 
             <fragment
                 android:id="@+id/fragment_view_clocks_day"
-                android:name="org.jesteban.clockomatic.fragments.register_page.ViewClocksDayFragment"
+                android:name="org.jesteban.clockomatic.fragments.registerpage.editclocksday.EditClocksDayFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_view_clocks_day" />

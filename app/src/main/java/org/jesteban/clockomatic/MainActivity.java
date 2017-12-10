@@ -1,10 +1,6 @@
 package org.jesteban.clockomatic;
 
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.support.annotation.Nullable;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,18 +15,25 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-import org.jesteban.clockomatic.fragments.RegisterPageFragment;
-import org.jesteban.clockomatic.fragments.ReportPageFragment;
+import org.jesteban.clockomatic.controllers.MainActivityContract;
+import org.jesteban.clockomatic.controllers.MainActivityPresenter;
+import org.jesteban.clockomatic.fragments.registerpage.RegisterPagePresenter;
+import org.jesteban.clockomatic.helpers.SewingBox;
+import org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment;
+import org.jesteban.clockomatic.fragments.reportpage.ReportPageFragment;
+import org.jesteban.clockomatic.fragments.reportpage.ReportPageContract;
 import org.jesteban.clockomatic.helpers.DependencyInjector;
+import org.jesteban.clockomatic.fragments.reportpage.ReportPagePresenter;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
     private static Logger LOGGER = Logger.getLogger(MainActivity.class.getName());
-    private StateController stateController = new StateController();
+
+    private MainActivityContract.Presenter presenter = new MainActivityPresenter();
+    private ReportPageContract.Presenter reportPagePresenter = null;
     DependencyInjector<StateController> stateControllerInjector = new DependencyInjector<StateController>();
 
 
@@ -51,8 +54,18 @@ public class MainActivity extends AppCompatActivity {
         // If changed orientations, viewPager fragments are no recreated, so it need pointer to stateController
         // In first run fragments are not created
         // https://stackoverflow.com/questions/13815010/showing-specified-page-when-view-pager-is-first-created
+
         LOGGER.log(Level.INFO,"onCreate injectStateController");
-        stateControllerInjector.injectList(stateController,getSupportFragmentManager().getFragments() );
+        stateControllerInjector.injectList(presenter.getStateController(),getSupportFragmentManager().getFragments() );
+        if (getSupportFragmentManager().getFragments()!=null) {
+            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                if (fragment instanceof ReportPageFragment) {
+                    ReportPageFragment reportPageFragment = (ReportPageFragment) fragment;
+                    reportPagePresenter = new ReportPagePresenter(reportPageFragment);
+                    SewingBox.sewPresentersView(reportPagePresenter, presenter, reportPageFragment);
+                }
+            }
+        }
     }
 
 
@@ -69,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        stateController.wipeStore();
+                        presenter.wipeStore();
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -141,15 +154,18 @@ public class MainActivity extends AppCompatActivity {
             Fragment result = null;
             LOGGER.info("SectionsPagerAdapter getItem(" + Integer.toString(position));
             if (position == 0) {
-                LOGGER.info("Creating instance for RegisterPageFragment(" + stateController + ")");
                 result = RegisterPageFragment.newInstance();
+                RegisterPageFragment registerPageFragment = RegisterPageFragment.newInstance();
+                SewingBox.sewPresentersView(new RegisterPagePresenter(registerPageFragment),presenter,registerPageFragment);
+                result = registerPageFragment;
+
             } else {
-                LOGGER.info("Creating instance for ReportPageFragment(" + stateController + ")");
-                result = ReportPageFragment.newInstance();
-                //fragment.setStateController(stateController);
-                //return fragment;
+                ReportPageFragment reportPageFragment = ReportPageFragment.newInstance();
+                reportPagePresenter = new ReportPagePresenter(reportPageFragment);
+                SewingBox.sewPresentersView(reportPagePresenter,presenter,reportPageFragment);
+                result = reportPageFragment;
             }
-            stateControllerInjector.inject(stateController,result );
+            stateControllerInjector.inject(presenter.getStateController(),result );
             return result;
         }
 
