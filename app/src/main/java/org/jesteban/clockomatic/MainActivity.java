@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         // In first run fragments are not created
         // https://stackoverflow.com/questions/13815010/showing-specified-page-when-view-pager-is-first-created
 
-        LOGGER.log(Level.INFO,"onCreate injectStateController");
+        LOGGER.log(Level.INFO,"onCreate patch to already created fragments");
         stateControllerInjector.injectList(presenter.getStateController(),getSupportFragmentManager().getFragments() );
         if (getSupportFragmentManager().getFragments()!=null) {
             for (Fragment fragment : getSupportFragmentManager().getFragments()) {
@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
                     ReportPageFragment reportPageFragment = (ReportPageFragment) fragment;
                     reportPagePresenter = new ReportPagePresenter(reportPageFragment);
                     SewingBox.sewPresentersView(reportPagePresenter, presenter, reportPageFragment);
+                }
+                if (fragment instanceof RegisterPageFragment) {
+                    RegisterPageFragment registerPageFragment = (RegisterPageFragment) fragment;
+                    SewingBox.sewPresentersView(new RegisterPagePresenter(registerPageFragment),presenter,registerPageFragment);
+
                 }
             }
         }
