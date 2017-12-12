@@ -12,12 +12,17 @@ import static org.junit.Assert.assertFalse;
 
 
 public class DependencyInjectorBindingTest {
-    public static class  Consumer{
+    public static class  ConsumerExampleBinding{
         public ExampleProvider example;
-        public AnotherProvider another;
+
         public void setExampleProvider(ExampleProvider smi){
             example = smi;
         }
+
+    }
+
+    public static class  ConsumerExampleBindingExtendedWithAnother extends ConsumerExampleBinding{
+        public AnotherProvider another;
         public void setAnotherProvider(AnotherProvider smi) { another = smi;};
     }
 
@@ -96,7 +101,7 @@ public class DependencyInjectorBindingTest {
     @Test
     public void happy_path(){
         DependencyInjectorBinding dib =new DependencyInjectorBinding();
-        Consumer consumer = new Consumer();
+        ConsumerExampleBinding consumer = new ConsumerExampleBinding();
         ExampleProviderImpl provider = new ExampleProviderImpl();
         Provider2 provider2 = new Provider2();
 
@@ -107,7 +112,7 @@ public class DependencyInjectorBindingTest {
     @Test
     public void inject_multiples_providers(){
         DependencyInjectorBinding dib =new DependencyInjectorBinding();
-        Consumer consumer = new Consumer();
+        ConsumerExampleBindingExtendedWithAnother consumer = new ConsumerExampleBindingExtendedWithAnother();
         ExampleProviderImpl provider = new ExampleProviderImpl();
         AnotherProviderImpl provider2 = new AnotherProviderImpl();
         List<Provider> providers = new ArrayList<>();

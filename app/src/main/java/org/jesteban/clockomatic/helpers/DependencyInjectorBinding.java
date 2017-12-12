@@ -28,7 +28,7 @@ public class DependencyInjectorBinding {
 
     public List<Method> getProviderMethods(Object consumer){
         ArrayList<Method> result = new ArrayList<>();
-        Method[] methods = consumer.getClass().getDeclaredMethods();
+        Method[] methods = consumer.getClass().getMethods();
         for (Method method : methods){
             LOGGER.info( method.getName() );
             if (isMethodForBinding(method)) result.add(method);
