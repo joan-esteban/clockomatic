@@ -6,7 +6,6 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -17,19 +16,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_my_date_time_picker" />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal">
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
 
+                <fragment
+                    android:id="@+id/fragment_detailed_info_day"
+                    android:name="org.jesteban.clockomatic.fragments.reportpage.showdaydetail.DayDetailFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </RelativeLayout>
             <fragment
                 android:id="@+id/fragment_view_clocks_day"
                 android:name="org.jesteban.clockomatic.fragments.registerpage.editclocksday.EditClocksDayFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_view_clocks_day"/>
-        </RelativeLayout>
+                tools:layout="@layout/fragment_view_clocks_day"
+                />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

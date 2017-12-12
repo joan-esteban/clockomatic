@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static Logger LOGGER = Logger.getLogger(MainActivity.class.getName());
+    private static final Logger  LOGGER = Logger.getLogger(MainActivity.class.getName());
 
     private MainActivityContract.Presenter presenter = new MainActivityPresenter();
     private ReportPageContract.Presenter reportPagePresenter = null;
@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
             Fragment result = null;
             LOGGER.info("SectionsPagerAdapter getItem(" + Integer.toString(position));
             if (position == 0) {
-                result = RegisterPageFragment.newInstance();
                 RegisterPageFragment registerPageFragment = RegisterPageFragment.newInstance();
                 SewingBox.sewPresentersView(new RegisterPagePresenter(registerPageFragment),presenter,registerPageFragment);
                 result = registerPageFragment;

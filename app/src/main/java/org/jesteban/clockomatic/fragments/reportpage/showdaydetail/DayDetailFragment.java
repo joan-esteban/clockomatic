@@ -3,11 +3,14 @@ package org.jesteban.clockomatic.fragments.reportpage.showdaydetail;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.jesteban.clockomatic.R;
+import org.jesteban.clockomatic.fragments.reportpage.ReportPageContract;
 import org.jesteban.clockomatic.fragments.reportpage.showlistdaysclocks.ShowListDaysClocksFragment;
 import org.jesteban.clockomatic.helpers.DependencyInjector;
 import org.jesteban.clockomatic.model.EntrySet;
@@ -19,25 +22,13 @@ import java.util.logging.Logger;
 
 
 
-public class  DayDetailFragment extends Fragment implements Observer,DependencyInjector.Injectable<DayDetailFragment.DayDetailModel>{
+public class  DayDetailFragment extends Fragment implements DayDetailContract.View{
     private static final Logger LOGGER = Logger.getLogger(ShowListDaysClocksFragment.class.getName());
-    private DayDetailModel model = null;
+    private DayDetailContract.Presenter presenter = null;
 
-    public static class DayDetailModel extends Observable{
-        public EntrySet getEntries() {
-            return entries;
-        }
-
-        public void setEntries(EntrySet entries) {
-            this.entries = entries;
-            setChanged();
-            notifyObservers();
-        }
-
-        private EntrySet entries;
-
-    }
-
+    private TextView txtNameDay = null;
+    private TextView txtNumDay = null;
+    private TextView txtEntries = null;
     public DayDetailFragment() {
         // Required empty public constructor
     }
@@ -45,52 +36,39 @@ public class  DayDetailFragment extends Fragment implements Observer,DependencyI
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_view_clocks_month, container, false);
+        View view =  inflater.inflate(R.layout.fragment_view_detail, container, false);
+        txtNameDay = (TextView) view.findViewById(R.id.text_name_day);
+        txtNumDay = (TextView) view.findViewById(R.id.text_num_day);
+        txtEntries = (TextView) view.findViewById(R.id.text_pair_entries);
+
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (model != null) model.addObserver(this);
-    }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        if (model != null) model.deleteObserver(this);
+    public void showDayName(String dayName) {
+        txtNameDay.setText(dayName);
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (model != null) model.deleteObserver(this);
-    }
-
-
-
-    private void syncWithState(DayDetailModel model){
-
-    }
-
-    @Override // DependencyInjector.Injectable<StateController>
-    public boolean setDependency(DayDetailModel dependency) {
-        if (dependency==null) return false;
-        model = dependency;
-        model.addObserver(this);
-        syncWithState(model);
-        return true;
+    public void showDayNumber(String dayNumber) {
+        txtNumDay.setText(dayNumber);
     }
 
     @Override
-    public void update(Observable observable, Object arg) {
-        LOGGER.log(Level.FINE, "update from a Observable");
-        if (observable instanceof DayDetailModel) {
-            DayDetailModel model = (DayDetailModel) observable;
-            LOGGER.log(Level.FINE, "update from StateController");
-            syncWithState(model);
-        }
+    public void showEntries(String entries) {
+        txtEntries.setText(Html.fromHtml(entries));
+    }
+
+    @Override
+    public void showInfo(String info) {
+
     }
 
 
+
+    @Override
+    public void setPresenter(DayDetailContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
 }

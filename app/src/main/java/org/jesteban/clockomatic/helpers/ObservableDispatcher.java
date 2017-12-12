@@ -38,7 +38,7 @@ public class ObservableDispatcher<T> {
                 Class<?> [] list = getClassForParams(params);
                 Method method = observer.getClass().getMethod(methodName,list);
 
-                LOGGER.info("calling method: " + method.getName() + " / ");
+                LOGGER.info("calling method: " + method.getName() + " / " + observer.getClass().getName());
                 LOGGER.info("param len  " + Integer.toString(params.length));
                 method.invoke(observer, params);
 

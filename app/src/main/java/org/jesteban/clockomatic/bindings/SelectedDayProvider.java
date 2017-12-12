@@ -12,6 +12,10 @@ public interface SelectedDayProvider extends Provider{
     public Calendar getSelectedDay();
     public Entry getFloatingEntry();
 
+    public String getFilterBelongingForDay();
+    public String getFilterBelongingForMonth();
+
+
     void subscribe(SelectedDayProvider.Listener listner);
 
     public interface Listener {
