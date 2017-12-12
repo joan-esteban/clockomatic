@@ -19,6 +19,7 @@ public class SelectedDayProviderImpl implements  SelectedDayProvider{
     public boolean setSelecteDay(Calendar date) {
         selectedDay = date;
         showBelongingMonthPrefix = null;
+        showBelongingDayPrefix=null;
         observable.notify("onChangeSelectedDay");
         return true;
     }

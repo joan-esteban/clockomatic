@@ -6,6 +6,7 @@ import org.jesteban.clockomatic.bindings.Provider;
 import org.jesteban.clockomatic.bindings.SelectedDayProvider;
 import org.jesteban.clockomatic.helpers.Entry2Html;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
+import org.jesteban.clockomatic.helpers.Minutes2String;
 import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
 import org.jesteban.clockomatic.model.EntrySet;
 
@@ -31,6 +32,8 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
     }
 
 
+
+
     private StringBuilder getTextForEntries(InfoDayEntry infoDay){
         StringBuilder sb = new StringBuilder();
         List<InfoDayEntry.EntryPairs> pairs = infoDay.getPairsInfo();
@@ -49,6 +52,8 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
                 , selectedDay.getFilterBelongingForDay());
         StringBuilder txt = getTextForEntries(infoDayEntry);
         view.showEntries(txt.toString());
+        long totalMinutesWork = infoDayEntry.getTotalMinuteOfWork();
+        view.showInfo( Minutes2String.convert(totalMinutesWork));
     }
 
     @Override
@@ -60,6 +65,13 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
         view.showDayName( days[date.get(Calendar.DAY_OF_WEEK)] );
         view.showDayNumber(Integer.toString(date.get(Calendar.DAY_OF_MONTH)));
         onChangeEntries();
+    }
+
+    @Override
+    public void startUi() {
+        super.startUi();
+        onChangeSelectedDay();
+
     }
 
     public void setSelectedDayProvider(@NonNull SelectedDayProvider p){

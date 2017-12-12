@@ -17,6 +17,7 @@ public class InfoDayEntry {
     private static final Logger LOGGER = Logger.getLogger(InfoDayEntry.class.getName());
 
     private EntrySet entries;
+    private List<EntryPairs> entryPairs=null;
 
     /**
      * It checks that data is coherent
@@ -75,7 +76,7 @@ public class InfoDayEntry {
             return (finish.getRegisterDate().getTimeInMillis() - starting.getRegisterDate().getTimeInMillis())/ (1000*60);
         }
     }
-    public List<EntryPairs> getPairsInfo(){
+    private List<EntryPairs> createPairsInfo(){
         if (entries==null) return null;
         ArrayList<EntryPairs> list = new ArrayList<>();
         EntryPairs current =null;
@@ -91,5 +92,19 @@ public class InfoDayEntry {
 
         }
         return list;
+    }
+
+    public List<EntryPairs> getPairsInfo(){
+        if (entryPairs==null) entryPairs = createPairsInfo();
+        return entryPairs;
+    }
+
+    public long getTotalMinuteOfWork(){
+        List<EntryPairs> entryPairs = getPairsInfo();
+        long totalTime = 0;
+        for (EntryPairs pair : entryPairs){
+            totalTime += pair.getMinutesWorkingTime();
+        }
+        return totalTime;
     }
 }

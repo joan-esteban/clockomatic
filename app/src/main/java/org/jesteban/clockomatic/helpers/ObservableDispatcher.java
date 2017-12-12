@@ -42,8 +42,18 @@ public class ObservableDispatcher<T> {
                 LOGGER.info("param len  " + Integer.toString(params.length));
                 method.invoke(observer, params);
 
-            } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "Exception invoking " + e);
+            }catch (IllegalAccessException e) {
+                LOGGER.log(Level.SEVERE, "Exception IllegalAccessException invoking " + e);
+                throw(new RuntimeException(e.toString()));
+            } catch(IllegalArgumentException e){
+                LOGGER.log(Level.SEVERE, "Exception IllegalArgumentException invoking " + e);
+                throw(new RuntimeException(e.toString()));
+            }catch (InvocationTargetException e) {
+                LOGGER.log(Level.SEVERE, "Exception InvocationTargetException invoking " + e);
+                throw(new RuntimeException(e.toString()));
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Exception NoSuchMethodException invoking " + e);
                 throw(new RuntimeException(e.toString()));
             }
         }

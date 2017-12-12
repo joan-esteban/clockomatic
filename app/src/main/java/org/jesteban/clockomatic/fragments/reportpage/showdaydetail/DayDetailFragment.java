@@ -29,6 +29,7 @@ public class  DayDetailFragment extends Fragment implements DayDetailContract.Vi
     private TextView txtNameDay = null;
     private TextView txtNumDay = null;
     private TextView txtEntries = null;
+    private TextView txtWorkInfo = null;
     public DayDetailFragment() {
         // Required empty public constructor
     }
@@ -40,7 +41,7 @@ public class  DayDetailFragment extends Fragment implements DayDetailContract.Vi
         txtNameDay = (TextView) view.findViewById(R.id.text_name_day);
         txtNumDay = (TextView) view.findViewById(R.id.text_num_day);
         txtEntries = (TextView) view.findViewById(R.id.text_pair_entries);
-
+        txtWorkInfo = (TextView) view.findViewById(R.id.text_work_info);
         return view;
     }
 
@@ -62,13 +63,15 @@ public class  DayDetailFragment extends Fragment implements DayDetailContract.Vi
 
     @Override
     public void showInfo(String info) {
-
+        txtWorkInfo.setText(Html.fromHtml(info));
     }
 
 
 
     @Override
     public void setPresenter(DayDetailContract.Presenter presenter) {
+
         this.presenter = presenter;
+        presenter.startUi();
     }
 }
