@@ -1,7 +1,9 @@
 package org.jesteban.clockomatic.fragments.reportpage.showdaydetail;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
+import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.bindings.Provider;
 import org.jesteban.clockomatic.bindings.SelectedDayProvider;
 import org.jesteban.clockomatic.helpers.Entry2Html;
@@ -19,13 +21,13 @@ import java.util.logging.Logger;
 public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDetailContract.View>
         implements DayDetailContract.Presenter, SelectedDayProvider.Listener {
     private static final Logger LOGGER = Logger.getLogger(DayDetailPresenter.class.getName());
-
+    private Context context = null;
     private SelectedDayProvider selectedDay = null;
-    public DayDetailPresenter(@NonNull DayDetailContract.View view) {
+    public DayDetailPresenter(@NonNull DayDetailContract.View view, Context current) {
         super(view);
+        context = current;
     }
-    // TODO this must be a resource to be localized
-    private static String[] days = {"?", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    //private static String[] days = {"?", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     @Override
     public List<Provider> getBindings() {
         return super.getBindings();
@@ -61,7 +63,7 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
 
         LOGGER.log(Level.INFO, "onChangeSelectedDay");
         Calendar date = selectedDay.getSelectedDay();
-
+        String[] days = context.getResources().getStringArray(R.array.name_days_short_array);
         view.showDayName( days[date.get(Calendar.DAY_OF_WEEK)] );
         view.showDayNumber(Integer.toString(date.get(Calendar.DAY_OF_MONTH)));
         onChangeEntries();

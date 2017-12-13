@@ -57,7 +57,7 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
         if (dayDetailFragment==null){
             throw new RuntimeException("can't find fragment for day detail");
         }
-        SewingBox.sewPresentersView(new DayDetailPresenter(dayDetailFragment),presenter,dayDetailFragment);
+        SewingBox.sewPresentersView(new DayDetailPresenter(dayDetailFragment, getContext()),presenter,dayDetailFragment);
         return view;
     }
 
