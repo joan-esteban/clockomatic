@@ -8,6 +8,9 @@ import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
 import org.jesteban.clockomatic.model.State;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -39,6 +42,20 @@ public class EntriesProviderImpl  implements EntriesProvider,Observer {
         State st = state.getState();
         if (st!=null) return st.getEntries();
         return null;
+    }
+
+    @Override
+    public EntrySet getEntriesBelongingDay(Calendar day) {
+        DateFormat df = new SimpleDateFormat(Entry.FORMAT_BELONGING_DAY);
+        String filter = df.format(day.getTime());
+        return getEntries().getEntriesBelongingDayStartWith(filter);
+    }
+
+    @Override
+    public EntrySet getEntriesBelongingMonth(Calendar day) {
+        DateFormat df = new SimpleDateFormat(Entry.FORMAT_BELONGING_MONTH);
+        String filter = df.format(day.getTime());
+        return getEntries().getEntriesBelongingDayStartWith(filter);
     }
 
     @Override
