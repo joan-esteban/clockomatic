@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.fragments.reportpage.showlistdaysclocks;
+package org.jesteban.clockomatic.fragments.showlistdaysclocks;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

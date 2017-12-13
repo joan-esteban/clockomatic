@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.jesteban.clockomatic.R;
-import org.jesteban.clockomatic.fragments.registerpage.editclocksday.EditClockDayPresenter;
-import org.jesteban.clockomatic.fragments.reportpage.showdaydetail.DayDetailFragment;
-import org.jesteban.clockomatic.fragments.reportpage.showdaydetail.DayDetailPresenter;
+import org.jesteban.clockomatic.fragments.editclocksday.EditClockDayPresenter;
+import org.jesteban.clockomatic.fragments.showdaydetail.DayDetailFragment;
+import org.jesteban.clockomatic.fragments.showdaydetail.DayDetailPresenter;
 import org.jesteban.clockomatic.helpers.SewingBox;
 import org.jesteban.clockomatic.views.MyDateTimePickerFragment;
-import org.jesteban.clockomatic.fragments.registerpage.editclocksday.EditClocksDayFragment;
+import org.jesteban.clockomatic.fragments.editclocksday.EditClocksDayFragment;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.State;
 

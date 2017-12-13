@@ -1,11 +1,8 @@
-package org.jesteban.clockomatic.fragments.reportpage.showdaydetail;
+package org.jesteban.clockomatic.fragments.showdaydetail;
 
 
 import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.controllers.ViewBase;
-import org.jesteban.clockomatic.fragments.reportpage.ReportPageContract;
-
-import java.util.Calendar;
 
 public class DayDetailContract {
     public interface View extends ViewBase<Presenter> {

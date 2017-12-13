@@ -1,16 +1,14 @@
-package org.jesteban.clockomatic.fragments.reportpage.showdaydetail;
+package org.jesteban.clockomatic.fragments.showdaydetail;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 
 import org.jesteban.clockomatic.R;
-import org.jesteban.clockomatic.bindings.Provider;
 import org.jesteban.clockomatic.bindings.SelectedDayProvider;
 import org.jesteban.clockomatic.helpers.Entry2Html;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.helpers.Minutes2String;
 import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
-import org.jesteban.clockomatic.model.EntrySet;
 
 import java.util.Calendar;
 import java.util.List;
@@ -23,27 +21,21 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
     private static final Logger LOGGER = Logger.getLogger(DayDetailPresenter.class.getName());
     private Context context = null;
     private SelectedDayProvider selectedDay = null;
+
     public DayDetailPresenter(@NonNull DayDetailContract.View view, Context current) {
         super(view);
         context = current;
     }
-    //private static String[] days = {"?", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-    @Override
-    public List<Provider> getBindings() {
-        return super.getBindings();
-    }
 
 
-
-
-    private StringBuilder getTextForEntries(InfoDayEntry infoDay){
+    private StringBuilder getTextForEntries(InfoDayEntry infoDay) {
         StringBuilder sb = new StringBuilder();
         List<InfoDayEntry.EntryPairs> pairs = infoDay.getPairsInfo();
-        if (pairs==null) return sb;
+        if (pairs == null) return sb;
         Entry2Html aux = new Entry2Html();
         for (InfoDayEntry.EntryPairs pair : pairs) {
             sb.append("<li>" + aux.getJustHours(pair.starting) + " --> " + aux.getJustHours(pair.finish) + "\n");
-        };
+        }
         return sb;
     }
 
@@ -55,7 +47,7 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
         StringBuilder txt = getTextForEntries(infoDayEntry);
         view.showEntries(txt.toString());
         long totalMinutesWork = infoDayEntry.getTotalMinuteOfWork();
-        view.showInfo( Minutes2String.convert(totalMinutesWork));
+        view.showInfo(Minutes2String.convert(totalMinutesWork));
     }
 
     @Override
@@ -64,7 +56,7 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
         LOGGER.log(Level.INFO, "onChangeSelectedDay");
         Calendar date = selectedDay.getSelectedDay();
         String[] days = context.getResources().getStringArray(R.array.name_days_short_array);
-        view.showDayName( days[date.get(Calendar.DAY_OF_WEEK)] );
+        view.showDayName(days[date.get(Calendar.DAY_OF_WEEK)]);
         view.showDayNumber(Integer.toString(date.get(Calendar.DAY_OF_MONTH)));
         onChangeEntries();
     }
@@ -76,7 +68,7 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
 
     }
 
-    public void setSelectedDayProvider(@NonNull SelectedDayProvider p){
+    public void setSelectedDayProvider(@NonNull SelectedDayProvider p) {
         LOGGER.log(Level.INFO, "setSelectedDayProvider");
         selectedDay = p;
         p.subscribe(this);

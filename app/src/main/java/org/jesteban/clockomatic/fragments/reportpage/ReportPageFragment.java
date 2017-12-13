@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment;
 import org.jesteban.clockomatic.helpers.SewingBox;
-import org.jesteban.clockomatic.fragments.reportpage.showlistdaysclocks.ShowListDaysClocksContract;
-import org.jesteban.clockomatic.fragments.reportpage.showlistdaysclocks.ShowListDaysClocksMonthPresenter;
+import org.jesteban.clockomatic.fragments.showlistdaysclocks.ShowListDaysClocksContract;
+import org.jesteban.clockomatic.fragments.showlistdaysclocks.ShowListDaysClocksMonthPresenter;
 import org.jesteban.clockomatic.views.MyDatePickerFragment;
-import org.jesteban.clockomatic.fragments.reportpage.showlistdaysclocks.ShowListDaysClocksFragment;
+import org.jesteban.clockomatic.fragments.showlistdaysclocks.ShowListDaysClocksFragment;
 
 
 import java.util.Calendar;

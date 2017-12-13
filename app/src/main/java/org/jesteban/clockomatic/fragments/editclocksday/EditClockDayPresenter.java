@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.fragments.registerpage.editclocksday;
+package org.jesteban.clockomatic.fragments.editclocksday;
 
 
 import android.support.annotation.NonNull;
@@ -6,9 +6,7 @@ import android.support.annotation.NonNull;
 import org.jesteban.clockomatic.bindings.EntriesProvider;
 import org.jesteban.clockomatic.bindings.Provider;
 import org.jesteban.clockomatic.bindings.SelectedDayProvider;
-import org.jesteban.clockomatic.bindings.SelectedDayProviderImpl;
 import org.jesteban.clockomatic.controllers.PresenterBase;
-import org.jesteban.clockomatic.fragments.registerpage.RegisterPageContract;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
 

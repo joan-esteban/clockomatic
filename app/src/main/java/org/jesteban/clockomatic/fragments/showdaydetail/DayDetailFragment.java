@@ -1,6 +1,5 @@
-package org.jesteban.clockomatic.fragments.reportpage.showdaydetail;
+package org.jesteban.clockomatic.fragments.showdaydetail;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -10,21 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.jesteban.clockomatic.R;
-import org.jesteban.clockomatic.fragments.reportpage.ReportPageContract;
-import org.jesteban.clockomatic.fragments.reportpage.showlistdaysclocks.ShowListDaysClocksFragment;
-import org.jesteban.clockomatic.helpers.DependencyInjector;
-import org.jesteban.clockomatic.model.EntrySet;
+import org.jesteban.clockomatic.fragments.showlistdaysclocks.ShowListDaysClocksFragment;
 
-import java.util.Observable;
-import java.util.Observer;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 
 public class  DayDetailFragment extends Fragment implements DayDetailContract.View{
     private static final Logger LOGGER = Logger.getLogger(ShowListDaysClocksFragment.class.getName());
-    private DayDetailContract.Presenter presenter = null;
 
     private TextView txtNameDay = null;
     private TextView txtNumDay = null;
@@ -70,8 +62,6 @@ public class  DayDetailFragment extends Fragment implements DayDetailContract.Vi
 
     @Override
     public void setPresenter(DayDetailContract.Presenter presenter) {
-
-        this.presenter = presenter;
         presenter.startUi();
     }
 }

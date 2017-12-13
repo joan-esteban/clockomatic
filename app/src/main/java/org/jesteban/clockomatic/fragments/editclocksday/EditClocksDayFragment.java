@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.fragments.registerpage.editclocksday;
+package org.jesteban.clockomatic.fragments.editclocksday;
 
 
 import android.os.Bundle;
