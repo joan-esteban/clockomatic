@@ -34,7 +34,7 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
         if (pairs == null) return sb;
         Entry2Html aux = new Entry2Html();
         for (InfoDayEntry.EntryPairs pair : pairs) {
-            sb.append("<li>" + aux.getJustHours(pair.starting) + " --> " + aux.getJustHours(pair.finish) + "\n");
+            sb.append("<li>" + aux.getJustHours(pair.starting) + " --> " + aux.getJustHours(pair.finish) + "</li><br>\n");
         }
         return sb;
     }
