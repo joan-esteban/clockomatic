@@ -3,11 +3,7 @@ package org.jesteban.clockomatic.fragments.showlistdaysclocks;
 
 import android.support.annotation.NonNull;
 
-import org.jesteban.clockomatic.bindings.EntriesProvider;
-import org.jesteban.clockomatic.bindings.Provider;
 import org.jesteban.clockomatic.bindings.SelectedMonthProvider;
-import org.jesteban.clockomatic.controllers.PresenterBase;
-import org.jesteban.clockomatic.fragments.showdaydetail.DayDetailContract;
 import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
@@ -15,7 +11,6 @@ import org.jesteban.clockomatic.model.EntrySet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntriesReady<ShowListDaysClocksContract.View>
@@ -30,8 +25,7 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
         }
         private String convertToPrefix(Calendar date){
             DateFormat df = new SimpleDateFormat(Entry.FORMAT_BELONGING_MONTH);
-            String showBelongingMonthPrefix = df.format(date.getTime());
-            return showBelongingMonthPrefix;
+            return df.format(date.getTime());
         }
 
         @Override
