@@ -28,7 +28,7 @@
 
                 <fragment
                     android:id="@+id/fragment_detailed_info_day"
-                    android:name="org.jesteban.clockomatic.fragments.reportpage.showdaydetail.DayDetailFragment"
+                    android:name="org.jesteban.clockomatic.fragments.showdaydetail.DayDetailFragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -36,7 +36,7 @@
             </RelativeLayout>
             <fragment
                 android:id="@+id/fragment_view_clocks_day"
-                android:name="org.jesteban.clockomatic.fragments.registerpage.editclocksday.EditClocksDayFragment"
+                android:name="org.jesteban.clockomatic.fragments.editclocksday.EditClocksDayFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_view_clocks_day"

@@ -26,7 +26,7 @@
 
         <fragment
             android:id="@+id/fragment_view_clocks_month"
-            android:name="org.jesteban.clockomatic.fragments.reportpage.showlistdaysclocks.ShowListDaysClocksFragment"
+            android:name="org.jesteban.clockomatic.fragments.showlistdaysclocks.ShowListDaysClocksFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_view_clocks_month" />

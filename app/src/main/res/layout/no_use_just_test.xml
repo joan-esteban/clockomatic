@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="org.jesteban.clockomatic.fragments.reportpage.showdaydetail.DayDetailFragment"
+        android:name="org.jesteban.clockomatic.fragments.showdaydetail.DayDetailFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.36" />

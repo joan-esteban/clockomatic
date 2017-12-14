@@ -18,4 +18,16 @@
         <b><a href='mailto:joanestebanr@gmail.com'>joanestebanr@gmail.com</a></b>
         <br></br>
     </string>
+    <!-- "?", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" -->
+    <string-array name="name_days_short_array">
+        <item> </item>
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+    </string-array>
+
 </resources>
