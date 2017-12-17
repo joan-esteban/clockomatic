@@ -32,12 +32,6 @@ public class DayDetailView extends LinearLayout {
         inflater.inflate(R.layout.view_detail, this, true);
     }
 
-    public void setDayInfo(String dayName, String dayNumber){
-        TextView tv = (TextView) findViewById(R.id.text_name_day);
-        tv.setText(dayName + "kk");
-        tv = (TextView) findViewById(R.id.text_num_day);
-        tv.setText(dayNumber);
-    }
 
 
 
