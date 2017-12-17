@@ -22,8 +22,8 @@ import org.jesteban.clockomatic.helpers.SewingBox;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment;
 import org.jesteban.clockomatic.fragments.reportpage.ReportPageFragment;
 import org.jesteban.clockomatic.fragments.reportpage.ReportPageContract;
-import org.jesteban.clockomatic.helpers.DependencyInjector;
 import org.jesteban.clockomatic.fragments.reportpage.ReportPagePresenter;
+import org.jesteban.clockomatic.views.DebugFragment;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,12 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
     private MainActivityContract.Presenter presenter = new MainActivityPresenter();
     private ReportPageContract.Presenter reportPagePresenter = null;
-    DependencyInjector<StateController> stateControllerInjector = new DependencyInjector<StateController>();
-
+    private ViewPager mViewPager=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LOGGER.info("Creating MainActivy " + BuildConfig.VERSION_NAME);
+        LOGGER.info("Creating MainActivy " + BuildConfig.VERSION_NAME + " debug=" + BuildConfig.DEBUG);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -49,14 +48,13 @@ public class MainActivity extends AppCompatActivity {
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         // If changed orientations, viewPager fragments are no recreated, so it need pointer to stateController
         // In first run fragments are not created
         // https://stackoverflow.com/questions/13815010/showing-specified-page-when-view-pager-is-first-created
 
         LOGGER.log(Level.INFO,"onCreate patch to already created fragments");
-        stateControllerInjector.injectList(presenter.getStateController(),getSupportFragmentManager().getFragments() );
         if (getSupportFragmentManager().getFragments()!=null) {
             for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                 if (fragment instanceof ReportPageFragment) {
@@ -78,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (BuildConfig.DEBUG){
+            MenuItem menuItemDebug = menu.findItem(R.id.action_debug);
+            if (menuItemDebug!=null){
+                menuItemDebug.setVisible(true);
+            }
+        }
         return true;
     }
 
@@ -114,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
+    public void menuShowDebug(){
+        // Nothing yet
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -133,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_about:
                 LOGGER.info("main Menu selected action_about");
                 menuShowAbout();
+                return true;
+            case R.id.action_debug:
+                LOGGER.info("main Menu selected action_debug");
+                menuShowDebug();
                 return true;
             default:
                 LOGGER.info("unknown menu item selected");
@@ -163,18 +175,23 @@ public class MainActivity extends AppCompatActivity {
                 SewingBox.sewPresentersView(new RegisterPagePresenter(registerPageFragment),presenter,registerPageFragment);
                 result = registerPageFragment;
 
-            } else {
+            } else if (position == 1) {
                 ReportPageFragment reportPageFragment = ReportPageFragment.newInstance();
                 reportPagePresenter = new ReportPagePresenter(reportPageFragment);
                 SewingBox.sewPresentersView(reportPagePresenter,presenter,reportPageFragment);
                 result = reportPageFragment;
+            } else{
+                return new DebugFragment();
             }
-            stateControllerInjector.inject(presenter.getStateController(),result );
             return result;
         }
 
         @Override
         public int getCount() {
+
+            if (BuildConfig.DEBUG){
+                return 3;
+            }
             return 2;
         }
 
