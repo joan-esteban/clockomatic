@@ -20,4 +20,11 @@
         android:title="@string/action_about"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_debug"
+        android:orderInCategory="100"
+        android:title="@string/action_debug"
+        android:visible="false"
+        app:showAsAction="never" />
+
 </menu>

@@ -2,6 +2,7 @@ package org.jesteban.clockomatic.views;
 
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
@@ -13,7 +14,7 @@ import org.jesteban.clockomatic.R;
 
 public class DayDetailView extends LinearLayout {
 
-
+    private final Paint mPaint = new Paint();
 
     public DayDetailView(Context context) {
         this(context, null,0);
@@ -33,7 +34,7 @@ public class DayDetailView extends LinearLayout {
 
     public void setDayInfo(String dayName, String dayNumber){
         TextView tv = (TextView) findViewById(R.id.text_name_day);
-        tv.setText(dayName);
+        tv.setText(dayName + "kk");
         tv = (TextView) findViewById(R.id.text_num_day);
         tv.setText(dayNumber);
     }

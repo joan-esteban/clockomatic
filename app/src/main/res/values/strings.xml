@@ -18,6 +18,7 @@
         <b><a href='mailto:joanestebanr@gmail.com'>joanestebanr@gmail.com</a></b>
         <br></br>
     </string>
+    <string name="action_debug">Debug Menu</string>
     <!-- "?", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" -->
     <string-array name="name_days_short_array">
         <item> </item>

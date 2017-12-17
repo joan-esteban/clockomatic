@@ -119,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void menuShowDebug(){
-        // Nothing yet
+        // https://stackoverflow.com/questions/7801954/how-to-programmatically-show-next-view-in-viewpager
+        mViewPager.setCurrentItem(3,true);
     }
 
     @Override
