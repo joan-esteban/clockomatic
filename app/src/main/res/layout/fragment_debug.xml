@@ -10,4 +10,11 @@
         android:text="DEBUG SAND BOX "
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@android:color/holo_red_dark" />
+
+    <view
+        class="org.jesteban.clockomatic.views.DayDetailView"
+        id="@+id/view"
+        layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

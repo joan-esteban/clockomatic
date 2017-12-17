@@ -34,7 +34,7 @@ public class  DayDetailFragment extends Fragment implements DayDetailContract.Vi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_view_detail, container, false);
+        View view =  inflater.inflate(R.layout.fragment_day_detail, container, false);
         txtNameDay = (TextView) view.findViewById(R.id.text_name_day);
         txtNumDay = (TextView) view.findViewById(R.id.text_num_day);
         txtEntries = (TextSwitcher) view.findViewById(R.id.text_pair_entries);
