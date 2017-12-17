@@ -10,12 +10,13 @@ import java.util.Calendar;
 
 public class RegisterPageContract {
     public interface View extends ViewBase<Presenter> {
-        public void showDate(Calendar date);
+        void showDate(Calendar date);
     }
 
     public interface Presenter extends PresenterBase {
         boolean register(Entry entry);
         void selected(Calendar date);
         boolean remove(Entry entry);
+        void onResume();
     }
 }

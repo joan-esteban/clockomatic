@@ -1,6 +1,7 @@
 package org.jesteban.clockomatic.fragments.registerpage;
 
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import org.jesteban.clockomatic.bindings.EntriesProvider;
@@ -12,12 +13,17 @@ import org.jesteban.clockomatic.model.Entry;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegisterPagePresenter implements RegisterPageContract.Presenter {
+    private static final Logger LOGGER = Logger.getLogger(RegisterPagePresenter.class.getName());
     private PresenterBase  parent = null;
     private SelectedDayProvider selectedDay = new SelectedDayProviderImpl();
     private EntriesProvider entries = null;
     private RegisterPageContract.View view = null;
+    // https://stackoverflow.com/questions/1877417/how-to-set-a-timer-in-android
+
 
     public RegisterPagePresenter(@NonNull RegisterPageContract.View view){
         this.view = view;
@@ -59,10 +65,19 @@ public class RegisterPagePresenter implements RegisterPageContract.Presenter {
         return false;
     }
 
+    @Override
+    public void onResume() {
+        LOGGER.log(Level.INFO, "onResume setting current date");
+        Calendar cal = Calendar.getInstance();
+        selectedDay.setSelecteDay(cal);
+        view.showDate(cal);
+    }
+
     // This is fill with DependencyInjectorBinding
     public void setEntriesProvider(@NonNull EntriesProvider i){
         entries = i;
         //entries.subscribe(this);
     }
+
 
 }

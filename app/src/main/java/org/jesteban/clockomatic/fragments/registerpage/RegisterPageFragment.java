@@ -54,6 +54,12 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
 
     @Override
     public void register(Calendar date) {
@@ -90,6 +96,7 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
     @Override
     public void showDate(Calendar date) {
         if (myDateTimePickerFragment != null)
+            LOGGER.info("RegisterPageFragmet::showDate setDate to " + date.getTime());
             myDateTimePickerFragment.setDate(date);
     }
 }
