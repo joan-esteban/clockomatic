@@ -1,5 +1,6 @@
 package org.jesteban.clockomatic.fragments.showlistdaysclocks;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -7,17 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.helpers.DynamicWidgets;
-S
+
 import java.util.List;
 
 public class ShowListDaysClocksFragment extends Fragment implements ShowListDaysClocksContract.View {
     private ShowListDaysClocksContract.Presenter presenter = null;
-    private LinearLayout layout = null;
-    private DynamicWidgets<TextView> dynamicTextViews = new DynamicWidgets<>(new DynamicTextViewsActions());
+    private TableLayout layout = null;
+    private DynamicWidgets<MyWidget> dynamicTextViews = new DynamicWidgets<>(new DynamicTextViewsActions());
 
 
     public ShowListDaysClocksFragment() {
@@ -38,18 +41,36 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
         syncWithState(dayDatas);
     }
 
+    class MyWidget{
+        TextView textView = null;
+        MyWidget(Context context){
 
-    protected class DynamicTextViewsActions implements DynamicWidgets.OnMyActions<TextView> {
-        @Override
-        public TextView createWidget(int idx) {
-            TextView textView = new TextView(getContext());
+            TableRow tableRow = new TableRow(context);
+
+            textView = new TextView(context);
             textView.setId(View.generateViewId());
-            layout.addView(textView);
-            return textView;
+            tableRow.addView(textView);
+            layout.addView(tableRow);
+        }
+
+        void setVisibility(int v){
+            textView.setVisibility(v);
+        }
+
+        void setText(CharSequence text){
+            textView.setText(text);
+        }
+
+    }
+
+    protected class DynamicTextViewsActions implements DynamicWidgets.OnMyActions<MyWidget> {
+        @Override
+        public MyWidget createWidget(int idx) {
+            return new MyWidget(getContext());
         }
 
         @Override
-        public void removeWidgetFromView(TextView widget) {
+        public void removeWidgetFromView(MyWidget widget) {
             if (widget == null) return;
             widget.setVisibility(View.GONE);
         }
@@ -61,7 +82,7 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_clocks_month, container, false);
-        layout = (LinearLayout) view.findViewById(R.id.month_main_layout);
+        layout = (TableLayout) view.findViewById(R.id.month_table_layout);
         return view;
     }
 
@@ -88,7 +109,7 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
         dynamicTextViews.setAllWidgetAsUnused();
         int idx = 0;
         for (ShowListDaysClocksContract.Presenter.DayDataToShow dayData : dayDatas) {
-            TextView textView = dynamicTextViews.getWidget(idx);
+            MyWidget textView = dynamicTextViews.getWidget(idx);
             textView.setVisibility(View.VISIBLE);
 
             textView.setText(Html.fromHtml("<h1>" + dayData.dateName + "</h1>" + getTextForDay(dayData.entryText)));
