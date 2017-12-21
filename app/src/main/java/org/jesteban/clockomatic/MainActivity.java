@@ -69,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        if (BuildConfig.DEBUG){
+            menuShowDebug();
+        }
     }
 
 
