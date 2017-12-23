@@ -15,7 +15,7 @@ import android.view.View;
 
 //https://stackoverflow.com/questions/3654321/measuring-text-height-to-be-drawn-on-canvas-android
 
-
+//TODO: Take care density!!!
 
 
 public class MyCalendarDayView extends View {
