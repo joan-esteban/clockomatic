@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyCalendarDayView">
+        <attr name="textUpper" format="string" />
+        <attr name="textMiddle" format="string" />
+        <attr name="textBottom" format="string" />
+        <attr name="sizeStyle" format="enum">
+            <enum name="BIG" value="1"/>
+            <enum name="SMALL" value="0"/>
+        </attr>
+    </declare-styleable>
+
+</resources>

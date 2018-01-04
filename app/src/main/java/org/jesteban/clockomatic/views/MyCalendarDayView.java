@@ -2,6 +2,7 @@ package org.jesteban.clockomatic.views;
 
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,6 +13,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import org.jesteban.clockomatic.R;
+
 
 //https://stackoverflow.com/questions/3654321/measuring-text-height-to-be-drawn-on-canvas-android
 
@@ -19,9 +22,13 @@ import android.view.View;
 
 
 public class MyCalendarDayView extends View {
+    public enum SizeStyle{
+        SMALL,
+        BIG
+    }
     private  int colorCalendarBg = 0;
     private  int colorCalendarText = 0;
-    private boolean small=true;
+    private SizeStyle sizeStyle=SizeStyle.SMALL;
     private String textUpper = "Divendres";
     private String textMiddle = "21";
     private String textBottom = "Juliol 07";
@@ -39,6 +46,23 @@ public class MyCalendarDayView extends View {
 
     public MyCalendarDayView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.MyCalendarDayView,
+                0, 0);
+        try{
+            textUpper = a.getString(R.styleable.MyCalendarDayView_textUpper);
+            textMiddle = a.getString(R.styleable.MyCalendarDayView_textMiddle);
+            textBottom = a.getString(R.styleable.MyCalendarDayView_textBottom);
+            int style = a.getInteger(R.styleable.MyCalendarDayView_sizeStyle,SizeStyle.SMALL.ordinal() );
+            sizeStyle = sizeStyle.values()[style];
+        } finally{
+
+        }
+        if (textUpper==null) textUpper="";
+        if (textMiddle==null) textMiddle="";
+        if (textBottom==null) textBottom="";
+
         setColorsGrey();
     }
 
@@ -67,21 +91,21 @@ public class MyCalendarDayView extends View {
     }
 
     public void setColorsGrey(){
-        colorCalendarBg = 0xff909090;
+        colorCalendarBg = 0xffb0b0b0;
         colorCalendarText = 0xff304050;
-        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,small);
+        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,sizeStyle);
         invalidate();
     }
     public void setColorRed(){
         colorCalendarBg = 0xFFd09090;
         colorCalendarText = 0xff603030;
-        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,small);
+        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,sizeStyle);
         invalidate();
     }
     public void setColorBlue(){
         colorCalendarBg = 0xff9090d0;
         colorCalendarText = 0xff303060;
-        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,small);
+        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,sizeStyle);
         invalidate();
     }
     public void setWorkingDay(boolean workingDay) {
@@ -93,15 +117,18 @@ public class MyCalendarDayView extends View {
         }
     }
 
-    public void setSmall(boolean v){
-        this.small=v;
-        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,small);
+    public void setSizeStyle(SizeStyle v){
+        this.sizeStyle=v;
+        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,sizeStyle);
         invalidate();
         // This force to recalculate size
         this.setMinimumHeight(0);
     }
+    public SizeStyle getSizeStyle(){
+        return this.sizeStyle;
+    }
     public boolean isSmall(){
-        return this.small;
+        return this.sizeStyle == SizeStyle.SMALL;
     }
 
     private  boolean isWorkingDay = false;
@@ -132,7 +159,8 @@ public class MyCalendarDayView extends View {
 
     @Override
     protected int getSuggestedMinimumWidth() {
-        return (getSuggestedMinimumHeight());
+        if (isSmall()) return 70;
+        return 125;
     }
 
     @Override
@@ -146,7 +174,7 @@ public class MyCalendarDayView extends View {
         // Try for a width based on our minimum
         int minw = getPaddingLeft() + getPaddingRight() + getSuggestedMinimumWidth();
 
-        int w = Math.max(minw, MeasureSpec.getSize(widthMeasureSpec));
+        int w = Math.min(minw, MeasureSpec.getSize(widthMeasureSpec));
 
         int minh =getSuggestedMinimumHeight() + getPaddingBottom() + getPaddingTop();
         int h = Math.min(MeasureSpec.getSize(heightMeasureSpec), minh);
@@ -165,8 +193,8 @@ public class MyCalendarDayView extends View {
         private int factorBottonUpper=9;
         private int radiusBg= 20;
 
-        void init(int colorBg, int colorText, boolean small){
-            if (small){
+        void init(int colorBg, int colorText, SizeStyle sizeStyle){
+            if (sizeStyle==SizeStyle.SMALL){
                 factorTextUpper=7;
                 factorMiddleUpper=28 /2;
                 factorBottonUpper=9 /2;
@@ -211,10 +239,10 @@ public class MyCalendarDayView extends View {
         {
             drawBg(canvas,where);
             canvas.drawText(upper, where.centerX(), where.bottom/4, this.paintUpperText);
-            if (small){
+            if (sizeStyle == SizeStyle.SMALL){
                 canvas.drawText(middle, where.centerX(), (int)(where.bottom*0.77), this.paintMiddleText);
             } else canvas.drawText(middle, where.centerX(), (int)(where.bottom*0.80), this.paintMiddleText);
-            if (!small) canvas.drawText(bottom, where.centerX() , (int)(where.bottom*0.95), this.paintBottomText);
+            if (sizeStyle == SizeStyle.BIG) canvas.drawText(bottom, where.centerX() , (int)(where.bottom*0.95), this.paintBottomText);
         }
 
         void drawBg(Canvas canvas, Rect where){

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
     android:id="@+id/debug_layout"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -24,26 +25,58 @@
         android:layout_height="wrap_content"
         android:text="Button" />
 
+
+
     <TableLayout
+        android:id="@+id/debug_layout_table"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <TableRow
             android:id="@+id/debug_layout_row_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+
         </TableRow>
 
         <TableRow
             android:id="@+id/debug_layout_row_3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <org.jesteban.clockomatic.views.MyCalendarDayView
+                id="@+id/view555"
+                layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                auto:textUpper="hola"
+                auto:sizeStyle="BIG"/>
+            <view
+                class="org.jesteban.clockomatic.views.MyLinkEntryView"
+                id="@+id/view_link1"
+                layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"/>
+            <view
+                class="org.jesteban.clockomatic.views.MyLinkEntryView"
+                id="@+id/view_link2"
+                layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"/>
+            <view
+                class="org.jesteban.clockomatic.views.MyCalendarDayView"
+                layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -51,12 +84,44 @@
     </TableLayout>
 
 
-<!--
-    <view
-        class="org.jesteban.clockomatic.views.DayDetailView"
-        id="@+id/debug_day_view2"
-        layout_width="match_parent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
--->
+    <!--
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <view
+            class="org.jesteban.clockomatic.views.MyCalendarDayView"
+            id="@+id/view555"
+            layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <view
+            class="org.jesteban.clockomatic.views.MyLinkEntryView"
+            id="@+id/view_link"
+            layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"/>
+
+        <view
+            class="org.jesteban.clockomatic.views.MyLinkEntryView"
+            id="@+id/view666"
+            layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <view
+            class="org.jesteban.clockomatic.views.MyLinkEntryView"
+            id="@+id/view777"
+            layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+       -->
 </LinearLayout>
