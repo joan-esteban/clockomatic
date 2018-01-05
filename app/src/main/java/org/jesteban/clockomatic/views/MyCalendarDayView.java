@@ -21,17 +21,15 @@ import org.jesteban.clockomatic.R;
 //TODO: Take care density!!!
 
 
-public class MyCalendarDayView extends View {
-    public enum SizeStyle{
-        SMALL,
-        BIG
-    }
+public class MyCalendarDayView extends View implements MyCalendarDayViewContract.View{
+
     private  int colorCalendarBg = 0;
     private  int colorCalendarText = 0;
-    private SizeStyle sizeStyle=SizeStyle.SMALL;
-    private String textUpper = "Divendres";
-    private String textMiddle = "21";
-    private String textBottom = "Juliol 07";
+    private MyCalendarDayViewContract.CalendarDayViewVisualData data = new MyCalendarDayViewContract.CalendarDayViewVisualData();
+    //private MyCalendarDayViewContract.SizeStyle sizeStyle= MyCalendarDayViewContract.SizeStyle.SMALL;
+    //private String textUpper = "Divendres";
+    //private String textMiddle = "21";
+    //private String textBottom = "Juliol 07";
     DrawCalendarIcon drawCalendarIcon = new DrawCalendarIcon();
 
     private Rect calendarRect=new Rect();
@@ -51,93 +49,102 @@ public class MyCalendarDayView extends View {
                 R.styleable.MyCalendarDayView,
                 0, 0);
         try{
-            textUpper = a.getString(R.styleable.MyCalendarDayView_textUpper);
-            textMiddle = a.getString(R.styleable.MyCalendarDayView_textMiddle);
-            textBottom = a.getString(R.styleable.MyCalendarDayView_textBottom);
-            int style = a.getInteger(R.styleable.MyCalendarDayView_sizeStyle,SizeStyle.SMALL.ordinal() );
-            sizeStyle = sizeStyle.values()[style];
+            data.textUpper = a.getString(R.styleable.MyCalendarDayView_textUpper);
+            data.textMiddle = a.getString(R.styleable.MyCalendarDayView_textMiddle);
+            data.textBottom = a.getString(R.styleable.MyCalendarDayView_textBottom);
+            int style = a.getInteger(R.styleable.MyCalendarDayView_sizeStyle, MyCalendarDayViewContract.SizeStyle.SMALL.ordinal() );
+            data.sizeStyle = data.sizeStyle.values()[style];
         } finally{
 
         }
-        if (textUpper==null) textUpper="";
-        if (textMiddle==null) textMiddle="";
-        if (textBottom==null) textBottom="";
+        if (data.textUpper==null) data.textUpper="";
+        if (data.textMiddle==null) data.textMiddle="";
+        if (data.textBottom==null) data.textBottom="";
 
         setColorsGrey();
     }
 
     public String getTextUpper() {
-        return textUpper;
+        return data.textUpper;
     }
 
     public void setTextUpper(String textUpper) {
-        this.textUpper = textUpper;
+        data.textUpper = textUpper;
     }
 
     public String getTextMiddle() {
-        return textMiddle;
+        return data.textMiddle;
     }
 
     public void setTextMiddle(String textMiddle) {
-        this.textMiddle = textMiddle;
+        data.textMiddle = textMiddle;
     }
 
     public String getTextBottom() {
-        return textBottom;
+        return data.textBottom;
     }
 
     public void setTextBottom(String textBottom) {
-        this.textBottom = textBottom;
+        data.textBottom = textBottom;
     }
 
     public void setColorsGrey(){
-        colorCalendarBg = 0xffb0b0b0;
-        colorCalendarText = 0xff304050;
-        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,sizeStyle);
-        invalidate();
-    }
-    public void setColorRed(){
-        colorCalendarBg = 0xFFd09090;
-        colorCalendarText = 0xff603030;
-        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,sizeStyle);
-        invalidate();
-    }
-    public void setColorBlue(){
-        colorCalendarBg = 0xff9090d0;
-        colorCalendarText = 0xff303060;
-        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,sizeStyle);
-        invalidate();
-    }
-    public void setWorkingDay(boolean workingDay) {
-        isWorkingDay = workingDay;
-        if (isWorkingDay()){
-            setColorBlue();
-        } else {
-            setColorRed();
-        }
+        setColor(MyCalendarDayViewContract.ColorStyle.GREY);
     }
 
-    public void setSizeStyle(SizeStyle v){
-        this.sizeStyle=v;
-        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,sizeStyle);
+    public void setColorRed(){
+        setColor(MyCalendarDayViewContract.ColorStyle.RED);
+    }
+    public void setColorBlue(){
+        setColor(MyCalendarDayViewContract.ColorStyle.BLUE);
+    }
+
+    public void setColor(MyCalendarDayViewContract.ColorStyle color){
+        switch (color){
+            case GREY:
+                colorCalendarBg = 0xffb0b0b0;
+                colorCalendarText = 0xff304050;
+                break;
+            case RED:
+                colorCalendarBg = 0xFFd09090;
+                colorCalendarText = 0xff603030;
+                break;
+            case BLUE:
+                colorCalendarBg = 0xff9090d0;
+                colorCalendarText = 0xff303060;
+                break;
+        }
+        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,data.sizeStyle);
+        invalidate();
+    }
+
+
+
+    public void setSizeStyle(MyCalendarDayViewContract.SizeStyle v){
+        data.sizeStyle=v;
+        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,data.sizeStyle);
         invalidate();
         // This force to recalculate size
         this.setMinimumHeight(0);
     }
-    public SizeStyle getSizeStyle(){
-        return this.sizeStyle;
+    public MyCalendarDayViewContract.SizeStyle getSizeStyle(){
+        return data.sizeStyle;
     }
     public boolean isSmall(){
-        return this.sizeStyle == SizeStyle.SMALL;
-    }
-
-    private  boolean isWorkingDay = false;
-    public boolean isWorkingDay() {
-        return isWorkingDay;
+        return data.sizeStyle == MyCalendarDayViewContract.SizeStyle.SMALL;
     }
 
 
 
+
+    @Override
+    public void showData(MyCalendarDayViewContract.CalendarDayViewVisualData data) {
+        setTextUpper(data.textUpper);
+        setTextMiddle(data.textMiddle);
+        setTextBottom(data.textBottom);
+        setSizeStyle(data.sizeStyle);
+        setColor(data.colorStyle);
+    }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -154,7 +161,7 @@ public class MyCalendarDayView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        drawCalendarIcon.drawCalendarIcon(canvas,calendarRect, textUpper, textMiddle,textBottom);
+        drawCalendarIcon.drawCalendarIcon(canvas,calendarRect, data.textUpper, data.textMiddle,data.textBottom);
     }
 
     @Override
@@ -182,6 +189,8 @@ public class MyCalendarDayView extends View {
         setMeasuredDimension(w, h);
     }
 
+
+
     class DrawCalendarIcon{
         private final Paint paintBgRect = new Paint();
         private final Paint paintBgLine = new Paint();
@@ -193,8 +202,8 @@ public class MyCalendarDayView extends View {
         private int factorBottonUpper=9;
         private int radiusBg= 20;
 
-        void init(int colorBg, int colorText, SizeStyle sizeStyle){
-            if (sizeStyle==SizeStyle.SMALL){
+        void init(int colorBg, int colorText, MyCalendarDayViewContract.SizeStyle sizeStyle){
+            if (sizeStyle== MyCalendarDayViewContract.SizeStyle.SMALL){
                 factorTextUpper=7;
                 factorMiddleUpper=28 /2;
                 factorBottonUpper=9 /2;
@@ -239,10 +248,10 @@ public class MyCalendarDayView extends View {
         {
             drawBg(canvas,where);
             canvas.drawText(upper, where.centerX(), where.bottom/4, this.paintUpperText);
-            if (sizeStyle == SizeStyle.SMALL){
+            if (data.sizeStyle == MyCalendarDayViewContract.SizeStyle.SMALL){
                 canvas.drawText(middle, where.centerX(), (int)(where.bottom*0.77), this.paintMiddleText);
             } else canvas.drawText(middle, where.centerX(), (int)(where.bottom*0.80), this.paintMiddleText);
-            if (sizeStyle == SizeStyle.BIG) canvas.drawText(bottom, where.centerX() , (int)(where.bottom*0.95), this.paintBottomText);
+            if (data.sizeStyle == MyCalendarDayViewContract.SizeStyle.BIG) canvas.drawText(bottom, where.centerX() , (int)(where.bottom*0.95), this.paintBottomText);
         }
 
         void drawBg(Canvas canvas, Rect where){

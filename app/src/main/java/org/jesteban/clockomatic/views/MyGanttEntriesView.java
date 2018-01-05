@@ -19,7 +19,7 @@ import java.util.List;
 public class MyGanttEntriesView extends View {
     private Rect totalRect=new Rect();
     private final Paint mPaint = new Paint();
-    private List<InfoDayEntry.EntryPairs>  entryPairs  = null;
+    private List<InfoDayEntry.PairedEntry>  entryPairs  = null;
 
     public MyGanttEntriesView(Context context) {
         this(context, null,0);
@@ -32,7 +32,7 @@ public class MyGanttEntriesView extends View {
     public MyGanttEntriesView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         entryPairs = new ArrayList<>();
-        InfoDayEntry.EntryPairs pair = new InfoDayEntry.EntryPairs();
+        InfoDayEntry.PairedEntry pair = new InfoDayEntry.PairedEntry();
         try {
             pair.starting = new Entry("1/1/2017 8:30:0","1/1/2017");
             pair.finish= new Entry("1/1/2017 13:05:0","1/1/2017");

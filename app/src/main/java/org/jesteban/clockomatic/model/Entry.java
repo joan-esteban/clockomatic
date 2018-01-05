@@ -3,6 +3,7 @@ package org.jesteban.clockomatic.model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 
@@ -108,5 +109,27 @@ public class Entry extends Object {
     public static String extractBeloningDay(Calendar d) {
         SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_BELONGING_DAY);
         return sdf.format(d.getTime());
+    }
+
+    static public class BelongingDay{
+        String belongingDay;
+
+        public String getBelongingDay() {
+            return belongingDay;
+        }
+
+        public Calendar getBelongingDayDate() {
+            return belongingDayDate;
+        }
+
+        Calendar belongingDayDate;
+
+        public BelongingDay(String belongingDay) throws ParseException {
+            this.belongingDay = belongingDay;
+            SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_BELONGING_DAY);
+            Date date = sdf.parse(belongingDay);
+            belongingDayDate = Calendar.getInstance();
+            belongingDayDate.setTime(date);
+        }
     }
 }

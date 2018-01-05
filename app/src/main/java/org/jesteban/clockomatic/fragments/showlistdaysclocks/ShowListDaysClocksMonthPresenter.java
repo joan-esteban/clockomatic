@@ -7,7 +7,6 @@ import org.jesteban.clockomatic.bindings.SelectedMonthProvider;
 import org.jesteban.clockomatic.helpers.Entry2Html;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
-import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
 
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
             dayData.entryText = new String[infoDayEntry.getPairsInfo().size()];
             Entry2Html aux = new Entry2Html();
             int idx = 0;
-            for (InfoDayEntry.EntryPairs pair : infoDayEntry.getPairsInfo()) {
+            for (InfoDayEntry.PairedEntry pair : infoDayEntry.getPairsInfo()) {
                 dayData.entryText[idx] = aux.getJustHours(pair.starting) + " --> " + aux.getJustHours(pair.finish);
                 idx++;
             }

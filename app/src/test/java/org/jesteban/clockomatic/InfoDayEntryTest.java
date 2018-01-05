@@ -69,7 +69,7 @@ public class InfoDayEntryTest {
         Entry entry1 = getEntry("1/1/2017 09:00:00", belongingDay);
         entries.addEntry( entry1 );
         InfoDayEntry infoDayEntry= new InfoDayEntry(entries, belongingDay);
-        List<InfoDayEntry.EntryPairs> pairs= infoDayEntry.getPairsInfo();
+        List<InfoDayEntry.PairedEntry> pairs= infoDayEntry.getPairsInfo();
         assertEquals(1, pairs.size() );
     }
 
@@ -82,7 +82,7 @@ public class InfoDayEntryTest {
         entries.addEntry( entry1 );
         entries.addEntry( entry2 );
         InfoDayEntry infoDayEntry= new InfoDayEntry(entries, belongingDay);
-        List<InfoDayEntry.EntryPairs> pairs= infoDayEntry.getPairsInfo();
+        List<InfoDayEntry.PairedEntry> pairs= infoDayEntry.getPairsInfo();
         assertEquals(1, pairs.size() );
     }
 
@@ -95,7 +95,7 @@ public class InfoDayEntryTest {
         entries.addEntry( entry1 );
         entries.addEntry( entry2 );
         InfoDayEntry infoDayEntry= new InfoDayEntry(entries, belongingDay);
-        List<InfoDayEntry.EntryPairs> pairs= infoDayEntry.getPairsInfo();
+        List<InfoDayEntry.PairedEntry> pairs= infoDayEntry.getPairsInfo();
         assertEquals(entry1, pairs.get(0).starting );
         assertEquals(entry2, pairs.get(0).finish);
     }
@@ -106,7 +106,7 @@ public class InfoDayEntryTest {
         String belongingDay = "01/01/2017";
         Entry entry1 = getEntry("1/1/2017 09:00:00", belongingDay);
         Entry entry2 = getEntry("1/1/2017 10:00:00", belongingDay);
-        InfoDayEntry.EntryPairs pair = new InfoDayEntry.EntryPairs(entry1, entry2);
+        InfoDayEntry.PairedEntry pair = new InfoDayEntry.PairedEntry(entry1, entry2);
         assertEquals(60, pair.getMinutesWorkingTime() );
     }
 

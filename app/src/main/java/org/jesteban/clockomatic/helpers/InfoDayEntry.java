@@ -17,7 +17,79 @@ public class InfoDayEntry {
     private static final Logger LOGGER = Logger.getLogger(InfoDayEntry.class.getName());
 
     private EntrySet entries;
-    private List<EntryPairs> entryPairs=null;
+    private List<PairedEntry> entryPairs=null;
+    private String belongingDay;
+
+    public InfoDayEntry(EntrySet entries){
+        this(entries, null);
+    }
+    public InfoDayEntry(EntrySet entries, String belongingDay){
+        if (belongingDay==null){
+            if (entries.getEntries().size()>0){
+                belongingDay = entries.getEntries().get(0).getBelongingDay();
+            } else{
+                this.belongingDay = null;
+                this.entries = null;
+                this.entryPairs = null;
+                return;
+            }
+        }
+        this.belongingDay = belongingDay;
+        if (!checkSanity(entries,belongingDay)){
+            // TODO: launch exception?
+            LOGGER.log(Level.SEVERE, "Inconsistent data on InfoDayEntry");
+            this.entries = null;
+        } else {
+            this.entries = cleanDuplicatedEntries(entries);
+        }
+    }
+
+
+
+    public String getBelongingDay() {
+        return belongingDay;
+    }
+    /**
+     * It returns if the day need more registers, for example
+     * It have a odd number or none, or some register are duplicated
+     * @return
+     */
+    public boolean isUnfinishDay(){
+        if (entries==null) return false;
+        return (entries.getEntries().size()%2!=0);
+    }
+
+    private List<PairedEntry> createPairsInfo(){
+        if (entries==null) return null;
+        ArrayList<PairedEntry> list = new ArrayList<>();
+        PairedEntry current =null;
+        for (Entry entry : entries){
+            if (current==null){
+                current = new PairedEntry();
+                list.add(current);
+                current.starting = entry;
+            } else{
+                current.finish = entry;
+                current = null;
+            }
+
+        }
+        return list;
+    }
+
+    public List<PairedEntry> getPairsInfo(){
+        if (entryPairs==null) entryPairs = createPairsInfo();
+        return entryPairs;
+    }
+
+    public long getTotalMinuteOfWork(){
+        List<PairedEntry> entryPairs = getPairsInfo();
+        long totalTime = 0;
+        for (PairedEntry pair : entryPairs){
+            totalTime += pair.getMinutesWorkingTime();
+        }
+        return totalTime;
+    }
 
     /**
      * It checks that data is coherent
@@ -38,35 +110,17 @@ public class InfoDayEntry {
         return new EntrySet(new ArrayList<Entry>(new LinkedHashSet<Entry>(entries.getEntries())));
     }
 
-    public InfoDayEntry(EntrySet entries, String belongingDay){
-        if (!checkSanity(entries,belongingDay)){
-            // TODO: launch exception?
-            LOGGER.log(Level.SEVERE, "Inconsistent data on InfoDayEntry");
-            this.entries = null;
-        } else {
-            this.entries = cleanDuplicatedEntries(entries);
-        };
-    }
 
-    /**
-     * It returns if the day need more registers, for example
-     * It have a odd number or none, or some register are duplicated
-     * @return
-     */
-    public boolean isUnfinishDay(){
-        if (entries==null) return false;
-        return (entries.getEntries().size()%2!=0);
-    }
-    public static class EntryPairs{
+    public static class PairedEntry {
         public Entry starting;
         public Entry finish;
 
-        public EntryPairs(){
+        public PairedEntry(){
             starting = null;
             finish = null;
         }
 
-        public EntryPairs(Entry s, Entry e){
+        public PairedEntry(Entry s, Entry e){
             starting = s;
             finish = e;
         }
@@ -76,35 +130,6 @@ public class InfoDayEntry {
             return (finish.getRegisterDate().getTimeInMillis() - starting.getRegisterDate().getTimeInMillis())/ (1000*60);
         }
     }
-    private List<EntryPairs> createPairsInfo(){
-        if (entries==null) return null;
-        ArrayList<EntryPairs> list = new ArrayList<>();
-        EntryPairs current =null;
-        for (Entry entry : entries){
-            if (current==null){
-                current = new EntryPairs();
-                list.add(current);
-                current.starting = entry;
-            } else{
-                current.finish = entry;
-                current = null;
-            }
 
-        }
-        return list;
-    }
 
-    public List<EntryPairs> getPairsInfo(){
-        if (entryPairs==null) entryPairs = createPairsInfo();
-        return entryPairs;
-    }
-
-    public long getTotalMinuteOfWork(){
-        List<EntryPairs> entryPairs = getPairsInfo();
-        long totalTime = 0;
-        for (EntryPairs pair : entryPairs){
-            totalTime += pair.getMinutesWorkingTime();
-        }
-        return totalTime;
-    }
 }

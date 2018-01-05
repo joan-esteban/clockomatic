@@ -30,10 +30,10 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
 
     private StringBuilder getTextForEntries(InfoDayEntry infoDay) {
         StringBuilder sb = new StringBuilder();
-        List<InfoDayEntry.EntryPairs> pairs = infoDay.getPairsInfo();
+        List<InfoDayEntry.PairedEntry> pairs = infoDay.getPairsInfo();
         if (pairs == null) return sb;
         Entry2Html aux = new Entry2Html();
-        for (InfoDayEntry.EntryPairs pair : pairs) {
+        for (InfoDayEntry.PairedEntry pair : pairs) {
             sb.append("<li>" + aux.getJustHours(pair.starting) + " --> " + aux.getJustHours(pair.finish) + "</li><br>\n");
         }
         return sb;
