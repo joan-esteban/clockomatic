@@ -36,18 +36,12 @@ public class InfoDayView  extends TableRow implements  InfoDayViewContract.View{
         calendarDayInfoView = (MyCalendarDayView) this.findViewById(R.id.calendar_day_info_view);
     }
 
-    @Override
-    public void showPairedEntries(List<MyPairedEntryViewContract.PairedEntryVisualData> data) {
-        pairedEntriesGridView.showPairedEntries(data);
-    }
+
 
     @Override
-    public void showCalendarDay(MyCalendarDayViewContract.CalendarDayViewVisualData data) {
-        calendarDayView.showData(data);
-    }
-
-    @Override
-    public void showCalendarDayInfo(MyCalendarDayViewContract.CalendarDayViewVisualData data) {
-        calendarDayInfoView.showData(data);
+    public void showData(InfoDayVisualData data) {
+        if (data.dayData!=null) calendarDayView.showData(data.dayData);
+        if (data.entriesData!=null) pairedEntriesGridView.showPairedEntries(data.entriesData);
+        if (data.briefData!=null) calendarDayInfoView.showData(data.briefData);
     }
 }

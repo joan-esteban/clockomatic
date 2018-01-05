@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
+import org.jesteban.clockomatic.helpers.Minutes2String;
 import org.jesteban.clockomatic.helpers.PresenterBasic;
 
 import org.jesteban.clockomatic.model.Entry;
@@ -34,14 +35,11 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
         this.context = current;
     }
 
-    private MyCalendarDayViewContract.CalendarDayViewVisualData getVisualDataFor(Entry.BelongingDay belongingDay){
-
+    private MyCalendarDayViewContract.CalendarDayViewVisualData getVisualDataForDay(Entry.BelongingDay belongingDay, int numEntries){
         MyCalendarDayViewContract.CalendarDayViewVisualData res = new MyCalendarDayViewContract.CalendarDayViewVisualData();
         if (belongingDay==null){
             return res;
         }
-
-
         Calendar calDay = belongingDay.getBelongingDayDate();
         res.textMiddle = sdfDay.format(calDay.getTime());
         String[] days = context.getResources().getStringArray(R.array.name_days_short_array);
@@ -49,15 +47,24 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
         if (calDay.get(Calendar.DAY_OF_WEEK)==1 || calDay.get(Calendar.DAY_OF_WEEK)==7){
             res.colorStyle = RED;
         } else  res.colorStyle = BLUE;
+
         String[] months = context.getResources().getStringArray(R.array.name_months_short_array);
         res.textBottom = months[calDay.get(Calendar.MONTH)];
         res.sizeStyle = BIG;
+        if (numEntries==0) {
+            res.colorStyle = GREY;
+            res.sizeStyle = SMALL;
+        }
         return res;
     }
 
     private MyPairedEntryViewContract.PairedEntryVisualData getVisualDataFor(InfoDayEntry.PairedEntry data){
         String starting = sdfHourMinute.format(data.starting.getRegisterDate().getTime());
-        String ending = sdfHourMinute.format(data.finish.getRegisterDate().getTime());
+        String ending = null;
+        if (data.finish!=null) {
+            ending = sdfHourMinute.format(data.finish.getRegisterDate().getTime());
+        }
+
         return new MyPairedEntryViewContract.PairedEntryVisualData(starting,ending);
     }
 
@@ -70,6 +77,24 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
         return res;
     }
 
+    private MyCalendarDayViewContract.CalendarDayViewVisualData getVisualDataForBrief(InfoDayEntry infoDay){
+        MyCalendarDayViewContract.CalendarDayViewVisualData res = new MyCalendarDayViewContract.CalendarDayViewVisualData();
+
+        res.textMiddle = Minutes2String.convert(infoDay.getTotalMinuteOfWork());
+        res.textUpper = "";
+
+        res.textBottom = "";
+        res.sizeStyle = BIG;
+        if (infoDay.isUnfinishDay()){
+            res.colorStyle = RED;
+        } else  res.colorStyle = BLUE;
+        if (infoDay.getPairsInfo().size()==0) {
+            res.colorStyle = GREY;
+            res.sizeStyle = SMALL;
+        }
+        return res;
+    }
+
     @Override
     public void showInfoDay(InfoDayEntry infoDay) {
         Entry.BelongingDay belongingDay = null;
@@ -78,7 +103,12 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        view.showCalendarDay(getVisualDataFor(belongingDay));
-        view.showPairedEntries(getVisualDataFor(infoDay.getPairsInfo()));
+
+        InfoDayViewContract.View.InfoDayVisualData data = new InfoDayViewContract.View.InfoDayVisualData();
+        data.dayData = getVisualDataForDay(belongingDay, infoDay.getPairsInfo().size() );
+        data.entriesData = getVisualDataFor(infoDay.getPairsInfo());
+        data.briefData = getVisualDataForBrief(infoDay);
+
+        view.showData(data);
     }
 }

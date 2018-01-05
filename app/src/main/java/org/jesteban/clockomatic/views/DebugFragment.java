@@ -38,14 +38,19 @@ public class DebugFragment extends Fragment {
 
     public EntrySet getDemoEntries(){
         EntrySet res = new EntrySet();
+        /*
         try {
+
             res.addEntry(new Entry("1/1/2018 8:05:01", null));
             res.addEntry(new Entry("1/1/2018 13:01:01", null));
             res.addEntry(new Entry("1/1/2018 14:53:01", null));
             res.addEntry(new Entry("1/1/2018 18:13:01", null));
+
+            //res.addEntry(new Entry("1/1/2018 18:14:01", null));
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        */
         return res;
     }
 
@@ -101,7 +106,7 @@ public class DebugFragment extends Fragment {
         }
         infoDayView = (InfoDayView) view.findViewById(R.id.debug_info_day_view);
         infoDayViewPresenter = new InfoDayViewPresenter(infoDayView, getContext());
-        InfoDayEntry infoDayEntry = new InfoDayEntry(getDemoEntries());
+        InfoDayEntry infoDayEntry = new InfoDayEntry(getDemoEntries(), "2018/1/1");
         infoDayViewPresenter.showInfoDay(infoDayEntry);
         return view;
 

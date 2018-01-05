@@ -8,9 +8,13 @@ import java.util.List;
 
 public class InfoDayViewContract {
     public interface View  {
-        public void showPairedEntries(List<MyPairedEntryViewContract.PairedEntryVisualData> data);
-        public void showCalendarDay(MyCalendarDayViewContract.CalendarDayViewVisualData data);
-        public void showCalendarDayInfo(MyCalendarDayViewContract.CalendarDayViewVisualData data);
+        static public class InfoDayVisualData{
+            MyCalendarDayViewContract.CalendarDayViewVisualData dayData;
+            List<MyPairedEntryViewContract.PairedEntryVisualData> entriesData;
+            MyCalendarDayViewContract.CalendarDayViewVisualData briefData;
+        }
+
+        public void showData(InfoDayVisualData data);
 
     }
 
