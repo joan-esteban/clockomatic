@@ -15,6 +15,8 @@ import android.view.View;
 
 import org.jesteban.clockomatic.R;
 
+import java.util.logging.Logger;
+
 
 //https://stackoverflow.com/questions/3654321/measuring-text-height-to-be-drawn-on-canvas-android
 
@@ -22,17 +24,13 @@ import org.jesteban.clockomatic.R;
 
 
 public class MyCalendarDayView extends View implements MyCalendarDayViewContract.View{
-
+    private static final Logger LOGGER = Logger.getLogger(MyCalendarDayView.class.getName());
     private  int colorCalendarBg = 0;
     private  int colorCalendarText = 0;
     private MyCalendarDayViewContract.CalendarDayViewVisualData data = new MyCalendarDayViewContract.CalendarDayViewVisualData();
-    //private MyCalendarDayViewContract.SizeStyle sizeStyle= MyCalendarDayViewContract.SizeStyle.SMALL;
-    //private String textUpper = "Divendres";
-    //private String textMiddle = "21";
-    //private String textBottom = "Juliol 07";
     DrawCalendarIcon drawCalendarIcon = new DrawCalendarIcon();
 
-    private Rect calendarRect=new Rect();
+    private Rect calendarRect=new Rect(0,0,70,70);
 
     public MyCalendarDayView(Context context) {
         this(context, null,0);
@@ -152,15 +150,18 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
         float xpad = (float)(getPaddingLeft() + getPaddingRight());
         float ypad = (float)(getPaddingTop() + getPaddingBottom());
         int fitw = Math.min(w, getSuggestedMinimumWidth());
-        int fith = Math.min(h, getSuggestedMinimumHeight());
+        int fith = Math.max(h, getSuggestedMinimumHeight());
         float ww = (float)fitw - xpad;
         float hh = (float)fith - ypad;
+        LOGGER.info("onSizeChanged  h=" + Integer.toString(h) +
+                "final h = " + Float.toString(hh));
         calendarRect= new Rect(0,0,(int)ww,(int)hh);
     }
 
 
     @Override
     public void onDraw(Canvas canvas) {
+        LOGGER.info("onDraw " + calendarRect.toString() );
         drawCalendarIcon.drawCalendarIcon(canvas,calendarRect, data.textUpper, data.textMiddle,data.textBottom);
     }
 
@@ -181,11 +182,12 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
         // Try for a width based on our minimum
         int minw = getPaddingLeft() + getPaddingRight() + getSuggestedMinimumWidth();
 
-        int w = Math.min(minw, MeasureSpec.getSize(widthMeasureSpec));
+        int w = minw;
 
         int minh =getSuggestedMinimumHeight() + getPaddingBottom() + getPaddingTop();
-        int h = Math.min(MeasureSpec.getSize(heightMeasureSpec), minh);
-
+        int h = minh;
+        LOGGER.info("onMeasure  heightMeasureSpec=" + Integer.toString(widthMeasureSpec) +
+                            "h = " + Integer.toString(h));
         setMeasuredDimension(w, h);
     }
 
