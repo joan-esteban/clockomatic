@@ -106,6 +106,11 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
     }
 
     @Override
+    public RegisterPageContract.Presenter getPresenter() {
+        return this.presenter;
+    }
+
+    @Override
     public void showDate(Calendar date) {
         if (myDateTimePickerFragment != null)
             LOGGER.info("RegisterPageFragmet::showDate setDate to " + date.getTime());

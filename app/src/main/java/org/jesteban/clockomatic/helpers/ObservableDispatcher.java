@@ -49,7 +49,7 @@ public class ObservableDispatcher<T> {
                 LOGGER.log(Level.SEVERE, "Exception IllegalArgumentException invoking " + e);
                 throw(new RuntimeException(e.toString()));
             }catch (InvocationTargetException e) {
-                LOGGER.log(Level.SEVERE, "Exception InvocationTargetException invoking " + e);
+                LOGGER.log(Level.SEVERE, "Exception InvocationTargetException invoking ["+ observer.getClass().getName() + "." + methodName + "] exception:" + e);
                 throw(new RuntimeException(e.toString()));
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();

@@ -84,7 +84,10 @@ public class DebugFragment extends Fragment {
             }
         });
         MyCalendarDayView dayView2;
-        for (int i=18 ; i<23; i++) {
+        for (int i=18 ; i<19; i++) {
+            InfoDayView tableRow = new InfoDayView(getContext());
+            layout.addView(tableRow);
+            /*
             TableRow tableRow = new TableRow(getContext());
             dayView2 = new MyCalendarDayView(getContext());
             dayView2.setTextMiddle(Integer.toString(i));
@@ -103,6 +106,7 @@ public class DebugFragment extends Fragment {
             //dayView2.setSmall(false);
             tableRow.addView(dayView2);
             layout.addView(tableRow);
+            */
         }
         infoDayView = (InfoDayView) view.findViewById(R.id.debug_info_day_view);
         infoDayViewPresenter = new InfoDayViewPresenter(infoDayView, getContext());

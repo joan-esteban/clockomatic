@@ -14,13 +14,16 @@ import android.widget.TextView;
 
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.helpers.DynamicWidgets;
+import org.jesteban.clockomatic.views.InfoDayView;
+import org.jesteban.clockomatic.views.InfoDayViewContract;
+import org.jesteban.clockomatic.views.InfoDayViewPresenter;
 
 import java.util.List;
 
 public class ShowListDaysClocksFragment extends Fragment implements ShowListDaysClocksContract.View {
     private ShowListDaysClocksContract.Presenter presenter = null;
     private TableLayout layout = null;
-    private DynamicWidgets<MyWidget> dynamicTextViews = new DynamicWidgets<>(new DynamicTextViewsActions());
+    private DynamicWidgets<InfoDayView> dynamicInfoDayViews = new DynamicWidgets<>(new DynamicInfoDayViewActions());
 
 
     public ShowListDaysClocksFragment() {
@@ -31,50 +34,13 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
         return new ShowListDaysClocksFragment();
     }
 
-    @Override
-    public void showTitle(String title) {
-        // For future
-    }
+
 
     @Override
-    public void showEntries(List<ShowListDaysClocksContract.Presenter.DayDataToShow> dayDatas) {
-        syncWithState(dayDatas);
+    public void showData(List<InfoDayViewContract.View.InfoDayVisualData> daysData) {
+        syncWithState(daysData);
     }
 
-    class MyWidget{
-        TextView textView = null;
-        MyWidget(Context context){
-
-            TableRow tableRow = new TableRow(context);
-
-            textView = new TextView(context);
-            textView.setId(View.generateViewId());
-            tableRow.addView(textView);
-            layout.addView(tableRow);
-        }
-
-        void setVisibility(int v){
-            textView.setVisibility(v);
-        }
-
-        void setText(CharSequence text){
-            textView.setText(text);
-        }
-
-    }
-
-    protected class DynamicTextViewsActions implements DynamicWidgets.OnMyActions<MyWidget> {
-        @Override
-        public MyWidget createWidget(int idx) {
-            return new MyWidget(getContext());
-        }
-
-        @Override
-        public void removeWidgetFromView(MyWidget widget) {
-            if (widget == null) return;
-            widget.setVisibility(View.GONE);
-        }
-    }
 
 
     @Override
@@ -83,6 +49,7 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_clocks_month, container, false);
         layout = (TableLayout) view.findViewById(R.id.month_table_layout);
+        //syncWithState(null);
         return view;
     }
 
@@ -91,6 +58,11 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
         assert (presenter != null);
         this.presenter = presenter;
         presenter.startUi();
+    }
+
+    @Override
+    public ShowListDaysClocksContract.Presenter getPresenter() {
+        return this.presenter;
     }
 
 
@@ -104,19 +76,41 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
         return sb.toString();
     }
 
-    public void syncWithState(List<ShowListDaysClocksContract.Presenter.DayDataToShow> dayDatas) {
+    public void syncWithState(List<InfoDayViewContract.View.InfoDayVisualData> daysData) {
 
-        dynamicTextViews.setAllWidgetAsUnused();
+        dynamicInfoDayViews.setAllWidgetAsUnused();
         int idx = 0;
-        for (ShowListDaysClocksContract.Presenter.DayDataToShow dayData : dayDatas) {
-            MyWidget textView = dynamicTextViews.getWidget(idx);
-            textView.setVisibility(View.VISIBLE);
-
-            textView.setText(Html.fromHtml("<h1>" + dayData.dateName + "</h1>" + getTextForDay(dayData.entryText)));
+        for (InfoDayViewContract.View.InfoDayVisualData data : daysData){
+            InfoDayView infoDayView = dynamicInfoDayViews.getWidget(idx);
+            infoDayView.setBackgroundResource(R.drawable.layout_bg_line_bottom);
+            infoDayView.setVisibility(View.VISIBLE);
+            infoDayView.showData(data);
             idx++;
         }
-        dynamicTextViews.removeWidgetUnused();
+        dynamicInfoDayViews.removeWidgetUnused();
+
     }
 
+
+
+    protected class DynamicInfoDayViewActions implements DynamicWidgets.OnMyActions<InfoDayView> {
+        @Override
+        public InfoDayView createWidget(int idx) {
+            InfoDayView res =  new InfoDayView(getContext());
+            res.setPresenter(new InfoDayViewPresenter(res,getContext()));
+            res.setVisibility(View.VISIBLE);
+            res.setId(View.generateViewId());
+            layout.addView(res);
+            return res;
+        }
+
+        @Override
+        public void removeWidgetFromView(InfoDayView widget) {
+            if (widget == null) return;
+            widget.setVisibility(View.GONE);
+        }
+
+
+    }
 
 }

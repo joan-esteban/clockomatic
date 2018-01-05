@@ -41,6 +41,10 @@ public class ReportPageFragment extends Fragment implements MyDatePickerFragment
         this.presenter =  presenter;
     }
 
+    @Override
+    public ReportPageContract.Presenter getPresenter() {
+        return this.presenter;
+    }
 
 
     private Fragment getFragment(int id){
@@ -57,7 +61,7 @@ public class ReportPageFragment extends Fragment implements MyDatePickerFragment
         View view =  inflater.inflate(R.layout.fragment_report_page, container, false);
         myDatePickerFragment = (MyDatePickerFragment)  getFragment(R.id.fragment_report_page_date_picker);
         viewClocksMonthFragment = (ShowListDaysClocksFragment) getFragment(R.id.fragment_view_clocks_month);
-        showListDaysClocksMonthPresenter = new ShowListDaysClocksMonthPresenter(viewClocksMonthFragment);
+        showListDaysClocksMonthPresenter = new ShowListDaysClocksMonthPresenter(viewClocksMonthFragment, getContext());
         SewingBox.sewPresentersView(showListDaysClocksMonthPresenter,presenter,viewClocksMonthFragment);
         myDatePickerFragment.setMonthMode();
         //presenter.startUi();

@@ -16,10 +16,6 @@ import java.util.List;
 
 public class MyPairedEntriesGridView extends GridView implements  MyPairedEntriesGridViewContract.View{
 
-
-
-
-
     List<MyPairedEntryViewContract.PairedEntryVisualData> entries = new ArrayList<>();
 
 
@@ -54,17 +50,16 @@ public class MyPairedEntriesGridView extends GridView implements  MyPairedEntrie
         entries.add(new MyPairedEntryViewContract.PairedEntryVisualData("13:02", "14:05"));
         adapter.set(entries);
         adapter.notifyDataSetChanged();
-        //
-        // invalidate();
-
     }
 
     public class LinkEntriesAdapter extends BaseAdapter {
-        List<MyPairedEntryViewContract.PairedEntryVisualData> entries = null;
+        List<MyPairedEntryViewContract.PairedEntryVisualData> entries = new ArrayList<>();
 
         private Context mContext;
         public LinkEntriesAdapter(Context c) {
             mContext = c;
+            MyPairedEntryViewContract.PairedEntryVisualData entriesExample = new MyPairedEntryViewContract.PairedEntryVisualData("10:00","20:00");
+            entries.add(entriesExample);
         }
 
         public int getCount() {
@@ -87,19 +82,12 @@ public class MyPairedEntriesGridView extends GridView implements  MyPairedEntrie
             if (convertView == null) {
                 // if it's not recycled, initialize some attributes
                 linkEntryView = new MyPairedEntryView(mContext);
-                //imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-                //imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 linkEntryView.setPadding(8, 8, 8, 8);
             } else {
                 linkEntryView = (MyPairedEntryView) convertView;
             }
             MyPairedEntryViewContract.PairedEntryVisualData data = entries.get(position);
             linkEntryView.showPairedEntry(data);
-            //if (position%3==0) linkEntryView.setText("8:05", "13:14");
-            //if (position%3==1) linkEntryView.setText("14:05", "15:14");
-            //if (position%3==2) linkEntryView.setText("13:05", null);
-
-            //imageView.setImageResource(mThumbIds[position]);
             return linkEntryView;
         }
 

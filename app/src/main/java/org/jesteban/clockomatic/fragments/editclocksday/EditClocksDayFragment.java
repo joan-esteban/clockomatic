@@ -147,6 +147,11 @@ public class EditClocksDayFragment extends Fragment implements EditClockDayContr
     }
 
     @Override
+    public EditClockDayContract.Presenter getPresenter() {
+        return this.presenter;
+    }
+
+    @Override
     public void showEntries(EntrySet entries) {
         syncWithState(entries);
     }

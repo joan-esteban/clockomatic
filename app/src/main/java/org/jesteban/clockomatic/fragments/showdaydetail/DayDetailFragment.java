@@ -27,6 +27,7 @@ public class  DayDetailFragment extends Fragment implements DayDetailContract.Vi
     private TextView txtNumDay = null;
     private TextSwitcher txtEntries = null;
     private TextView txtWorkInfo = null;
+    private DayDetailContract.Presenter presenter = null;
     public DayDetailFragment() {
         // Required empty public constructor
     }
@@ -85,6 +86,12 @@ public class  DayDetailFragment extends Fragment implements DayDetailContract.Vi
 
     @Override
     public void setPresenter(DayDetailContract.Presenter presenter) {
+        this.presenter = presenter;
         presenter.startUi();
+    }
+
+    @Override
+    public DayDetailContract.Presenter getPresenter() {
+        return this.presenter;
     }
 }

@@ -1,6 +1,7 @@
 package org.jesteban.clockomatic.fragments.showlistdaysclocks;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import org.jesteban.clockomatic.bindings.SelectedMonthProvider;
@@ -8,6 +9,8 @@ import org.jesteban.clockomatic.helpers.Entry2Html;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
 import org.jesteban.clockomatic.model.EntrySet;
+import org.jesteban.clockomatic.views.InfoDayViewContract;
+import org.jesteban.clockomatic.views.InfoDayViewPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +22,11 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
         SelectedMonthProvider.Listener {
     private static final Logger LOGGER = Logger.getLogger(ShowListDaysClocksMonthPresenter.class.getName());
     private SelectedMonthProvider selectedMonth = null;
+    private InfoDayViewPresenter infoDayViewPresenter = null;
 
-    public ShowListDaysClocksMonthPresenter(@NonNull ShowListDaysClocksContract.View view) {
+    public ShowListDaysClocksMonthPresenter(@NonNull ShowListDaysClocksContract.View view, Context context) {
         super(view);
+        infoDayViewPresenter = new InfoDayViewPresenter(null, context);
     }
 
     @Override
@@ -33,24 +38,16 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
     @Override
     public void onChangeEntries() {
         EntrySet entries = this.entries.getEntriesBelongingMonth(selectedMonth.getSelectedMonth());
-        List<DayDataToShow> showData = new ArrayList<>();
+        List<InfoDayViewContract.View.InfoDayVisualData> showData = new ArrayList<>();
         Set<String> days = entries.getDistintBelongingDays();
         for (String day : days) {
             InfoDayEntry infoDayEntry = new InfoDayEntry(entries.getEntriesBelongingDayStartWith(day), day);
-            DayDataToShow dayData = new DayDataToShow();
-            dayData.dateName = day;
-            dayData.entryText = new String[infoDayEntry.getPairsInfo().size()];
-            Entry2Html aux = new Entry2Html();
-            int idx = 0;
-            for (InfoDayEntry.PairedEntry pair : infoDayEntry.getPairsInfo()) {
-                dayData.entryText[idx] = aux.getJustHours(pair.starting) + " --> " + aux.getJustHours(pair.finish);
-                idx++;
-            }
 
+            InfoDayViewContract.View.InfoDayVisualData dayData = this.infoDayViewPresenter.getVisualData(infoDayEntry);
             showData.add(dayData);
         }
 
-        view.showEntries(showData);
+        view.showData(showData);
     }
 
     // This is fill with DependencyInjectorBinding
