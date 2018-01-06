@@ -2,6 +2,7 @@ package org.jesteban.clockomatic.fragments.reportpage;
 
 import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.controllers.ViewBase;
+import org.jesteban.clockomatic.model.Entry;
 
 import java.util.Calendar;
 

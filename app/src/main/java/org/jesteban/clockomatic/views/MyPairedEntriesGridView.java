@@ -1,6 +1,7 @@
 package org.jesteban.clockomatic.views;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.view.Gravity.CENTER;
 
 /**
  * This show multiples entries
@@ -35,6 +38,13 @@ public class MyPairedEntriesGridView extends GridView implements  MyPairedEntrie
         super(context, attrs, defStyleAttr, defStyleRes);
         GridView gridView = this;
         gridView.setAdapter(new LinkEntriesAdapter(context));
+        //ViewGroup.LayoutParams params = gridView.getLayoutParams();
+        //params.height = LayoutParams.WRAP_CONTENT;
+        //gridView.setLayoutParams(params);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+        gridView.setNumColumns(2);
+        else
+            gridView.setNumColumns(4);
     }
 
     @Override
@@ -50,6 +60,7 @@ public class MyPairedEntriesGridView extends GridView implements  MyPairedEntrie
         entries.add(new MyPairedEntryViewContract.PairedEntryVisualData("13:02", "14:05"));
         adapter.set(entries);
         adapter.notifyDataSetChanged();
+        this.requestLayout();
     }
 
     public class LinkEntriesAdapter extends BaseAdapter {
@@ -82,7 +93,8 @@ public class MyPairedEntriesGridView extends GridView implements  MyPairedEntrie
             if (convertView == null) {
                 // if it's not recycled, initialize some attributes
                 linkEntryView = new MyPairedEntryView(mContext);
-                linkEntryView.setPadding(8, 8, 8, 8);
+                //linkEntryView.setPadding(8, 8, 8, 8);
+                linkEntryView.setGravity(CENTER);
             } else {
                 linkEntryView = (MyPairedEntryView) convertView;
             }

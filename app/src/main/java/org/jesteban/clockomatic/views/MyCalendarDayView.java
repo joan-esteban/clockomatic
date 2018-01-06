@@ -153,15 +153,14 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
         int fith = Math.max(h, getSuggestedMinimumHeight());
         float ww = (float)fitw - xpad;
         float hh = (float)fith - ypad;
-        LOGGER.info("onSizeChanged  h=" + Integer.toString(h) +
-                "final h = " + Float.toString(hh));
-        calendarRect= new Rect(0,0,(int)ww,(int)hh);
+        //LOGGER.info("onSizeChanged  h=" + Integer.toString(h) +
+        //        "final h = " + Float.toString(hh) + "padding_left= " + Integer.toString(getPaddingLeft()));
+        calendarRect= new Rect(getPaddingLeft(),getPaddingTop(),(int)ww + getPaddingLeft(),(int)hh +getPaddingTop());
     }
 
 
     @Override
     public void onDraw(Canvas canvas) {
-        LOGGER.info("onDraw " + calendarRect.toString() );
         drawCalendarIcon.drawCalendarIcon(canvas,calendarRect, data.textUpper, data.textMiddle,data.textBottom);
     }
 
@@ -186,8 +185,8 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
 
         int minh =getSuggestedMinimumHeight() + getPaddingBottom() + getPaddingTop();
         int h = minh;
-        LOGGER.info("onMeasure  heightMeasureSpec=" + Integer.toString(widthMeasureSpec) +
-                            "h = " + Integer.toString(h));
+        //LOGGER.info("onMeasure  heightMeasureSpec=" + Integer.toString(widthMeasureSpec) +
+        //                    "h = " + Integer.toString(h) + " pading_left=" + Integer.toString(getPaddingLeft()));
         setMeasuredDimension(w, h);
     }
 
@@ -249,7 +248,7 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
                               String upper, String middle, String bottom)
         {
             drawBg(canvas,where);
-            canvas.drawText(upper, where.centerX(), where.bottom/4, this.paintUpperText);
+            canvas.drawText(upper, where.centerX(), where.top + ((where.bottom-where.top)/4), this.paintUpperText);
             if (data.sizeStyle == MyCalendarDayViewContract.SizeStyle.SMALL){
                 canvas.drawText(middle, where.centerX(), (int)(where.bottom*0.77), this.paintMiddleText);
             } else canvas.drawText(middle, where.centerX(), (int)(where.bottom*0.80), this.paintMiddleText);

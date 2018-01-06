@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/layout_bg_rounded"
+
     >
 
     <org.jesteban.clockomatic.views.MyCalendarDayView
@@ -18,6 +18,9 @@
         auto:textBottom="el mes"
         auto:textMiddle="dia"
         auto:textUpper="hola"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+
         />
 
     <org.jesteban.clockomatic.views.MyPairedEntriesGridView
@@ -32,6 +35,9 @@
         android:numColumns="auto_fit"
         android:verticalSpacing="1dp"
         android:visibility="visible"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+        android:background="@drawable/layout_bg_line_bottom"
         />
 
     <org.jesteban.clockomatic.views.MyCalendarDayView
@@ -41,6 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="visible"
-        auto:sizeStyle="BIG" />
+        auto:sizeStyle="BIG"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+        />
 
 </merge>

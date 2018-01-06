@@ -1,6 +1,8 @@
 package org.jesteban.clockomatic;
 
 import android.content.DialogInterface;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +19,7 @@ import android.view.View;
 
 import org.jesteban.clockomatic.controllers.MainActivityContract;
 import org.jesteban.clockomatic.controllers.MainActivityPresenter;
+import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPagePresenter;
 import org.jesteban.clockomatic.helpers.SewingBox;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment;
@@ -28,20 +31,23 @@ import org.jesteban.clockomatic.views.DebugFragment;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainActivityContract.View{
 
     private static final Logger  LOGGER = Logger.getLogger(MainActivity.class.getName());
 
-    private MainActivityContract.Presenter presenter = new MainActivityPresenter();
+    private MainActivityContract.Presenter presenter = null;
     private ReportPageContract.Presenter reportPagePresenter = null;
     private ViewPager mViewPager=null;
+    private CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LOGGER.info("Creating MainActivy " + BuildConfig.VERSION_NAME + " debug=" + BuildConfig.DEBUG);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        setContentView(R.layout.activity_main);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
+        presenter = new MainActivityPresenter(this, getBaseContext());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each sections of the activity.
@@ -156,6 +162,27 @@ public class MainActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setPresenter(PresenterBase presenter) {
+
+    }
+
+    @Override
+    public PresenterBase getPresenter() {
+        return this.presenter;
+    }
+
+    @Override
+    public void showMessage(String text) {
+        Snackbar.make(coordinatorLayout, text, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    @Override
+    public void showRegisterPage() {
+        mViewPager.setCurrentItem(0,true);
     }
 
     /**

@@ -9,13 +9,19 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/layout_bg_link_entry">
+        android:background="@drawable/layout_bg_link_entry"
+        android:gravity="center"
+        android:layout_gravity="center"
+        >
     <TextView
         android:id="@+id/text_view_initial_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:text="16:44" />
+        android:text="16:44"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
 
 
         <ImageView
@@ -25,13 +31,19 @@
             android:layout_width="18dp"
             android:layout_height="21dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/link3" />
+            app:srcCompat="@drawable/link3"
+            android:gravity="center"
+            android:layout_gravity="center"
+            />
 
         <TextView
         android:id="@+id/text_view_final_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:text="18:37" />
+        android:text="18:37"
+            android:gravity="center"
+            android:layout_gravity="center"
+            />
     </LinearLayout>
 </merge>

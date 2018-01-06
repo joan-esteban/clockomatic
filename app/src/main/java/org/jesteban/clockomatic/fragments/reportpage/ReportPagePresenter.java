@@ -7,6 +7,7 @@ import org.jesteban.clockomatic.bindings.Provider;
 import org.jesteban.clockomatic.bindings.SelectedMonthProvider;
 import org.jesteban.clockomatic.bindings.SelectedMonthProviderImpl;
 import org.jesteban.clockomatic.controllers.PresenterBase;
+import org.jesteban.clockomatic.model.Entry;
 
 import java.util.Calendar;
 import java.util.List;
@@ -20,7 +21,8 @@ public class ReportPagePresenter implements ReportPageContract.Presenter, Entrie
 
     private PresenterBase parent;
     private EntriesProvider entries;
-    private SelectedMonthProvider selectedMonth = new SelectedMonthProviderImpl();
+    private SelectedMonthProvider selectedMonth = null;
+
     private ReportPageContract.View view = null;
 
     public ReportPagePresenter( @NonNull ReportPageContract.View view){
@@ -33,6 +35,13 @@ public class ReportPagePresenter implements ReportPageContract.Presenter, Entrie
         LOGGER.info("setEntriesProvider");
         entries = i;
         entries.subscribe(this);
+    }
+
+    // This is fill with DependencyInjectorBinding
+    public void setSelectedMonthProvider(@NonNull SelectedMonthProvider i){
+        LOGGER.info("setSelectedMonthProvider");
+        selectedMonth = i;
+        //selectedMonth.subscribe(this);
     }
 
     @Override
@@ -50,6 +59,7 @@ public class ReportPagePresenter implements ReportPageContract.Presenter, Entrie
         //presenter.setMonthReport(day);
 
     }
+
 
 
 

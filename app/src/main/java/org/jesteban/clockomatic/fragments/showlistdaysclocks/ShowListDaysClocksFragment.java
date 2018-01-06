@@ -2,6 +2,7 @@ package org.jesteban.clockomatic.fragments.showlistdaysclocks;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import org.jesteban.clockomatic.R;
+import org.jesteban.clockomatic.bindings.SelectedDayProvider;
 import org.jesteban.clockomatic.helpers.DynamicWidgets;
 import org.jesteban.clockomatic.views.InfoDayView;
 import org.jesteban.clockomatic.views.InfoDayViewContract;
@@ -20,7 +22,7 @@ import org.jesteban.clockomatic.views.InfoDayViewPresenter;
 
 import java.util.List;
 
-public class ShowListDaysClocksFragment extends Fragment implements ShowListDaysClocksContract.View {
+public class ShowListDaysClocksFragment extends Fragment implements ShowListDaysClocksContract.View{
     private ShowListDaysClocksContract.Presenter presenter = null;
     private TableLayout layout = null;
     private DynamicWidgets<InfoDayView> dynamicInfoDayViews = new DynamicWidgets<>(new DynamicInfoDayViewActions());
@@ -83,13 +85,26 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
         for (InfoDayViewContract.View.InfoDayVisualData data : daysData){
             InfoDayView infoDayView = dynamicInfoDayViews.getWidget(idx);
             infoDayView.setBackgroundResource(R.drawable.layout_bg_line_bottom);
+            //infoDayView.setBackgroundResource(R.drawable.layout_bg_month);
+            infoDayView.setPadding(-5,-5,5,5);
             infoDayView.setVisibility(View.VISIBLE);
             infoDayView.showData(data);
+
+            infoDayView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    InfoDayView idv = (InfoDayView) v;
+                    Snackbar.make(getView(), "ERROR!!!!!!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    presenter.clickOnDay(idv.getData().belongingDay);
+                }
+            });
             idx++;
         }
         dynamicInfoDayViews.removeWidgetUnused();
 
     }
+
 
 
 
@@ -100,6 +115,7 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
             res.setPresenter(new InfoDayViewPresenter(res,getContext()));
             res.setVisibility(View.VISIBLE);
             res.setId(View.generateViewId());
+
             layout.addView(res);
             return res;
         }

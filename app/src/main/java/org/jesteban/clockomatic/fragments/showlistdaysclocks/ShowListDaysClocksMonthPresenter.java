@@ -4,10 +4,12 @@ package org.jesteban.clockomatic.fragments.showlistdaysclocks;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import org.jesteban.clockomatic.bindings.SelectedDayProvider;
 import org.jesteban.clockomatic.bindings.SelectedMonthProvider;
 import org.jesteban.clockomatic.helpers.Entry2Html;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
+import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
 import org.jesteban.clockomatic.views.InfoDayViewContract;
 import org.jesteban.clockomatic.views.InfoDayViewPresenter;
@@ -22,6 +24,7 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
         SelectedMonthProvider.Listener {
     private static final Logger LOGGER = Logger.getLogger(ShowListDaysClocksMonthPresenter.class.getName());
     private SelectedMonthProvider selectedMonth = null;
+    private SelectedDayProvider selectedDay = null;
     private InfoDayViewPresenter infoDayViewPresenter = null;
 
     public ShowListDaysClocksMonthPresenter(@NonNull ShowListDaysClocksContract.View view, Context context) {
@@ -55,10 +58,21 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
         selectedMonth = i;
         selectedMonth.subscribe(this);
     }
+    // This is fill with DependencyInjectorBinding
+    public void setSelectedDayProvider(SelectedDayProvider i) {
+        selectedDay = i;
+        //selectedDay.subscribe(this);
+    }
+
 
 
     @Override
     public void startUi() {
         onChangeEntries();
+    }
+
+    @Override
+    public void clickOnDay(Entry.BelongingDay day) {
+        this.selectedDay.setSelecteDay(day.getBelongingDayDate());
     }
 }

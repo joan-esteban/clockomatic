@@ -50,7 +50,9 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
 
         String[] months = context.getResources().getStringArray(R.array.name_months_short_array);
         res.textBottom = months[calDay.get(Calendar.MONTH)];
+
         res.sizeStyle = SMALL;
+        if (numEntries>2) res.sizeStyle = BIG;
         if (numEntries==0) {
             res.colorStyle = GREY;
             res.sizeStyle = SMALL;
@@ -92,6 +94,7 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
             res.colorStyle = GREY;
             res.sizeStyle = SMALL;
         }
+        if (infoDay.getPairsInfo().size()>2) res.sizeStyle = BIG;
         return res;
     }
 
@@ -107,6 +110,7 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
         data.dayData = getVisualDataForDay(belongingDay, infoDay.getPairsInfo().size() );
         data.entriesData = getVisualDataFor(infoDay.getPairsInfo());
         data.briefData = getVisualDataForBrief(infoDay);
+        data.belongingDay = belongingDay;
         return data;
     }
     @Override

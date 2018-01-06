@@ -20,6 +20,7 @@ public class InfoDayView  extends TableRow implements  InfoDayViewContract.View{
     MyPairedEntriesGridView pairedEntriesGridView = null;
     MyCalendarDayView calendarDayInfoView = null;
     InfoDayViewContract.Presenter presenter = null;
+    InfoDayVisualData data = null;
     public InfoDayView(Context context) {
         this(context,null);
     }
@@ -44,6 +45,12 @@ public class InfoDayView  extends TableRow implements  InfoDayViewContract.View{
         if (data.dayData!=null) calendarDayView.showData(data.dayData);
         if (data.entriesData!=null) pairedEntriesGridView.showPairedEntries(data.entriesData);
         if (data.briefData!=null) calendarDayInfoView.showData(data.briefData);
+        this.data = data;
+    }
+
+    @Override
+    public InfoDayVisualData getData() {
+        return this.data;
     }
 
     @Override

@@ -16,12 +16,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RegisterPagePresenter implements RegisterPageContract.Presenter {
+public class RegisterPagePresenter implements RegisterPageContract.Presenter, SelectedDayProvider.Listener {
     private static final Logger LOGGER = Logger.getLogger(RegisterPagePresenter.class.getName());
     private PresenterBase  parent = null;
-    private SelectedDayProvider selectedDay = new SelectedDayProviderImpl();
+    private SelectedDayProvider selectedDay = null;
     private EntriesProvider entries = null;
     private RegisterPageContract.View view = null;
+
+    private String currentFilterBelongingForDay = "";
     // https://stackoverflow.com/questions/1877417/how-to-set-a-timer-in-android
 
 
@@ -31,10 +33,13 @@ public class RegisterPagePresenter implements RegisterPageContract.Presenter {
     @Override
     public List<Provider> getBindings() {
         List<Provider> list = parent.getBindings();
-        list.add(selectedDay);
         return list;
     }
-
+    // This is fill with DependencyInjectorBinding
+    public void setSelectedDayProvider(SelectedDayProvider i) {
+        selectedDay = i;
+        selectedDay.subscribe(this);
+    }
     @Override
     public void setParent(PresenterBase parent) {
         this.parent = parent;
@@ -68,9 +73,9 @@ public class RegisterPagePresenter implements RegisterPageContract.Presenter {
     @Override
     public void onResume() {
         LOGGER.log(Level.INFO, "onResume setting current date");
-        Calendar cal = Calendar.getInstance();
-        selectedDay.setSelecteDay(cal);
-        view.showDate(cal);
+        //Calendar cal = Calendar.getInstance();
+        //selectedDay.setSelecteDay(cal);
+        //view.showDate(cal);
     }
 
     // This is fill with DependencyInjectorBinding
@@ -80,4 +85,10 @@ public class RegisterPagePresenter implements RegisterPageContract.Presenter {
     }
 
 
+    @Override
+    public void onChangeSelectedDay() {
+        if (currentFilterBelongingForDay.equals(selectedDay.getFilterBelongingForDay())) return;
+        currentFilterBelongingForDay = selectedDay.getFilterBelongingForDay();
+        view.showDate(selectedDay.getSelectedDay());
+    }
 }
