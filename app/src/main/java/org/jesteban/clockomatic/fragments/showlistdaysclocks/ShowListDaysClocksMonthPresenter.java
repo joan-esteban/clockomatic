@@ -10,6 +10,7 @@ import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
+import org.jesteban.clockomatic.providers.ShowPageProviderContract;
 import org.jesteban.clockomatic.views.InfoDayViewContract;
 import org.jesteban.clockomatic.views.InfoDayViewPresenter;
 
@@ -24,6 +25,7 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
     private static final Logger LOGGER = Logger.getLogger(ShowListDaysClocksMonthPresenter.class.getName());
     private SelectedMonthProviderContract selectedMonth = null;
     private SelectedDayProviderContract selectedDay = null;
+    private ShowPageProviderContract showPage = null;
     private InfoDayViewPresenter infoDayViewPresenter = null;
 
     public ShowListDaysClocksMonthPresenter(@NonNull ShowListDaysClocksContract.View view, Context context) {
@@ -62,7 +64,9 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
         selectedDay = i;
         //selectedDay.subscribe(this);
     }
-
+    public void setShowPageProvider(ShowPageProviderContract i) {
+        showPage = i;
+    }
 
 
     @Override
@@ -73,5 +77,6 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
     @Override
     public void clickOnDay(Entry.BelongingDay day) {
         this.selectedDay.setSelecteDay(day.getBelongingDayDate());
+        this.showPage.setShowPage(ShowPageProviderContract.PageId.REGISTER_PAGE);
     }
 }

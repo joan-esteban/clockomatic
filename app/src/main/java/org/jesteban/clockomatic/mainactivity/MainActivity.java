@@ -26,6 +26,7 @@ import org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment;
 import org.jesteban.clockomatic.fragments.reportpage.ReportPageFragment;
 import org.jesteban.clockomatic.fragments.reportpage.ReportPageContract;
 import org.jesteban.clockomatic.fragments.reportpage.ReportPagePresenter;
+import org.jesteban.clockomatic.providers.ShowPageProviderContract;
 import org.jesteban.clockomatic.views.DebugFragment;
 
 import java.util.logging.Level;
@@ -55,6 +56,18 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+
+            @Override
+            public void onPageSelected(int position) {
+                presenter.OnViewChangeShowPage(ShowPageProviderContract.PageId.values()[position]);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) { }
+        });
         mViewPager.setAdapter(mSectionsPagerAdapter);
         // If changed orientations, viewPager fragments are no recreated, so it need pointer to stateController
         // In first run fragments are not created
@@ -75,9 +88,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
                 }
             }
         }
-        if (BuildConfig.DEBUG){
-            menuShowDebug();
-        }
+        presenter.startUi();
+
     }
 
 
@@ -94,8 +106,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         return true;
     }
 
-    public void menuWipeData() {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+    @Override
+    public void askConfirmWipeData() {
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
@@ -116,7 +129,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     }
 
-    public void menuShowAbout(){
+    @Override
+    public void showAbout(){
         View messageView = getLayoutInflater().inflate(R.layout.about, null, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -129,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     public void menuShowDebug(){
         // https://stackoverflow.com/questions/7801954/how-to-programmatically-show-next-view-in-viewpager
+
         mViewPager.setCurrentItem(3,true);
     }
 
@@ -141,36 +156,18 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         int id = item.getItemId();
         LOGGER.info("main Menu selected " + Integer.toString(id));
         //noinspection SimplifiableIfStatement
-        switch (id) {
-            case R.id.action_settings:
-                break;
-            case R.id.action_wipe_data:
-                LOGGER.info("main Menu selected action_wipe_data");
-                menuWipeData();
-                return true;
-            case R.id.action_about:
-                LOGGER.info("main Menu selected action_about");
-                menuShowAbout();
-                return true;
-            case R.id.action_debug:
-                LOGGER.info("main Menu selected action_debug");
-                menuShowDebug();
-                return true;
-            default:
-                LOGGER.info("unknown menu item selected");
-        }
-
+        presenter.onSelectedMenuItem(id);
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void setPresenter(PresenterBase presenter) {
-
+    public void setPresenter(MainActivityContract.Presenter presenter) {
+        throw new RuntimeException("This class create his own presenter!");
     }
 
     @Override
-    public PresenterBase getPresenter() {
+    public MainActivityContract.Presenter getPresenter() {
         return this.presenter;
     }
 
@@ -181,9 +178,24 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
-    public void showRegisterPage() {
-        mViewPager.setCurrentItem(0,true);
+    public void showPage(ShowPageProviderContract.PageId id) {
+        int item = 0;
+        switch (id){
+            case REGISTER_PAGE:
+                item = 0;
+                break;
+            case REPORT_PAGE:
+                item = 1;
+                break;
+            case DEBUG_PAGE:
+                item = 2;
+                break;
+        }
+        mViewPager.setCurrentItem(item,true);
     }
+
+
+
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
