@@ -19,7 +19,6 @@ import android.view.View;
 
 import org.jesteban.clockomatic.BuildConfig;
 import org.jesteban.clockomatic.R;
-import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPagePresenter;
 import org.jesteban.clockomatic.helpers.SewingBox;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment;
@@ -58,7 +57,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // Not need to do something
+            }
 
             @Override
             public void onPageSelected(int position) {
@@ -66,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) { }
+            public void onPageScrollStateChanged(int state) {
+                // Not need to do something
+            }
         });
         mViewPager.setAdapter(mSectionsPagerAdapter);
         // If changed orientations, viewPager fragments are no recreated, so it need pointer to stateController
