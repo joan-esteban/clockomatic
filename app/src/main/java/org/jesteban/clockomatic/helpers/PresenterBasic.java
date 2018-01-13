@@ -3,8 +3,7 @@ package org.jesteban.clockomatic.helpers;
 
 import android.support.annotation.NonNull;
 
-import org.jesteban.clockomatic.bindings.EntriesProvider;
-import org.jesteban.clockomatic.bindings.Provider;
+import org.jesteban.clockomatic.providers.Provider;
 import org.jesteban.clockomatic.controllers.PresenterBase;
 
 import java.util.List;

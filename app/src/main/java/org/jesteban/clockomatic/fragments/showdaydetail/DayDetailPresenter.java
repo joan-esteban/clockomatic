@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import org.jesteban.clockomatic.R;
-import org.jesteban.clockomatic.bindings.SelectedDayProvider;
+import org.jesteban.clockomatic.providers.SelectedDayProviderContract;
 import org.jesteban.clockomatic.helpers.Entry2Html;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.helpers.Minutes2String;
@@ -17,10 +17,10 @@ import java.util.logging.Logger;
 
 
 public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDetailContract.View>
-        implements DayDetailContract.Presenter, SelectedDayProvider.Listener {
+        implements DayDetailContract.Presenter, SelectedDayProviderContract.Listener {
     private static final Logger LOGGER = Logger.getLogger(DayDetailPresenter.class.getName());
     private Context context = null;
-    private SelectedDayProvider selectedDay = null;
+    private SelectedDayProviderContract selectedDay = null;
 
     public DayDetailPresenter(@NonNull DayDetailContract.View view, Context current) {
         super(view);
@@ -68,7 +68,7 @@ public class DayDetailPresenter extends PresenterBasicProviderEntriesReady<DayDe
 
     }
 
-    public void setSelectedDayProvider(@NonNull SelectedDayProvider p) {
+    public void setSelectedDayProvider(@NonNull SelectedDayProviderContract p) {
         LOGGER.log(Level.INFO, "setSelectedDayProvider");
         selectedDay = p;
         p.subscribe(this);

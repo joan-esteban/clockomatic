@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.bindings;
+package org.jesteban.clockomatic.providers;
 
 import org.jesteban.clockomatic.helpers.ObservableDispatcher;
 import org.jesteban.clockomatic.model.Entry;
@@ -9,8 +9,8 @@ import java.util.Calendar;
 
 
 
-public class SelectedDayProviderImpl implements  SelectedDayProvider{
-    private ObservableDispatcher<SelectedDayProvider.Listener> observable = new ObservableDispatcher<>();
+public class SelectedDayProvider implements SelectedDayProviderContract {
+    private ObservableDispatcher<SelectedDayProviderContract.Listener> observable = new ObservableDispatcher<>();
     private Calendar selectedDay = Calendar.getInstance();
 
     private String showBelongingDayPrefix = null;
@@ -53,12 +53,12 @@ public class SelectedDayProviderImpl implements  SelectedDayProvider{
     }
 
     @Override
-    public void subscribe(SelectedDayProvider.Listener listener)  {
+    public void subscribe(SelectedDayProviderContract.Listener listener)  {
         observable.add(listener);
     }
 
     @Override
     public String getName() {
-        return SelectedDayProvider.KEY_PROVIDER;
+        return SelectedDayProviderContract.KEY_PROVIDER;
     }
 }

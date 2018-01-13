@@ -1,6 +1,6 @@
 package org.jesteban.clockomatic.helpers;
-import org.jesteban.clockomatic.bindings.Provider;
-import java.lang.reflect.InvocationTargetException;
+import org.jesteban.clockomatic.providers.Provider;
+
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import java.util.logging.Logger;
  * get list of implementations ending with "Provider"
  * and find members on class starting wint set<name_interface>
  * Example:
- *  interface SelectedMonthProvider
+ *  interface SelectedMonthProviderContract
  *
  *  On consumer
- *  public void setSelectedMonthProvider(SelectedMonthProvider i);
+ *  public void setSelectedMonthProvider(SelectedMonthProviderContract i);
  */
 
 public class DependencyInjectorBinding {
@@ -45,6 +45,10 @@ public class DependencyInjectorBinding {
         for (Class cls2 : classes){
             LOGGER.info("provider has: " + cls2.getName());
             if (cls2.getName().endsWith(interfaceClassName)){
+                LOGGER.info("find a suitable source " + cls2.getName());
+                return cls2;
+            }
+            if (cls2.getName().endsWith(interfaceClassName+"Contract")){
                 LOGGER.info("find a suitable source " + cls2.getName());
                 return cls2;
             }

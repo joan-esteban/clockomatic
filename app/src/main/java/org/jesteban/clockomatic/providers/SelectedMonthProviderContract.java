@@ -1,8 +1,8 @@
-package org.jesteban.clockomatic.bindings;
+package org.jesteban.clockomatic.providers;
 
 import java.util.Calendar;
 
-public interface SelectedMonthProvider extends Provider{
+public interface SelectedMonthProviderContract extends Provider{
     public static final String KEY_PROVIDER ="selectedMonth";
 
     public boolean setSelectedMonth(Calendar date);

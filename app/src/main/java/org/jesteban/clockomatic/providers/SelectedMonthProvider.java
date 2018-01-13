@@ -1,12 +1,11 @@
-package org.jesteban.clockomatic.bindings;
+package org.jesteban.clockomatic.providers;
 
-import org.jesteban.clockomatic.bindings.SelectedMonthProvider;
 import org.jesteban.clockomatic.helpers.ObservableDispatcher;
 
 import java.util.Calendar;
 
 
-public class SelectedMonthProviderImpl implements SelectedMonthProvider {
+public class SelectedMonthProvider implements SelectedMonthProviderContract {
     private ObservableDispatcher<Listener> observable = new ObservableDispatcher<>();
     private Calendar selectedMonth = Calendar.getInstance();
     @Override
@@ -30,6 +29,6 @@ public class SelectedMonthProviderImpl implements SelectedMonthProvider {
 
     @Override
     public String getName() {
-        return SelectedMonthProvider.KEY_PROVIDER;
+        return SelectedMonthProviderContract.KEY_PROVIDER;
     }
 }

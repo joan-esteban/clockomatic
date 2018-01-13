@@ -1,12 +1,9 @@
 package org.jesteban.clockomatic.fragments.showdaydetailbrief;
 
 
-import org.jesteban.clockomatic.bindings.SelectedDayProvider;
-import org.jesteban.clockomatic.fragments.showdaydetail.DayDetailContract;
-import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
 /*
 public class DayDetailBriefPresenter extends PresenterBasicProviderEntriesReady<DayDetailBriefContract.View>
-        implements DayDetailContract.Presenter, SelectedDayProvider.Listener {
+        implements DayDetailContract.Presenter, SelectedDayProviderContract.Listener {
 
     @Override
     public void onChangeEntries() {

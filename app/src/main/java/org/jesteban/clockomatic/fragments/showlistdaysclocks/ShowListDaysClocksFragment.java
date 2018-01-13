@@ -1,20 +1,14 @@
 package org.jesteban.clockomatic.fragments.showlistdaysclocks;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import org.jesteban.clockomatic.R;
-import org.jesteban.clockomatic.bindings.SelectedDayProvider;
 import org.jesteban.clockomatic.helpers.DynamicWidgets;
 import org.jesteban.clockomatic.views.InfoDayView;
 import org.jesteban.clockomatic.views.InfoDayViewContract;

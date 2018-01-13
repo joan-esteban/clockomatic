@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.bindings;
+package org.jesteban.clockomatic.providers;
 
 
 import org.jesteban.clockomatic.model.Entry;
@@ -6,7 +6,7 @@ import org.jesteban.clockomatic.model.EntrySet;
 
 import java.util.Calendar;
 
-public interface EntriesProvider extends  Provider{
+public interface EntriesProviderContract extends  Provider{
     static final String  KEY_PROVIDER="entries";
 
     Boolean register(Entry date);

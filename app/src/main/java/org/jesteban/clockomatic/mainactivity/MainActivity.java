@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic;
+package org.jesteban.clockomatic.mainactivity;
 
 import android.content.DialogInterface;
 import android.support.design.widget.CoordinatorLayout;
@@ -17,8 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-import org.jesteban.clockomatic.controllers.MainActivityContract;
-import org.jesteban.clockomatic.controllers.MainActivityPresenter;
+import org.jesteban.clockomatic.BuildConfig;
+import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPagePresenter;
 import org.jesteban.clockomatic.helpers.SewingBox;

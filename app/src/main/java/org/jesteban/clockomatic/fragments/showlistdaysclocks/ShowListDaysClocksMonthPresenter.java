@@ -4,9 +4,8 @@ package org.jesteban.clockomatic.fragments.showlistdaysclocks;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import org.jesteban.clockomatic.bindings.SelectedDayProvider;
-import org.jesteban.clockomatic.bindings.SelectedMonthProvider;
-import org.jesteban.clockomatic.helpers.Entry2Html;
+import org.jesteban.clockomatic.providers.SelectedDayProviderContract;
+import org.jesteban.clockomatic.providers.SelectedMonthProviderContract;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
 import org.jesteban.clockomatic.model.Entry;
@@ -21,10 +20,10 @@ import java.util.logging.Logger;
 
 public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntriesReady<ShowListDaysClocksContract.View>
         implements ShowListDaysClocksContract.Presenter,
-        SelectedMonthProvider.Listener {
+        SelectedMonthProviderContract.Listener {
     private static final Logger LOGGER = Logger.getLogger(ShowListDaysClocksMonthPresenter.class.getName());
-    private SelectedMonthProvider selectedMonth = null;
-    private SelectedDayProvider selectedDay = null;
+    private SelectedMonthProviderContract selectedMonth = null;
+    private SelectedDayProviderContract selectedDay = null;
     private InfoDayViewPresenter infoDayViewPresenter = null;
 
     public ShowListDaysClocksMonthPresenter(@NonNull ShowListDaysClocksContract.View view, Context context) {
@@ -54,12 +53,12 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
     }
 
     // This is fill with DependencyInjectorBinding
-    public void setSelectedMonthProvider(SelectedMonthProvider i) {
+    public void setSelectedMonthProvider(SelectedMonthProviderContract i) {
         selectedMonth = i;
         selectedMonth.subscribe(this);
     }
     // This is fill with DependencyInjectorBinding
-    public void setSelectedDayProvider(SelectedDayProvider i) {
+    public void setSelectedDayProvider(SelectedDayProviderContract i) {
         selectedDay = i;
         //selectedDay.subscribe(this);
     }

@@ -1,6 +1,6 @@
 package org.jesteban.clockomatic;
 
-import org.jesteban.clockomatic.bindings.Provider;
+import org.jesteban.clockomatic.providers.Provider;
 import org.jesteban.clockomatic.helpers.DependencyInjectorBinding;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class DependencyInjectorBindingTest {
         public void setAnotherProvider(AnotherProvider smi) { another = smi;};
     }
 
-    public interface ExampleProvider extends org.jesteban.clockomatic.bindings.Provider {
+    public interface ExampleProvider extends org.jesteban.clockomatic.providers.Provider {
         public static final String KEY_PROVIDER ="example";
 
         public boolean setExample(String txt);
@@ -39,7 +39,7 @@ public class DependencyInjectorBindingTest {
         }
     }
 
-    public interface AnotherProvider extends org.jesteban.clockomatic.bindings.Provider {
+    public interface AnotherProvider extends org.jesteban.clockomatic.providers.Provider {
 
 
     }

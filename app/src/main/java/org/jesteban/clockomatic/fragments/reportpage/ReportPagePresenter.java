@@ -2,12 +2,10 @@ package org.jesteban.clockomatic.fragments.reportpage;
 
 import android.support.annotation.NonNull;
 
-import org.jesteban.clockomatic.bindings.EntriesProvider;
-import org.jesteban.clockomatic.bindings.Provider;
-import org.jesteban.clockomatic.bindings.SelectedMonthProvider;
-import org.jesteban.clockomatic.bindings.SelectedMonthProviderImpl;
+import org.jesteban.clockomatic.providers.EntriesProviderContract;
+import org.jesteban.clockomatic.providers.Provider;
+import org.jesteban.clockomatic.providers.SelectedMonthProviderContract;
 import org.jesteban.clockomatic.controllers.PresenterBase;
-import org.jesteban.clockomatic.model.Entry;
 
 import java.util.Calendar;
 import java.util.List;
@@ -16,12 +14,12 @@ import java.util.logging.Logger;
 /**
  * Presenter mix
  */
-public class ReportPagePresenter implements ReportPageContract.Presenter, EntriesProvider.Listener {
+public class ReportPagePresenter implements ReportPageContract.Presenter, EntriesProviderContract.Listener {
     private static final Logger LOGGER = Logger.getLogger(ReportPagePresenter.class.getName());
 
     private PresenterBase parent;
-    private EntriesProvider entries;
-    private SelectedMonthProvider selectedMonth = null;
+    private EntriesProviderContract entries;
+    private SelectedMonthProviderContract selectedMonth = null;
 
     private ReportPageContract.View view = null;
 
@@ -31,14 +29,14 @@ public class ReportPagePresenter implements ReportPageContract.Presenter, Entrie
     }
 
     // This is fill with DependencyInjectorBinding
-    public void setEntriesProvider(@NonNull EntriesProvider i){
+    public void setEntriesProvider(@NonNull EntriesProviderContract i){
         LOGGER.info("setEntriesProvider");
         entries = i;
         entries.subscribe(this);
     }
 
     // This is fill with DependencyInjectorBinding
-    public void setSelectedMonthProvider(@NonNull SelectedMonthProvider i){
+    public void setSelectedMonthProvider(@NonNull SelectedMonthProviderContract i){
         LOGGER.info("setSelectedMonthProvider");
         selectedMonth = i;
         //selectedMonth.subscribe(this);

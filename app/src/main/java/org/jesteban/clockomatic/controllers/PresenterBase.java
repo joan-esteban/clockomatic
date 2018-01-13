@@ -1,7 +1,7 @@
 package org.jesteban.clockomatic.controllers;
 
 
-import org.jesteban.clockomatic.bindings.Provider;
+import org.jesteban.clockomatic.providers.Provider;
 
 import java.util.List;
 

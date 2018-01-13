@@ -1,28 +1,28 @@
-package org.jesteban.clockomatic.controllers;
+package org.jesteban.clockomatic.mainactivity;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 
 import org.jesteban.clockomatic.StateController;
-import org.jesteban.clockomatic.bindings.EntriesProvider;
-import org.jesteban.clockomatic.bindings.EntriesProviderImpl;
-import org.jesteban.clockomatic.bindings.Provider;
-import org.jesteban.clockomatic.bindings.SelectedDayProvider;
-import org.jesteban.clockomatic.bindings.SelectedDayProviderImpl;
-import org.jesteban.clockomatic.bindings.SelectedMonthProvider;
-import org.jesteban.clockomatic.bindings.SelectedMonthProviderImpl;
+import org.jesteban.clockomatic.providers.EntriesProviderContract;
+import org.jesteban.clockomatic.providers.EntriesProvider;
+import org.jesteban.clockomatic.providers.Provider;
+import org.jesteban.clockomatic.providers.SelectedDayProviderContract;
+import org.jesteban.clockomatic.providers.SelectedDayProvider;
+import org.jesteban.clockomatic.providers.SelectedMonthProviderContract;
+import org.jesteban.clockomatic.providers.SelectedMonthProvider;
+import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.helpers.DependencyInjectorBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivityPresenter implements MainActivityContract.Presenter, SelectedDayProvider.Listener {
+public class MainActivityPresenter implements MainActivityContract.Presenter, SelectedDayProviderContract.Listener {
     private StateController stateController = new StateController();
-    private EntriesProvider entriesProvider = new EntriesProviderImpl(stateController);
-    private SelectedDayProvider selectedDay = new SelectedDayProviderImpl();
-    private SelectedMonthProvider selectedMonth = new SelectedMonthProviderImpl();
+    private EntriesProviderContract entriesProvider = new EntriesProvider(stateController);
+    private SelectedDayProviderContract selectedDay = new SelectedDayProvider();
+    private SelectedMonthProviderContract selectedMonth = new SelectedMonthProvider();
     private MainActivityContract.View view = null;
     private Context context = null;
     public MainActivityPresenter(@NonNull MainActivityContract.View view, Context context){
@@ -71,6 +71,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Se
     @Override
     public void onChangeSelectedDay() {
         view.showMessage("onChangeSelectedDay " + selectedDay.getFilterBelongingForDay());
-        view.showRegisterPage();
+        //view.showRegisterPage();
     }
 }

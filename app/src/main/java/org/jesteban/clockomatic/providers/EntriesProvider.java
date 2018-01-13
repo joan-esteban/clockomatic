@@ -1,8 +1,7 @@
-package org.jesteban.clockomatic.bindings;
+package org.jesteban.clockomatic.providers;
 
 
 import org.jesteban.clockomatic.StateController;
-import org.jesteban.clockomatic.bindings.EntriesProvider;
 import org.jesteban.clockomatic.helpers.ObservableDispatcher;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
@@ -15,11 +14,11 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class EntriesProviderImpl  implements EntriesProvider,Observer {
+public class EntriesProvider implements EntriesProviderContract,Observer {
     private StateController state = null;
     private ObservableDispatcher<Listener> observable = new ObservableDispatcher<>();
 
-    public EntriesProviderImpl(StateController parent){
+    public EntriesProvider(StateController parent){
         state = parent;
         state.addObserver(this);
     }
@@ -72,6 +71,6 @@ public class EntriesProviderImpl  implements EntriesProvider,Observer {
 
     @Override
     public String getName() {
-        return EntriesProvider.KEY_PROVIDER;
+        return EntriesProviderContract.KEY_PROVIDER;
     }
 }

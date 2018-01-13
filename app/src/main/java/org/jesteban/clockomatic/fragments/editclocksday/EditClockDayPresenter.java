@@ -3,9 +3,9 @@ package org.jesteban.clockomatic.fragments.editclocksday;
 
 import android.support.annotation.NonNull;
 
-import org.jesteban.clockomatic.bindings.EntriesProvider;
-import org.jesteban.clockomatic.bindings.Provider;
-import org.jesteban.clockomatic.bindings.SelectedDayProvider;
+import org.jesteban.clockomatic.providers.EntriesProviderContract;
+import org.jesteban.clockomatic.providers.Provider;
+import org.jesteban.clockomatic.providers.SelectedDayProviderContract;
 import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
@@ -13,11 +13,11 @@ import org.jesteban.clockomatic.model.EntrySet;
 import java.util.List;
 
 public class EditClockDayPresenter implements EditClockDayContract.Presenter,
-    SelectedDayProvider.Listener,
-        EntriesProvider.Listener{
+    SelectedDayProviderContract.Listener,
+        EntriesProviderContract.Listener{
     private PresenterBase  parent = null;
-    private SelectedDayProvider selectedDay = null;
-    private EntriesProvider entries = null;
+    private SelectedDayProviderContract selectedDay = null;
+    private EntriesProviderContract entries = null;
     private EditClockDayContract.View view = null;
 
     public EditClockDayPresenter(EditClockDayContract.View view){
@@ -65,12 +65,12 @@ public class EditClockDayPresenter implements EditClockDayContract.Presenter,
     }
 
     // This is fill with DependencyInjectorBinding
-    public void setEntriesProvider(@NonNull EntriesProvider i){
+    public void setEntriesProvider(@NonNull EntriesProviderContract i){
         entries = i;
         entries.subscribe(this);
     }
 
-    public void setSelectedDayProvider(@NonNull SelectedDayProvider i){
+    public void setSelectedDayProvider(@NonNull SelectedDayProviderContract i){
         selectedDay = i;
         selectedDay.subscribe(this);
     }
