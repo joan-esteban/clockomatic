@@ -135,29 +135,22 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setIcon(R.mipmap.ic_launcher);
-        builder.setTitle(R.string.app_name);
+        String title = getResources().getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME;
+        if (BuildConfig.DEBUG) {
+            title += " debug";
+        }
+        builder.setTitle( title );
         builder.setView(messageView);
         builder.create();
         builder.show();
     }
 
-    public void menuShowDebug(){
-        // https://stackoverflow.com/questions/7801954/how-to-programmatically-show-next-view-in-viewpager
-
-        mViewPager.setCurrentItem(3,true);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         LOGGER.info("main Menu");
         int id = item.getItemId();
         LOGGER.info("main Menu selected " + Integer.toString(id));
-        //noinspection SimplifiableIfStatement
         presenter.onSelectedMenuItem(id);
-
         return super.onOptionsItemSelected(item);
     }
 
