@@ -62,15 +62,7 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
     }
 
 
-    private String getTextForDay(String[] txtEntries) {
-        StringBuilder sb = new StringBuilder();
-        if (txtEntries == null) return "None";
 
-        for (String txt : txtEntries) {
-            sb.append("<li>" + txt + "\n");
-        }
-        return sb.toString();
-    }
 
     public void syncWithState(List<InfoDayViewContract.View.InfoDayVisualData> daysData) {
 

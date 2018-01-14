@@ -103,6 +103,8 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
                 colorCalendarBg = 0xffb0b0b0;
                 colorCalendarText = 0xff304050;
                 break;
+            case COLOR_SATURDAY:
+            case COLOR_SUNDAY:
             case RED:
                 colorCalendarBg = 0xFFd09090;
                 colorCalendarText = 0xff603030;
@@ -111,10 +113,35 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
                 colorCalendarBg = 0xff9090d0;
                 colorCalendarText = 0xff303060;
                 break;
+            case COLOR_MONDAY:
+                colorCalendarBg = 0xff6060d0;
+                colorCalendarText = 0xff303060;
+                break;
+            case COLOR_TUESDAY:
+                colorCalendarBg = 0xff7070d0;
+                colorCalendarText = 0xff303060;
+                break;
+            case COLOR_WEDNESDAY:
+                colorCalendarBg = 0xff8080d0;
+                colorCalendarText = 0xff303060;
+                break;
+            case COLOR_THURSDAY:
+                colorCalendarBg = 0xff9090d0;
+                colorCalendarText = 0xff303060;
+                break;
+            case COLOR_FRIDAY:
+                colorCalendarBg = 0xffa0a0d0;
+                colorCalendarText = 0xff303060;
+                break;
         }
-        this.drawCalendarIcon.init(colorCalendarBg, colorCalendarText,data.sizeStyle);
+        setColor(colorCalendarBg, colorCalendarText);
+    }
+
+    public void setColor(int colorBg, int colorText){
+        this.drawCalendarIcon.init(colorBg, colorText,data.sizeStyle);
         invalidate();
     }
+
 
 
 
@@ -141,7 +168,11 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
         setTextMiddle(data.textMiddle);
         setTextBottom(data.textBottom);
         setSizeStyle(data.sizeStyle);
-        setColor(data.colorStyle);
+        if (data.colorStyle == MyCalendarDayViewContract.ColorStyle.CUSTOM){
+            setColor(data.colorCalendarBg, data.colorCalendarText);
+        } else{
+            setColor(data.colorStyle);
+        };
     }
 
     @Override

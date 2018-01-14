@@ -7,9 +7,17 @@ public class MyCalendarDayViewContract {
         BIG
     }
     public enum ColorStyle{
+        COLOR_MONDAY,
+        COLOR_TUESDAY,
+        COLOR_WEDNESDAY,
+        COLOR_THURSDAY,
+        COLOR_FRIDAY,
+        COLOR_SATURDAY,
+        COLOR_SUNDAY,
         GREY,
         RED,
-        BLUE
+        BLUE,
+        CUSTOM
     }
 
     public static class CalendarDayViewVisualData {

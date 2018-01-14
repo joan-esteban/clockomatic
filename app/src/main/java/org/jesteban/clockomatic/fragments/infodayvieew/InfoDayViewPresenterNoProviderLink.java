@@ -20,6 +20,11 @@ import java.util.Calendar;
 import java.util.List;
 
 import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.ColorStyle.BLUE;
+import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.ColorStyle.COLOR_FRIDAY;
+import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.ColorStyle.COLOR_MONDAY;
+import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.ColorStyle.COLOR_THURSDAY;
+import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.ColorStyle.COLOR_TUESDAY;
+import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.ColorStyle.COLOR_WEDNESDAY;
 import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.ColorStyle.GREY;
 import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.ColorStyle.RED;
 import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.SizeStyle.BIG;
@@ -46,7 +51,16 @@ public class InfoDayViewPresenterNoProviderLink extends PresenterBasic<InfoDayVi
         res.textUpper = days[calDay.get(Calendar.DAY_OF_WEEK)];
         if (calDay.get(Calendar.DAY_OF_WEEK)==1 || calDay.get(Calendar.DAY_OF_WEEK)==7){
             res.colorStyle = RED;
-        } else  res.colorStyle = BLUE;
+        } else{
+            switch (calDay.get(Calendar.DAY_OF_WEEK)){
+                case Calendar.MONDAY: res.colorStyle = COLOR_MONDAY; break;
+                case Calendar.TUESDAY: res.colorStyle = COLOR_TUESDAY; break;
+                case Calendar.WEDNESDAY: res.colorStyle = COLOR_WEDNESDAY; break;
+                case Calendar.THURSDAY: res.colorStyle = COLOR_THURSDAY; break;
+                case Calendar.FRIDAY: res.colorStyle = COLOR_FRIDAY; break;
+
+            }
+        }
 
         String[] months = context.getResources().getStringArray(R.array.name_months_short_array);
         res.textBottom = months[calDay.get(Calendar.MONTH)];
