@@ -1,4 +1,7 @@
 language: android
+sudo: required
+dist: trusty
+group: deprecated-2017Q4
 env:
   global:
     - ANDROID_TARGET=android-25
