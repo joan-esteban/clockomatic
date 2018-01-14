@@ -9,8 +9,9 @@ buildscript {
 }
 allprojects {
     repositories {
-        jcenter() // Junit
         google()
+        jcenter() // Junit
+
     }
 }
 
