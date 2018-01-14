@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.views;
+package org.jesteban.clockomatic.fragments.infodayvieew;
 
 
 import android.content.Context;
@@ -10,6 +10,8 @@ import org.jesteban.clockomatic.helpers.Minutes2String;
 import org.jesteban.clockomatic.helpers.PresenterBasic;
 
 import org.jesteban.clockomatic.model.Entry;
+import org.jesteban.clockomatic.views.MyCalendarDayViewContract;
+import org.jesteban.clockomatic.views.MyPairedEntryViewContract;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,14 +25,12 @@ import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.ColorStyl
 import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.SizeStyle.BIG;
 import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.SizeStyle.SMALL;
 
-public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.View>
+public class InfoDayViewPresenterNoProviderLink extends PresenterBasic<InfoDayViewContract.View>
         implements InfoDayViewContract.Presenter {
 
-    private SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
-    private SimpleDateFormat sdfHourMinute = new SimpleDateFormat("HH:mm");
-    private Context context = null;
 
-    public InfoDayViewPresenter(@NonNull InfoDayViewContract.View view, Context current) {
+
+    public InfoDayViewPresenterNoProviderLink(@NonNull InfoDayViewContract.View view, Context current) {
         super(view);
         this.context = current;
     }
@@ -57,6 +57,7 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
             res.colorStyle = GREY;
             res.sizeStyle = SMALL;
         }
+        if (alwaysBig) res.sizeStyle = BIG;
         return res;
     }
 
@@ -95,6 +96,7 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
             res.sizeStyle = SMALL;
         }
         if (infoDay.getPairsInfo().size()>2) res.sizeStyle = BIG;
+        if (alwaysBig) res.sizeStyle = BIG;
         return res;
     }
 
@@ -117,4 +119,10 @@ public class InfoDayViewPresenter extends PresenterBasic<InfoDayViewContract.Vie
     public void showInfoDay(InfoDayEntry infoDay) {
         view.showData(getVisualData(infoDay));
     }
+
+    private SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
+    private SimpleDateFormat sdfHourMinute = new SimpleDateFormat("HH:mm");
+    private Context context = null;
+    private boolean alwaysBig = true;
+
 }

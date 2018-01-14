@@ -1,10 +1,12 @@
-package org.jesteban.clockomatic.views;
+package org.jesteban.clockomatic.fragments.infodayvieew;
 
 
 import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.controllers.ViewBase;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.model.Entry;
+import org.jesteban.clockomatic.views.MyCalendarDayViewContract;
+import org.jesteban.clockomatic.views.MyPairedEntryViewContract;
 
 import java.util.List;
 

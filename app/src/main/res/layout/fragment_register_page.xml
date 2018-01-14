@@ -25,10 +25,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal">
-
+                <!--
                 <fragment
                     android:id="@+id/fragment_detailed_info_day"
                     android:name="org.jesteban.clockomatic.fragments.showdaydetail.DayDetailFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                -->
+                <org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView
+                    android:id="@+id/info_day_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

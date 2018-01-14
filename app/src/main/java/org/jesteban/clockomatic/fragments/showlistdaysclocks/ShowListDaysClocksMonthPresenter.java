@@ -11,8 +11,8 @@ import org.jesteban.clockomatic.helpers.PresenterBasicProviderEntriesReady;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
 import org.jesteban.clockomatic.providers.ShowPageProviderContract;
-import org.jesteban.clockomatic.views.InfoDayViewContract;
-import org.jesteban.clockomatic.views.InfoDayViewPresenter;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayViewContract;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayViewPresenterNoProviderLink;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +26,11 @@ public class ShowListDaysClocksMonthPresenter extends PresenterBasicProviderEntr
     private SelectedMonthProviderContract selectedMonth = null;
     private SelectedDayProviderContract selectedDay = null;
     private ShowPageProviderContract showPage = null;
-    private InfoDayViewPresenter infoDayViewPresenter = null;
+    private InfoDayViewPresenterNoProviderLink infoDayViewPresenter = null;
 
     public ShowListDaysClocksMonthPresenter(@NonNull ShowListDaysClocksContract.View view, Context context) {
         super(view);
-        infoDayViewPresenter = new InfoDayViewPresenter(null, context);
+        infoDayViewPresenter = new InfoDayViewPresenterNoProviderLink(null, context);
     }
 
     @Override

@@ -9,8 +9,9 @@ import java.util.List;
 
 public class MyPairedEntryViewContract {
 
-    static class PairedEntryVisualData {
-        PairedEntryVisualData(String initialHour, String endHour){
+    static public class PairedEntryVisualData {
+
+        public PairedEntryVisualData(String initialHour, String endHour){
             this.initialHour = initialHour;
             this.endHour = endHour;
         }

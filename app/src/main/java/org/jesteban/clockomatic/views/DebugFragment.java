@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TableLayout;
 
 import org.jesteban.clockomatic.R;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayViewPresenterNoProviderLink;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
 import org.jesteban.clockomatic.model.EntrySet;
 
@@ -26,7 +28,7 @@ public class DebugFragment extends Fragment {
     MyCalendarDayView dayView=null;
     MyPairedEntriesGridView myLinkEntriesGridView = null;
     InfoDayView infoDayView = null;
-    InfoDayViewPresenter infoDayViewPresenter = null;
+    InfoDayViewPresenterNoProviderLink infoDayViewPresenter = null;
     public DebugFragment() {
         // Required empty public constructor
     }
@@ -70,7 +72,7 @@ public class DebugFragment extends Fragment {
             layout.addView(tableRow);
         }
         infoDayView = (InfoDayView) view.findViewById(R.id.debug_info_day_view);
-        infoDayViewPresenter = new InfoDayViewPresenter(infoDayView, getContext());
+        infoDayViewPresenter = new InfoDayViewPresenterNoProviderLink(infoDayView, getContext());
         InfoDayEntry infoDayEntry = new InfoDayEntry(getDemoEntries(), "2018/1/1");
         infoDayViewPresenter.showInfoDay(infoDayEntry);
         return view;

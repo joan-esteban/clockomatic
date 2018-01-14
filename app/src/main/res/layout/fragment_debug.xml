@@ -133,7 +133,7 @@
                 auto:sizeStyle="BIG"/>
         </TableRow>
 
-        <org.jesteban.clockomatic.views.InfoDayView
+        <org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView
             android:id="@+id/debug_info_day_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -148,11 +148,11 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <org.jesteban.clockomatic.views.InfoDayView
+        <org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView
 
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <org.jesteban.clockomatic.views.InfoDayView
+        <org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView
 
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

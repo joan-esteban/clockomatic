@@ -3,10 +3,8 @@ package org.jesteban.clockomatic.fragments.showlistdaysclocks;
 import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.controllers.ViewBase;
 import org.jesteban.clockomatic.model.Entry;
-import org.jesteban.clockomatic.model.EntrySet;
-import org.jesteban.clockomatic.views.InfoDayViewContract;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayViewContract;
 
-import java.util.Calendar;
 import java.util.List;
 
 

@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.views;
+package org.jesteban.clockomatic.fragments.infodayvieew;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,6 +6,8 @@ import android.widget.TableRow;
 
 
 import org.jesteban.clockomatic.R;
+import org.jesteban.clockomatic.views.MyCalendarDayView;
+import org.jesteban.clockomatic.views.MyPairedEntriesGridView;
 
 
 /**

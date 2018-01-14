@@ -10,9 +10,9 @@ import android.widget.TableLayout;
 
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.helpers.DynamicWidgets;
-import org.jesteban.clockomatic.views.InfoDayView;
-import org.jesteban.clockomatic.views.InfoDayViewContract;
-import org.jesteban.clockomatic.views.InfoDayViewPresenter;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayViewContract;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayViewPresenterNoProviderLink;
 
 import java.util.List;
 
@@ -106,7 +106,7 @@ public class ShowListDaysClocksFragment extends Fragment implements ShowListDays
         @Override
         public InfoDayView createWidget(int idx) {
             InfoDayView res =  new InfoDayView(getContext());
-            res.setPresenter(new InfoDayViewPresenter(res,getContext()));
+            res.setPresenter(new InfoDayViewPresenterNoProviderLink(res,getContext()));
             res.setVisibility(View.VISIBLE);
             res.setId(View.generateViewId());
 

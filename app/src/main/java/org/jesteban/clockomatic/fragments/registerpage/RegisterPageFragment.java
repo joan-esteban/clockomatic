@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.fragments.editclocksday.EditClockDayPresenter;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView;
+import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayViewPresenter;
 import org.jesteban.clockomatic.fragments.showdaydetail.DayDetailFragment;
 import org.jesteban.clockomatic.fragments.showdaydetail.DayDetailPresenter;
 import org.jesteban.clockomatic.helpers.SewingBox;
@@ -58,11 +60,17 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
         EditClocksDayFragment viewClocksDayFragment = (EditClocksDayFragment) getChildFragmentManager().findFragmentById(R.id.fragment_view_clocks_day);
         SewingBox.sewPresentersView(new EditClockDayPresenter(viewClocksDayFragment), presenter, viewClocksDayFragment);
         // This is the brief info show
+        /*
         DayDetailFragment dayDetailFragment = (DayDetailFragment) getChildFragmentManager().findFragmentById(R.id.fragment_detailed_info_day);
         if (dayDetailFragment == null) {
-            throw new NoSuchElementException("can't find fragment for day detail");
+
         }
         SewingBox.sewPresentersView(new DayDetailPresenter(dayDetailFragment, getContext()), presenter, dayDetailFragment);
+        */
+        InfoDayView infoDayView = (InfoDayView) view.findViewById(R.id.info_day_view);
+        if (infoDayView == null) throw new NoSuchElementException("can't find fragment for day detail");
+        SewingBox.sewPresentersView(new InfoDayViewPresenter(infoDayView, getContext()), presenter, infoDayView);
+
         return view;
     }
 
