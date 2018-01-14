@@ -40,7 +40,7 @@ public class EditClockDayPresenter implements EditClockDayContract.Presenter,
 
     @Override
     public void startUi() {
-
+        // Nothing to do
     }
 
     @Override

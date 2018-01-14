@@ -2,14 +2,11 @@ package org.jesteban.clockomatic.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 import android.widget.TableRow;
-import android.widget.TextView;
+
 
 import org.jesteban.clockomatic.R;
 
-import java.util.List;
-import java.util.logging.Logger;
 
 /**
  *  This class show a digested day info

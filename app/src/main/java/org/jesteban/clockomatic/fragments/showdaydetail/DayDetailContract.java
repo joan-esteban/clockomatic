@@ -13,6 +13,5 @@ public class DayDetailContract {
     }
 
     public interface Presenter extends PresenterBase {
-        //public void selectedMonth(Calendar day);
     }
 }

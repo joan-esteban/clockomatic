@@ -25,7 +25,7 @@ public class InfoDayEntry {
     }
     public InfoDayEntry(EntrySet entries, String belongingDay){
         if (belongingDay==null){
-            if (entries.getEntries().size()>0){
+            if (!entries.getEntries().isEmpty()){
                 belongingDay = entries.getEntries().get(0).getBelongingDay();
             } else{
                 this.belongingDay = null;
@@ -36,7 +36,6 @@ public class InfoDayEntry {
         }
         this.belongingDay = belongingDay;
         if (!checkSanity(entries,belongingDay)){
-            // TODO: launch exception?
             LOGGER.log(Level.SEVERE, "Inconsistent data on InfoDayEntry");
             this.entries = null;
         } else {

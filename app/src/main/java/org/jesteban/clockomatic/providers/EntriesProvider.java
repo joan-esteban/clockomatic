@@ -24,16 +24,12 @@ public class EntriesProvider implements EntriesProviderContract,Observer {
     }
     @Override
     public Boolean register(Entry date) {
-        if (state.register(date)) {
-            return true;
-        } else return false;
+        return state.register(date);
     }
 
     @Override
     public Boolean remove(Entry date) {
-        if (state.remove(date)){
-            return true;
-        }else return false;
+        return state.remove(date);
     }
 
     @Override

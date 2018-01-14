@@ -57,7 +57,7 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
                 myDateTimePickerFragment = (MyDateTimePickerFragment) getChildFragmentManager().findFragmentById(R.id.fragment_my_date_time_picker);
         EditClocksDayFragment viewClocksDayFragment = (EditClocksDayFragment) getChildFragmentManager().findFragmentById(R.id.fragment_view_clocks_day);
         SewingBox.sewPresentersView(new EditClockDayPresenter(viewClocksDayFragment), presenter, viewClocksDayFragment);
-
+        // This is the brief info show
         DayDetailFragment dayDetailFragment = (DayDetailFragment) getChildFragmentManager().findFragmentById(R.id.fragment_detailed_info_day);
         if (dayDetailFragment == null) {
             throw new NoSuchElementException("can't find fragment for day detail");

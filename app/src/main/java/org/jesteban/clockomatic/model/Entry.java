@@ -112,10 +112,10 @@ public class Entry extends Object {
     }
 
     static public class BelongingDay{
-        String belongingDay;
 
-        public String getBelongingDay() {
-            return belongingDay;
+
+        public String getDay() {
+            return day;
         }
 
         public Calendar getBelongingDayDate() {
@@ -125,11 +125,14 @@ public class Entry extends Object {
         Calendar belongingDayDate;
 
         public BelongingDay(String belongingDay) throws ParseException {
-            this.belongingDay = belongingDay;
+            this.day = belongingDay;
             SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_BELONGING_DAY);
             Date date = sdf.parse(belongingDay);
             belongingDayDate = Calendar.getInstance();
             belongingDayDate.setTime(date);
         }
+
+        String day;
+        
     }
 }

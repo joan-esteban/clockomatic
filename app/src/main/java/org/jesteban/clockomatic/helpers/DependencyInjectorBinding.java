@@ -80,7 +80,6 @@ public class DependencyInjectorBinding {
     }
 
     public void inject(Object consumer, List<Provider> providers){
-        int successful = 0;
         List<Method> methodToFill = getProviderMethods(consumer);
         for (Method method : methodToFill) {
             fullfillMethod(consumer,method,providers);

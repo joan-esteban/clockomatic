@@ -21,8 +21,6 @@ import java.util.logging.Logger;
 
 
 public class  DayDetailFragment extends Fragment implements DayDetailContract.View{
-    private static final Logger LOGGER = Logger.getLogger(ShowListDaysClocksFragment.class.getName());
-
     private TextView txtNameDay = null;
     private TextView txtNumDay = null;
     private TextSwitcher txtEntries = null;

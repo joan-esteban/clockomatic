@@ -1,23 +1,18 @@
 package org.jesteban.clockomatic.views;
 
-import android.content.Context;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.helpers.InfoDayEntry;
-import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
 
-import java.text.ParseException;
 
 import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.SizeStyle.BIG;
 import static org.jesteban.clockomatic.views.MyCalendarDayViewContract.SizeStyle.SMALL;
@@ -38,19 +33,6 @@ public class DebugFragment extends Fragment {
 
     public EntrySet getDemoEntries(){
         EntrySet res = new EntrySet();
-        /*
-        try {
-
-            res.addEntry(new Entry("1/1/2018 8:05:01", null));
-            res.addEntry(new Entry("1/1/2018 13:01:01", null));
-            res.addEntry(new Entry("1/1/2018 14:53:01", null));
-            res.addEntry(new Entry("1/1/2018 18:13:01", null));
-
-            //res.addEntry(new Entry("1/1/2018 18:14:01", null));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        */
         return res;
     }
 
@@ -66,7 +48,6 @@ public class DebugFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dayView.setWorkingDay(!dayView.isWorkingDay());
                 myLinkEntriesGridView.add();
             }
         });
@@ -87,26 +68,6 @@ public class DebugFragment extends Fragment {
         for (int i=18 ; i<19; i++) {
             InfoDayView tableRow = new InfoDayView(getContext());
             layout.addView(tableRow);
-            /*
-            TableRow tableRow = new TableRow(getContext());
-            dayView2 = new MyCalendarDayView(getContext());
-            dayView2.setTextMiddle(Integer.toString(i));
-            dayView2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MyCalendarDayView dayView = (MyCalendarDayView) v;
-                    MyCalendarDayViewContract.SizeStyle currentStyle = dayView.getSizeStyle();
-                    if (currentStyle == BIG){
-                        dayView.setSizeStyle(SMALL);
-                    } else{
-                        dayView.setSizeStyle(BIG);
-                    }
-                }
-            });
-            //dayView2.setSmall(false);
-            tableRow.addView(dayView2);
-            layout.addView(tableRow);
-            */
         }
         infoDayView = (InfoDayView) view.findViewById(R.id.debug_info_day_view);
         infoDayViewPresenter = new InfoDayViewPresenter(infoDayView, getContext());
