@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import org.jesteban.clockomatic.BuildConfig;
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.StateController;
+import org.jesteban.clockomatic.model.State;
 import org.jesteban.clockomatic.providers.EntriesProviderContract;
 import org.jesteban.clockomatic.providers.EntriesProvider;
 import org.jesteban.clockomatic.providers.Provider;
@@ -17,6 +18,7 @@ import org.jesteban.clockomatic.controllers.PresenterBase;
 import org.jesteban.clockomatic.helpers.DependencyInjectorBinding;
 import org.jesteban.clockomatic.providers.ShowPageProvider;
 import org.jesteban.clockomatic.providers.ShowPageProviderContract;
+import org.jesteban.clockomatic.store.ImportFicharFiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +69,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Se
     public void startUi() {
         this.showPage.setShowPage(ShowPageProviderContract.PageId.REPORT_PAGE);
         if (BuildConfig.DEBUG){
-
+            ImportFicharFiles importer = new ImportFicharFiles();
+            State state = stateController.getState();
+            importer.importAllDataTo(state);
+            view.showMessage("state = " + state.getEntries().getEntries().size());
         }
     }
 
