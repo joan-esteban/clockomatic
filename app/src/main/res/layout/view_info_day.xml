@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
+    >
+
+    <org.jesteban.clockomatic.views.MyCalendarDayView
+        android:id="@+id/calendar_day_view"
+        layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        auto:sizeStyle="BIG"
+        auto:textBottom="el mes"
+        auto:textMiddle="dia"
+        auto:textUpper="hola"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+
+        />
+
+    <org.jesteban.clockomatic.views.MyPairedEntriesGridView
+        android:id="@+id/paired_entries_grid_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="0dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="1dp"
+        android:visibility="visible"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+        android:background="@drawable/layout_bg_line_bottom"
+        />
+
+    <org.jesteban.clockomatic.views.MyCalendarDayView
+        android:id="@+id/calendar_day_info_view"
+        layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        auto:sizeStyle="BIG"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+        />
+
+</merge>

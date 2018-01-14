@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.fragments.register_page;
+package org.jesteban.clockomatic.views;
 
 import android.content.Context;
 import android.os.Build;
@@ -38,7 +38,7 @@ public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFr
         if (day == null) {
             registerDate = (Calendar) myDatePicker.getDay().clone();
         }
-        LOGGER.info("selected day " + registerDate.getTime());
+
         int hour = 0;
         int minute = 0;
         if (Build.VERSION.SDK_INT >= 23) {
@@ -52,6 +52,7 @@ public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFr
         registerDate.set(Calendar.SECOND, 0);
         registerDate.set(Calendar.HOUR_OF_DAY, hour);
         registerDate.set(Calendar.MINUTE, minute);
+        LOGGER.info("getComposedDate selected day " + registerDate.getTime());
         return registerDate;
     }
 
@@ -66,14 +67,8 @@ public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFr
         // Inflate the layout for this fragment
         LOGGER.info("onCreateView");
         View view = inflater.inflate(R.layout.fragment_my_date_time_picker, container, false);
-        timePicker = (TimePicker) view.findViewById(R.id.timePicker2);
 
-        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                LOGGER.info("timePicker: OnTimeChanged " + Integer.toString(hourOfDay));
-            }
-        });
+
         // getFragmentManager() can't find child fragment, it only contains fragment_my_date_time_picker (father)
         myDatePicker = (MyDatePickerFragment) getChildFragmentManager().findFragmentById(R.id.fragment_date_picker);
 
@@ -84,10 +79,13 @@ public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFr
                 pressRegisterDate();
             }
         });
+
+        timePicker = (TimePicker) view.findViewById(R.id.timePicker2);
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
 
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                LOGGER.info("timePicker listener: OnTimeChanged " + Integer.toString(hourOfDay));
                 Calendar date = getComposedDate(null);
                 mListener.selected(date);
             }
@@ -120,9 +118,13 @@ public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFr
     }
 
     public void setDate(Calendar date) {
+        LOGGER.info("MyDateTimePickerFragment::setDate setDate to " + date.getTime());
+        LOGGER.info("setDate HOUR=" +date.get(Calendar.HOUR_OF_DAY));
+        LOGGER.info("setDate MIN=" +date.get(Calendar.MINUTE));
+        timePicker.setCurrentHour(1);
+        timePicker.setCurrentHour(date.get(Calendar.HOUR_OF_DAY));
+        timePicker.setCurrentMinute(date.get(Calendar.MINUTE));
         myDatePicker.setDay(date);
-        timePicker.setHour(date.get(Calendar.HOUR_OF_DAY));
-        timePicker.setMinute(date.get(Calendar.MINUTE));
     }
 
     public interface OnMyDateTimePickerFragmentListener {

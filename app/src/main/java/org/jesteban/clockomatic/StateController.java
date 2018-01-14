@@ -15,12 +15,16 @@ public class StateController extends Observable {
         public void setStateController(StateController stateController);
     }
 
+    public interface EventsListener{
+        void onChangeEntries(StateController owner);
+    }
+
     private static Logger LOGGER = Logger.getLogger(StateController.class.getName());
 
     private State state = new State();
     private StoreOnFiles store = new StoreOnFiles();
 
-    protected Boolean save() {
+    public Boolean save() {
         LOGGER.info("save ");
         if ((store == null) || (state == null)) return false;
         EntrySet entries = state.getEntries();

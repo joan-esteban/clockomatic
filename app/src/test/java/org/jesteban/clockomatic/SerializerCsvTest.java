@@ -24,9 +24,9 @@ public class SerializerCsvTest {
         Calendar cal = Calendar.getInstance();
 
         try {
-            cal.setTime(sdf.parse(date));
+            return new Entry(date, belongingDay);
         } catch (Exception e){
-            return new Entry(null, belongingDay);
+
         }
         return new Entry(cal,belongingDay);
     }

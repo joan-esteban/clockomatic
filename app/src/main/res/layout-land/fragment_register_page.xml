@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.jesteban.clockomatic.fragments.RegisterPageFragment">
+    tools:context="org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -13,23 +13,38 @@
 
         <fragment
             android:id="@+id/fragment_my_date_time_picker"
-            android:name="org.jesteban.clockomatic.fragments.register_page.MyDateTimePickerFragment"
+            android:name="org.jesteban.clockomatic.views.MyDateTimePickerFragment"
             android:layout_width="359dp"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_my_date_time_picker" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical">
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
 
+                <fragment
+                    android:id="@+id/fragment_detailed_info_day"
+                    android:name="org.jesteban.clockomatic.fragments.showdaydetail.DayDetailFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </RelativeLayout>
             <fragment
                 android:id="@+id/fragment_view_clocks_day"
-                android:name="org.jesteban.clockomatic.fragments.register_page.ViewClocksDayFragment"
+                android:name="org.jesteban.clockomatic.fragments.editclocksday.EditClocksDayFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_view_clocks_day" />
-        </RelativeLayout>
+
+
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
