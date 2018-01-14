@@ -14,7 +14,7 @@ public class EditClockDayContract {
     }
 
     public interface Presenter extends PresenterBase {
-        boolean remove(Entry entry);
+        boolean selectedEntry(Entry entry);
     }
 
 }

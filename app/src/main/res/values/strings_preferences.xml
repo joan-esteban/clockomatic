@@ -8,8 +8,8 @@
     <!-- Example General settings -->
 
     <string name="pref_header_general">General</string>
-    <string name="pref_title_setalarm">Alarma</string>
-    <string name="pref_description_setalarm">Establece una alarma para avisar del mejor fichaje posible</string>
+    <string name="pref_title_setalarm">Alarm</string>
+    <string name="pref_description_setalarm">Set an alarm to warn when leaving work</string>
     <string name="pref_title_display_name">Display name</string>
 
     <string name="import_old_data_checkbox_description">Automatic import old data app</string>

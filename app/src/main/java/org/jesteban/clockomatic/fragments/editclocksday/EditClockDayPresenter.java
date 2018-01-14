@@ -44,7 +44,7 @@ public class EditClockDayPresenter implements EditClockDayContract.Presenter,
     }
 
     @Override
-    public boolean remove(Entry entry) {
+    public boolean selectedEntry(Entry entry) {
         return entries.remove(entry);
     }
 

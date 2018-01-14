@@ -93,9 +93,7 @@ public class EditClocksDayFragment extends Fragment implements EditClockDayContr
         layout.addView(button);
         return button;
     }
-    public void removeEntry(Entry entry){
-        presenter.remove(entry);
-    }
+
 
     private void setButtonHourAsPortrait(Button button, int sizeEntries){
 
@@ -131,7 +129,8 @@ public class EditClocksDayFragment extends Fragment implements EditClockDayContr
                 @Override
                 public void onClick(View v) {
                     Button button = (Button) v;
-                    removeEntry((Entry)button.getTag());
+                    presenter.selectedEntry((Entry)button.getTag());
+
                 }
             });
             buttonIdx++;
