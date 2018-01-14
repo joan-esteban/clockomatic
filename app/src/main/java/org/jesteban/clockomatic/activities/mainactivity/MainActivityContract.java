@@ -1,4 +1,4 @@
-package org.jesteban.clockomatic.mainactivity;
+package org.jesteban.clockomatic.activities.mainactivity;
 
 import org.jesteban.clockomatic.StateController;
 import org.jesteban.clockomatic.controllers.PresenterBase;
@@ -15,6 +15,7 @@ public class MainActivityContract {
         void showPage(ShowPageProviderContract.PageId id);
         void askConfirmWipeData();
         void showAbout();
+        void showSettings();
     }
 
     public interface Presenter extends PresenterBase {

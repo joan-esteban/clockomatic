@@ -24,7 +24,7 @@ public class StateController extends Observable {
     private State state = new State();
     private StoreOnFiles store = new StoreOnFiles();
 
-    protected Boolean save() {
+    public Boolean save() {
         LOGGER.info("save ");
         if ((store == null) || (state == null)) return false;
         EntrySet entries = state.getEntries();

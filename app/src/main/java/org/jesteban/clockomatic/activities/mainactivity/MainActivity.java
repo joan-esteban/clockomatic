@@ -1,6 +1,7 @@
-package org.jesteban.clockomatic.mainactivity;
+package org.jesteban.clockomatic.activities.mainactivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +21,7 @@ import android.view.View;
 import org.jesteban.clockomatic.BuildConfig;
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPagePresenter;
+import org.jesteban.clockomatic.activities.settingactivity.SettingsActivity;
 import org.jesteban.clockomatic.helpers.SewingBox;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment;
 import org.jesteban.clockomatic.fragments.reportpage.ReportPageFragment;
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     @Override
     public void askConfirmWipeData() {
-    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
@@ -146,6 +148,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         builder.setView(messageView);
         builder.create();
         builder.show();
+    }
+
+    @Override
+    public void showSettings(){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -1,11 +1,13 @@
-package org.jesteban.clockomatic.mainactivity;
+package org.jesteban.clockomatic.activities.mainactivity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 
-import org.jesteban.clockomatic.BuildConfig;
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.StateController;
+import org.jesteban.clockomatic.activities.settingactivity.SettingsFragment;
 import org.jesteban.clockomatic.model.State;
 import org.jesteban.clockomatic.providers.EntriesProviderContract;
 import org.jesteban.clockomatic.providers.EntriesProvider;
@@ -68,11 +70,17 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Se
     @Override
     public void startUi() {
         this.showPage.setShowPage(ShowPageProviderContract.PageId.REPORT_PAGE);
-        if (BuildConfig.DEBUG){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        Boolean importData = sharedPreferences.getBoolean(SettingsFragment.KEY_PREFERENCE_IMPORT_OLD_DATA, true);
+        if (importData){
             ImportFicharFiles importer = new ImportFicharFiles();
             State state = stateController.getState();
             importer.importAllDataTo(state);
-            view.showMessage("state = " + state.getEntries().getEntries().size());
+            view.showMessage("Imported old data");
+            stateController.save();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(SettingsFragment.KEY_PREFERENCE_IMPORT_OLD_DATA, false);
+            editor.commit();
         }
     }
 
@@ -96,6 +104,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Se
     public void onSelectedMenuItem(int id) {
         switch (id) {
             case R.id.action_settings:
+                view.showSettings();
                 break;
             case R.id.action_wipe_data:
                 LOGGER.info("main Menu selected action_wipe_data");
@@ -116,13 +125,11 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Se
 
     @Override
     public void onChangeSelectedDay() {
-        view.showMessage("onChangeSelectedDay " + selectedDay.getFilterBelongingForDay());
-        //view.showRegisterPage();
+        // Nothing to do
     }
 
     @Override
     public void onChangeShowPage() {
-        view.showMessage("onChangeShowPage " );
         view.showPage(showPage.getShowPage());
     }
 }

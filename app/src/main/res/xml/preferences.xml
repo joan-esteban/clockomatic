@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="import_old_data_checkbox"
+        android:summary="@string/import_old_data_checkbox_description"
+        android:title="@string/import_old_data_checkbox_name" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="setalarm_checkbox"
+        android:summary="@string/pref_description_setalarm"
+        android:title="@string/pref_title_setalarm" />
+</PreferenceScreen>
