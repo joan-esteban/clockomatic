@@ -1,41 +1,38 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:auto="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.showlistdaysclocks.ShowListDaysClocksFragment">
 
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView02"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/ScrollView02"
-        android:scrollbarStyle="insideInset"
-        >
+        android:scrollbarStyle="insideInset">
 
+        <LinearLayout
+            android:id="@+id/month_main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:id="@+id/month_main_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-       >
+            <TableLayout
+                android:id="@+id/month_table_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <TableLayout
-            android:id="@+id/month_table_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TableLayout>
-
-    </LinearLayout>
-
+        </LinearLayout>
 
     </ScrollView>
-</FrameLayout>
+
+
+</LinearLayout>
