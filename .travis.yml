@@ -19,4 +19,6 @@ android:
     - extra
 script:
    - chmod +x ./gradlew
-   - ./gradlew build testRelease assembleDebug
+   - ./gradlew build assembleDebug
+   - ./gradlew build testDebug
+   
