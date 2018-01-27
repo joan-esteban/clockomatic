@@ -1,6 +1,6 @@
 [![Build Status](https://www.travis-ci.org/joan-esteban/clockomatic.svg?branch=master)](https://www.travis-ci.org/joan-esteban/clockomatic)
 
-## Readme (devel branch)
+## Readme (master branch)
 This software is for learning purpose. This is my first program using Java
 and also Android so do not expect a perfect code.
 
