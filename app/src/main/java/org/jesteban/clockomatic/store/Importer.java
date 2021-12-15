@@ -1,9 +1,9 @@
 package org.jesteban.clockomatic.store;
 
 
-import org.jesteban.clockomatic.model.State;
+import org.jesteban.clockomatic.providers.EntriesProviderContract;
 
 public interface Importer {
     boolean thereAreData();
-    boolean importAllDataTo(State state);
+    boolean importAllDataTo(EntriesProviderContract state);
 }

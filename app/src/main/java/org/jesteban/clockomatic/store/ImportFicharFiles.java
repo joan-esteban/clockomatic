@@ -2,7 +2,7 @@ package org.jesteban.clockomatic.store;
 
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
-import org.jesteban.clockomatic.model.State;
+import org.jesteban.clockomatic.providers.EntriesProviderContract;
 import org.jesteban.clockomatic.store.containers.ContainerFile;
 import org.jesteban.clockomatic.store.serializers.SerializerOldFicharDat;
 
@@ -30,16 +30,19 @@ public class ImportFicharFiles implements  Importer{
     }
 
     @Override
-    public boolean importAllDataTo(State state){
+    public boolean importAllDataTo(EntriesProviderContract state){
         File[] files = getCandidatesFiles (this.currentBaseDir);
+        if (files == null) return false;
         for (File file : files) {
-            Container container = new ContainerFile(file.getAbsolutePath());
+            StoreContract<ContainerFile.StringHolder> container = new ContainerFile(file.getAbsolutePath());
             try {
-                String fileData = container.get();
+                ContainerFile.StringHolder fileData =new ContainerFile.StringHolder();
+                container.read(fileData);
                 SerializerOldFicharDat serializer = new SerializerOldFicharDat();
-                EntrySet entries = serializer.deserialize(fileData);
+                EntrySet entries = new EntrySet();
+                serializer.deserialize(fileData.getString(),entries);
                 for (Entry entry : entries){
-                    state.addEntry(entry);
+                    state.register(entry);
                 }
                 } catch (Exception e) {
                 e.printStackTrace();
@@ -64,7 +67,7 @@ public class ImportFicharFiles implements  Importer{
         }
     }
 
-    private static final Logger LOGGER = Logger.getLogger(StoreOnFiles.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(StoreEntriesOnFiles.class.getName());
     private static final String PREFIX_FILENAME_DATA = "fichardata_";
     private static final String INFIX_FILENAME_DATA = "yyyyMM";
     private static final String SUFIX_FILENAME_DATA = ".dat";

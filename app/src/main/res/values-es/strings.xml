@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Clock-o-matic</string>
+    <string name="title_activity_settings">Configuración</string>
+    <string name="title_companies_editor_settings">Editor de empresas</string>
+    <string name="title_companies_editor_add_new_company">Nueva empresa</string>
+    <string name="default_company_name">Empresa</string>
+    <string name="default_company_desc">Esto es una nueva empresa</string>
+    <string name="pref_header_general">General</string>
+    <string name="pref_title_setalarm">Alarma</string>
+    <string name="pref_description_setalarm">Generar alarma para la mejor salida del trabajo</string>
+    <string name="pref_title_display_name">Nombre</string>
+    <string name="import_old_data_checkbox_description">Importación automatica de antiguos datos</string>
+    <string name="import_old_data_checkbox_name">Importación automatica</string>
+    <string name="action_undo">Deshacer</string>
+    <string name="action_settings">Configuración</string>
+    <string name="action_configure_companies">Editor de empresas</string>
+    <string name="action_wipe_data">Borrar todos los datos</string>
+    <string name="action_about">Acerca de la app</string>
+    <string name="error_title">Error</string>
+    <string name="dialog_wipe_all_are_you_sure">Se borrarán todos los datos, esta seguro?</string>
+    <string name="app_about">"     Esta aplicación gratuita te ayuda a mantener el control de tus fichajes.\n        El código fuentes esta disponible en  Git Hub <a href="https://github.com/joan-esteban/clockomatic">https://github.com/joan-esteban/clockomatic</a> cualquier ayuda será bienvenida!\n        Esta aplicación es con fines de aprendizaje. Para contactar:\n        <b><a href="mailto:joanestebanr@gmail.com">joanestebanr@gmail.com</a></b>\n        <br />"</string>
+    <string name="app_about_line_2">"         Se usa <a href="https://github.com/QuadFlask/colorpicker">QuadFlask/colorpicker</a> para elegir colores (license Apache 2.0):       el código fuentes está en Git Hub <a href="https://github.com/QuadFlask/colorpicker">https://github.com/QuadFlask/colorpicker</a>         <br />     "</string>
+    <string name="error_entry_duplicated">Ya existe este registro</string>
+
+    <string name="view_info_full_time_title">Tiempo total</string>
+    <string name="view_info_hr_time_title">Tiempo RRHH</string>
+    <string name="work_schedule_title">Horario</string>
+
+    <string-array name="name_days_short_array">
+        <item> </item>
+        <item>Dom</item>
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mie</item>
+        <item>Jue</item>
+        <item>Vi</item>
+        <item>sa</item>
+    </string-array>
+
+    <string-array name="name_months_short_array">
+        <item>Ene</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Abr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Ago</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dic</item>
+    </string-array>
+    <string name="msg_undo">DESHACER</string>
+    <string name="msg_error_empty_company_name">Debe poner un nombre a la empresa</string>
+    <string name="msg_changed_companies">Activa empresa %s</string>
+    <string name="msg_reload_companies">Recargando empresas</string>
+    <string name="msg_undo_delete_data_company">Borrados datos de la empresa</string>
+    <string name="msg_undo_disabled_company">Deshabilitada empresa %s</string>
+    <string name="msg_undo_register_date">Registrado %s</string>
+    <string name="msg_undo_remove_date">Borrado %s</string>
+    <string name="msg_undo_modified_date">Modificado %s</string>
+    <string name="msg_undo_set_ws">Modificado horario</string>
+    <string name="msg_undo_clear_ws">Quitado horario</string>
+    <string name="msg_undo_removed_company">Eliminada empresa %s</string>
+    <string name="msg_undo_modified_company">Modificada empresa %s</string>
+    <string name="msg_undo_add_company">Añadida empresa %s</string>
+    <string name="company_editor_name_title">Nombre</string>
+    <string name="company_editor_desc_title">Descripción</string>
+    <string name="company_editor_color_title">Color</string>
+    <string name="label_company">Empresa</string>
+    <string-array name="kind_array">
+        <item>Trabajo</item>
+        <item>Otros</item>
+    </string-array>
+    <string name="limited_enter">Horario de entrada limitado</string>
+    <string name="limited_midday">Horario del medio día limitado</string>
+    <string name="limited_leave">Horario de salida limitado</string>
+    <string name="minimum_time">Tiempo mínimo</string>
+    <string name="limited_working_time">Tiempo de trabajo fijado</string>
+</resources>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:auto="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/view_info_day_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        auto:cardCornerRadius="2dp"
+        auto:cardElevation="2dp"
+        auto:cardUseCompatPadding="true"
+        android:padding="1dp"
+        android:animateLayoutChanges="true"
+        >
+        <RelativeLayout
+            android:id="@+id/view_info_period_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp">
+
+            <LinearLayout
+                android:id="@+id/view_info_period_layout_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/icon_image"
+                    android:layout_width="30dip"
+                    android:layout_height="30dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="2dp"
+                    auto:srcCompat="@drawable/working_time_icon"/>
+
+
+
+
+            </LinearLayout>
+            <TableLayout
+                android:id="@+id/view_info_period_layout_hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_info_period_layout_main">
+                <TableRow android:layout_width="match_parent"
+                    android:paddingRight="10dp">
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="working days:" />
+                        <TextView
+                            android:id="@+id/text_num_working_days"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="23 days" />
+                    </TableRow>
+                <TableRow android:layout_width="match_parent"
+                    android:paddingRight="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Working time"
+                        android:paddingRight="10dp"/>
+                    <TextView
+                        android:id="@+id/text_total_working_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8:50" />
+
+                </TableRow>
+                <TableRow
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Working valid"
+                        android:paddingRight="10dp"/>
+                    <TextView
+                        android:id="@+id/text_rh_working_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8:16" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Expected time"
+                        android:paddingRight="10dp"/>
+                    <TextView
+                        android:id="@+id/text_rh_expected_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8:16" />
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+</merge>

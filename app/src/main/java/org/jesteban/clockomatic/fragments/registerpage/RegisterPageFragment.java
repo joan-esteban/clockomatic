@@ -1,6 +1,7 @@
 package org.jesteban.clockomatic.fragments.registerpage;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.InflateException;
@@ -10,15 +11,13 @@ import android.view.ViewGroup;
 
 import org.jesteban.clockomatic.R;
 import org.jesteban.clockomatic.fragments.editclocksday.EditClockDayPresenter;
+import org.jesteban.clockomatic.fragments.editclocksday.EditClocksDayV2Fragment;
 import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView;
 import org.jesteban.clockomatic.fragments.infodayvieew.InfoDayViewPresenter;
-import org.jesteban.clockomatic.fragments.showdaydetail.DayDetailFragment;
-import org.jesteban.clockomatic.fragments.showdaydetail.DayDetailPresenter;
 import org.jesteban.clockomatic.helpers.SewingBox;
 import org.jesteban.clockomatic.views.MyDateTimePickerFragment;
-import org.jesteban.clockomatic.fragments.editclocksday.EditClocksDayFragment;
+
 import org.jesteban.clockomatic.model.Entry;
-import org.jesteban.clockomatic.model.State;
 
 import java.util.Calendar;
 import java.util.NoSuchElementException;
@@ -32,6 +31,7 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
     RegisterPageContract.Presenter presenter = null;
     private MyDateTimePickerFragment myDateTimePickerFragment = null;
     private View view=null;
+    private FloatingActionButton floatingRegisterButton = null;
 
     public RegisterPageFragment() {
         // Required empty public constructor
@@ -54,11 +54,11 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
         try {
             view = inflater.inflate(R.layout.fragment_register_page, container, false);
         } catch (InflateException e){
-            LOGGER.log(Level.SEVERE, "Exception inflating view for RegisterPage due in debug there are 3 pages");
+            LOGGER.log(Level.SEVERE, "Exception inflating view for RegisterPage due in debug there are 3 pages" + e.toString());
         }
-                myDateTimePickerFragment = (MyDateTimePickerFragment) getChildFragmentManager().findFragmentById(R.id.fragment_my_date_time_picker);
-        EditClocksDayFragment viewClocksDayFragment = (EditClocksDayFragment) getChildFragmentManager().findFragmentById(R.id.fragment_view_clocks_day);
-        SewingBox.sewPresentersView(new EditClockDayPresenter(viewClocksDayFragment), presenter, viewClocksDayFragment);
+        myDateTimePickerFragment = (MyDateTimePickerFragment) getChildFragmentManager().findFragmentById(R.id.fragment_my_date_time_picker);
+        EditClocksDayV2Fragment viewClocksDayFragment = (EditClocksDayV2Fragment) getChildFragmentManager().findFragmentById(R.id.fragment_view_clocks_day);
+        SewingBox.sewPresentersView(new EditClockDayPresenter(viewClocksDayFragment, getContext()), presenter, viewClocksDayFragment);
         // This is the brief info show
         /*
         DayDetailFragment dayDetailFragment = (DayDetailFragment) getChildFragmentManager().findFragmentById(R.id.fragment_detailed_info_day);
@@ -69,10 +69,24 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
         */
         InfoDayView infoDayView = (InfoDayView) view.findViewById(R.id.info_day_view);
         if (infoDayView == null) throw new NoSuchElementException("can't find fragment for day detail");
+        floatingRegisterButton = (FloatingActionButton) view.findViewById(R.id.register_main);
+        floatingRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pressRegisterDate();
+            }
+        });
         SewingBox.sewPresentersView(new InfoDayViewPresenter(infoDayView, getContext()), presenter, infoDayView);
-
+        ChooseWorkScheduleView chooseWorkScheduleView = (ChooseWorkScheduleView) getChildFragmentManager().findFragmentById(R.id.choose_work_schedule);
+        SewingBox.sewPresentersView(new ChooseWorkSchedulePresenter(chooseWorkScheduleView, getContext()), presenter, chooseWorkScheduleView);
+        chooseWorkScheduleView.getPresenter().startUi();
         return view;
     }
+    private void pressRegisterDate() {
+        Calendar registerDate = myDateTimePickerFragment.getComposedDate(null);
+        register(registerDate);
+    }
+
 
     @Override
     public void onResume() {
@@ -85,11 +99,7 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
     public void register(Calendar date) {
         if (presenter != null) {
             Entry entry = new Entry(date);
-            if (!presenter.register(entry)) {
-                Snackbar.make(getView(), "ERROR!!!!!!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            } else Snackbar.make(getView(), "Register Date " + entry, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            presenter.register(entry);
         }
     }
 
@@ -98,15 +108,6 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
         LOGGER.info("selected Date " + date.getTime() + " / " + date);
         presenter.selected(date);
     }
-
-    public void syncWithState(State state) {
-        if (state == null) return;
-        LOGGER.info("syncWithState " + state.getFloatingEntry());
-        if (myDateTimePickerFragment != null)
-            myDateTimePickerFragment.setDate(state.getFloatingEntry().getRegisterDate());
-
-    }
-
 
     @Override
     public void setPresenter(RegisterPageContract.Presenter presenter) {
@@ -124,4 +125,10 @@ public class RegisterPageFragment extends Fragment implements MyDateTimePickerFr
             LOGGER.info("RegisterPageFragmet::showDate setDate to " + date.getTime());
             myDateTimePickerFragment.setDate(date);
     }
+    @Override
+    public void showMessage(String text) {
+        Snackbar.make(getView(), text, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
 }

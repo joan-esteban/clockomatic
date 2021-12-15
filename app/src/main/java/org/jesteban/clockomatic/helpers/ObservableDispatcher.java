@@ -44,17 +44,17 @@ public class ObservableDispatcher<T> {
 
             }catch (IllegalAccessException e) {
                 LOGGER.log(Level.SEVERE, "Exception IllegalAccessException invoking " + e);
-                throw(new RuntimeException(e.toString()));
+                throw(new RuntimeException(e));
             } catch(IllegalArgumentException e){
                 LOGGER.log(Level.SEVERE, "Exception IllegalArgumentException invoking " + e);
-                throw(new RuntimeException(e.toString()));
+                throw(new RuntimeException(e));
             }catch (InvocationTargetException e) {
                 LOGGER.log(Level.SEVERE, "Exception InvocationTargetException invoking ["+ observer.getClass().getName() + "." + methodName + "] exception:" + e);
-                throw(new RuntimeException(e.toString()));
+                throw(new RuntimeException(e));
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
                 LOGGER.log(Level.SEVERE, "Exception NoSuchMethodException invoking " + e);
-                throw(new RuntimeException(e.toString()));
+                throw(new RuntimeException(e));
             }
         }
     }

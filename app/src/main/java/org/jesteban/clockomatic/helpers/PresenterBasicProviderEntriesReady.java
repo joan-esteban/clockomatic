@@ -14,7 +14,7 @@ public abstract class PresenterBasicProviderEntriesReady<VIEW_CLASS> extends Pre
 
 
     // This is fill with DependencyInjectorBinding
-    public void setEntriesProvider(@NonNull EntriesProviderContract i){
+    public void setEntriesProvider(@NonNull EntriesProviderContract i) {
         entries = i;
         entries.subscribe(this);
     }

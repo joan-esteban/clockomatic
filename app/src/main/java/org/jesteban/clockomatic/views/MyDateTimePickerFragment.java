@@ -1,14 +1,19 @@
 package org.jesteban.clockomatic.views;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 
 import org.jesteban.clockomatic.R;
@@ -17,12 +22,13 @@ import java.util.Calendar;
 import java.util.logging.Logger;
 
 
-public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFragment.OnFragmentInteractionListener {
+public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFragment.OnFragmentInteractionListener,
+        DatePickerDialog.OnDateSetListener{
     private static final Logger LOGGER = Logger.getLogger(MyDateTimePickerFragment.class.getName());
     private OnMyDateTimePickerFragmentListener mListener;
     private MyDatePickerFragment myDatePicker = null;
     private TimePicker timePicker = null;
-
+    private ImageButton buttonExpand = null;
 
     public MyDateTimePickerFragment() {
         // Empty constructor
@@ -72,13 +78,8 @@ public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFr
         // getFragmentManager() can't find child fragment, it only contains fragment_my_date_time_picker (father)
         myDatePicker = (MyDatePickerFragment) getChildFragmentManager().findFragmentById(R.id.fragment_date_picker);
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.register);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pressRegisterDate();
-            }
-        });
+
+        buttonExpand = (ImageButton) view.findViewById(R.id.button_expand);
 
         timePicker = (TimePicker) view.findViewById(R.id.timePicker2);
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
@@ -90,9 +91,29 @@ public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFr
                 mListener.selected(date);
             }
         });
+        CardView cardEntryPicker = (CardView) view.findViewById(R.id.card_entry_picker);
+        //cardEntryPicker.setLayoutAnimation();
+        final ImageButton buttonExpand = (ImageButton) view.findViewById(R.id.button_expand);
+        buttonExpand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setExpandState (timePicker.getVisibility()==View.GONE);
+
+            }
+        });
+        setExpandState(false);
         return view;
     }
+    public void setExpandState(boolean expanded){
+        if (expanded){
+            timePicker.setVisibility(View.VISIBLE);
+            buttonExpand.setImageResource(R.drawable.ic_expand_less_black_24dp);
 
+        } else {
+            timePicker.setVisibility(View.GONE);
+            buttonExpand.setImageResource(R.drawable.ic_expand_more_black_24dp);
+        }
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -117,6 +138,14 @@ public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFr
         mListener.selected(date);
     }
 
+    @Override
+    public void onClickTextDay() {
+        Calendar date = getComposedDate(null);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(), this, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
     public void setDate(Calendar date) {
         LOGGER.info("MyDateTimePickerFragment::setDate setDate to " + date.getTime());
         LOGGER.info("setDate HOUR=" +date.get(Calendar.HOUR_OF_DAY));
@@ -125,6 +154,15 @@ public class MyDateTimePickerFragment extends Fragment implements MyDatePickerFr
         timePicker.setCurrentHour(date.get(Calendar.HOUR_OF_DAY));
         timePicker.setCurrentMinute(date.get(Calendar.MINUTE));
         myDatePicker.setDay(date);
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar date = getComposedDate(null);
+        date.set(Calendar.YEAR, year);
+        date.set(Calendar.MONTH, month);
+        date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        setDate(date);
     }
 
     public interface OnMyDateTimePickerFragmentListener {

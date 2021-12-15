@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_edit_company_main_layout"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/layout_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text_company_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/edit_text_company_name"
+                    android:text="@string/company_editor_name_title" />
+
+                <EditText
+                    android:id="@+id/edit_text_company_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Write name here..." />
+
+
+                <TextView
+                    android:id="@+id/text_company_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/edit_text_company_desc"
+                    android:layout_below="@id/text_company_name"
+                    android:text="@string/company_editor_desc_title" />
+
+                <EditText
+                    android:id="@+id/edit_text_company_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edit_text_company_name"
+                    android:layout_alignParentEnd="true"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+
+                    android:text="Write name here..." />
+
+
+                <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:auto="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    auto:cardCornerRadius="2dp"
+                    auto:cardElevation="2dp"
+                    auto:cardUseCompatPadding="true"
+                    android:padding="1dp"
+                    android:animateLayoutChanges="true"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/check_box_workingtime_restrictions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/limited_working_time" />
+
+                        <TableLayout
+                            android:id="@+id/layout_workingtime_restrictions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="30dp">
+                            <TableRow>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/minimum_time" />
+
+                                <EditText
+                                    android:id="@+id/edit_text_workingtime_expected"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:ems="4"
+
+                                    android:hint="08:16"
+                                    android:inputType="time" />
+
+                                <ImageButton
+                                    android:id="@+id/button_time_workingtime_expected"
+                                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                    android:layout_width="50dip"
+                                    android:layout_height="50dip"
+                                    android:layout_below="@id/button_date"
+                                    android:layout_toEndOf="@id/edit_time"
+                                    android:scaleType="fitCenter"
+                                    android:tag="1"
+                                    app:srcCompat="@drawable/ic_schedule_black_24dp" />
+                            </TableRow>
+
+                        </TableLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:auto="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    auto:cardCornerRadius="2dp"
+                    auto:cardElevation="2dp"
+                    auto:cardUseCompatPadding="true"
+                    android:padding="1dp"
+                    android:animateLayoutChanges="true"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/check_box_enter_restrictions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/limited_enter" />
+
+                        <TableLayout
+                            android:id="@+id/layout_enter_restrictions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="30dp">
+                            <TableRow>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/early_time" />
+
+                                <EditText
+                                    android:id="@+id/edit_text_enter_early"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_below="@id/edit_text_company_name"
+                                    android:ems="4"
+
+                                    android:hint="08:30"
+                                    android:inputType="time" />
+
+                                <ImageButton
+                                    android:id="@+id/button_time_enter_early"
+                                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                    android:layout_width="50dip"
+                                    android:layout_height="50dip"
+                                    android:layout_below="@id/button_date"
+                                    android:layout_toEndOf="@id/edit_time"
+                                    android:scaleType="fitCenter"
+                                    android:tag="1"
+                                    app:srcCompat="@drawable/ic_schedule_black_24dp" />
+                            </TableRow>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/later_time" />
+
+                                <EditText
+                                    android:id="@+id/edit_text_enter_later"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_below="@id/edit_text_company_name"
+                                    android:ems="4"
+                                    android:hint="09:00"
+                                    android:inputType="time" />
+
+                                <ImageButton
+                                    android:id="@+id/button_time_enter_later"
+                                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                    android:layout_width="50dip"
+                                    android:layout_height="50dip"
+                                    android:layout_below="@id/button_date"
+                                    android:layout_toEndOf="@id/edit_time"
+                                    android:scaleType="fitCenter"
+                                    android:tag="1"
+                                    app:srcCompat="@drawable/ic_schedule_black_24dp" />
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:auto="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/view_info_day_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    auto:cardCornerRadius="2dp"
+                    auto:cardElevation="2dp"
+                    auto:cardUseCompatPadding="true"
+                    android:padding="1dp"
+                    android:animateLayoutChanges="true"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/check_box_midday_restrictions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/limited_midday" />
+
+                        <TableLayout
+                            android:id="@+id/layout_midday_restrictions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="30dp">
+                            <TableRow>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/early_time" />
+
+                                <EditText
+                                    android:id="@+id/edit_text_midday_early"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:ems="4"
+
+                                    android:hint="13:00"
+                                    android:inputType="time" />
+
+                                <ImageButton
+                                    android:id="@+id/button_time_midday_early"
+                                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                    android:layout_width="50dip"
+                                    android:layout_height="50dip"
+                                    android:layout_below="@id/button_date"
+                                    android:layout_toEndOf="@id/edit_time"
+                                    android:scaleType="fitCenter"
+                                    android:tag="1"
+                                    app:srcCompat="@drawable/ic_schedule_black_24dp" />
+                            </TableRow>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/later_time" />
+
+                                <EditText
+                                    android:id="@+id/edit_text_midday_later"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+
+                                    android:ems="4"
+                                    android:hint="15:00"
+                                    android:inputType="time" />
+
+                                <ImageButton
+                                    android:id="@+id/button_time_midday_later"
+                                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                    android:layout_width="50dip"
+                                    android:layout_height="50dip"
+                                    android:layout_below="@id/button_date"
+                                    android:layout_toEndOf="@id/edit_time"
+                                    android:scaleType="fitCenter"
+                                    android:tag="1"
+                                    app:srcCompat="@drawable/ic_schedule_black_24dp" />
+                            </TableRow>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/minimum_time" />
+
+                                <EditText
+                                    android:id="@+id/edit_text_midday_minimum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+
+                                    android:ems="4"
+                                    android:hint="01:00"
+                                    android:inputType="time" />
+
+                                <ImageButton
+                                    android:id="@+id/button_time_midday_minimum"
+                                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                    android:layout_width="50dip"
+                                    android:layout_height="50dip"
+                                    android:layout_below="@id/button_date"
+                                    android:layout_toEndOf="@id/edit_time"
+                                    android:scaleType="fitCenter"
+                                    app:srcCompat="@drawable/ic_schedule_black_24dp" />
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:auto="http://schemas.android.com/apk/res-auto"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    auto:cardCornerRadius="2dp"
+                    auto:cardElevation="2dp"
+                    auto:cardUseCompatPadding="true"
+                    android:padding="1dp"
+                    android:animateLayoutChanges="true"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/check_box_leave_restrictions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/limited_leave" />
+
+                        <TableLayout
+                            android:id="@+id/layout_leave_restrictions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="30dp">
+                            <TableRow>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/early_time" />
+
+                                <EditText
+                                    android:id="@+id/edit_text_leave_early"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_below="@id/edit_text_company_name"
+                                    android:ems="4"
+
+                                    android:hint="17:46"
+                                    android:inputType="time" />
+
+                                <ImageButton
+                                    android:id="@+id/button_time_leave_early"
+                                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                    android:layout_width="50dip"
+                                    android:layout_height="50dip"
+                                    android:layout_below="@id/button_date"
+                                    android:layout_toEndOf="@id/edit_time"
+                                    android:scaleType="fitCenter"
+                                    app:srcCompat="@drawable/ic_schedule_black_24dp" />
+                            </TableRow>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/later_time" />
+
+                                <EditText
+                                    android:id="@+id/edit_text_leave_later"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_below="@id/edit_text_company_name"
+                                    android:ems="4"
+                                    android:hint="19:00"
+                                    android:inputType="time" />
+
+                                <ImageButton
+                                    android:id="@+id/button_time_leave_later"
+                                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                    android:layout_width="50dip"
+                                    android:layout_height="50dip"
+                                    android:layout_below="@id/button_date"
+                                    android:layout_toEndOf="@id/edit_time"
+                                    android:scaleType="fitCenter"
+                                    app:srcCompat="@drawable/ic_schedule_black_24dp" />
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </TableLayout>
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            >
+
+            <ImageButton
+                android:id="@+id/button_edit_company_remove"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_below="@+id/layout_company_desc"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/remove"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+
+            <Button
+                android:id="@+id/button_edit_company_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:text="@android:string/ok"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+</RelativeLayout>

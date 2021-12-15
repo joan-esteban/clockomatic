@@ -4,10 +4,21 @@
     tools:context=".activities.mainactivity.MainActivity">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_undo"
         android:icon="@mipmap/ic_launcher"
         android:orderInCategory="100"
-        android:title="@string/action_settings" />
+        android:title="@string/action_undo" />
+
+    <item
+    android:id="@+id/action_settings"
+    android:icon="@mipmap/ic_launcher"
+    android:orderInCategory="100"
+    android:title="@string/action_settings" />
+    <item
+        android:id="@+id/action_configure_companies"
+        android:icon="@mipmap/ic_launcher"
+        android:orderInCategory="100"
+        android:title="@string/action_configure_companies" />
     <item
         android:id="@+id/action_wipe_data"
         android:icon="@android:drawable/ic_menu_delete"

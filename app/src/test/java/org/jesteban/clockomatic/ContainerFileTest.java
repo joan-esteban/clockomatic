@@ -8,51 +8,51 @@ import static org.junit.Assert.assertNotEquals;
 
 public class ContainerFileTest {
     private final String  filename = "test.txt";
-    private final String  dataExample = "this is my data";
-
+    private final ContainerFile.StringHolder  dataExample =new ContainerFile.StringHolder("this is my data");
+    private final ContainerFile.StringHolder data = new ContainerFile.StringHolder();
     @Test
     public void write_file() throws Exception {
         ContainerFile cf = new ContainerFile(filename);
-        cf.put(dataExample);
+        cf.write(dataExample);
     }
 
     @Test(expected = Exception.class)
     public void error_reading_non_existing_file() throws Exception {
         ContainerFile cf = new ContainerFile("test2.txt");
-        cf.get();
+
+        cf.read(data);
     }
 
     @Test
     public void read_written_data() throws Exception {
         ContainerFile fileToWrite = new ContainerFile(filename);
-        fileToWrite.put(dataExample);
-
+        fileToWrite.write(dataExample);
         ContainerFile fileToRead = new ContainerFile(filename);
-        String data = fileToRead.get();
+        fileToRead.read(data);
 
-        assertEquals(dataExample, data);
+        assertEquals(dataExample.toString(), data.toString());
 
     }
 
     @Test(expected = Exception.class)
     public void wipe_file() throws Exception {
         ContainerFile fileToWrite = new ContainerFile(filename);
-        fileToWrite.put(dataExample);
+        fileToWrite.write(dataExample);
         fileToWrite.wipe();
         ContainerFile fileToRead = new ContainerFile(filename);
         // Read from non existing file throw excepction
-        String data = fileToRead.get();
+        fileToRead.read(data);
     }
 
     @Test
-    public void dont_append_overwrite() throws Exception {
+    public void append_overwrite() throws Exception {
         ContainerFile fileToWrite = new ContainerFile(filename);
         fileToWrite.wipe();
-        fileToWrite.put(dataExample);
-        fileToWrite.put(dataExample);
+        fileToWrite.write(dataExample);
+        fileToWrite.write(dataExample);
         ContainerFile fileToRead = new ContainerFile(filename);
-        String data = fileToRead.get();
-        assertEquals(dataExample, data);
+        fileToRead.read(data);
+        assertEquals(dataExample.toString(), data.toString());
     }
 
 }

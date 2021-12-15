@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -23,27 +24,49 @@
         android:layout_gravity="center"
         />
 
+    <TextView
+        android:id="@+id/text_view_initial_offset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:gravity="top"
+        android:paddingTop="5dp"
+        android:text="+1"
+        android:textColor="@color/colorAccent"
+        android:textSize="8sp" />
 
-        <ImageView
-            android:id="@+id/image_view_link_icon"
-            android:paddingTop="7dp"
 
-            android:layout_width="18dp"
-            android:layout_height="21dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/link3"
-            android:gravity="center"
-            android:layout_gravity="center"
-            />
+    <ImageView
+        android:id="@+id/image_view_link_icon"
+        android:paddingTop="7dp"
 
-        <TextView
+        android:layout_width="18dp"
+        android:layout_height="21dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/link3"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
+
+    <TextView
         android:id="@+id/text_view_final_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:text="18:37"
-            android:gravity="center"
-            android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_gravity="center"
+            />
+        <TextView
+            android:id="@+id/text_view_final_offset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="+1"
+            android:gravity="top"
+            android:layout_gravity="top"
+            android:textSize="8sp"
+            android:textColor="@color/colorAccent"
             />
     </LinearLayout>
 </merge>

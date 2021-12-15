@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="view_info_full_time_title">Full time</string>
+    <string name="view_info_hr_time_title">HR time</string>
+</resources>

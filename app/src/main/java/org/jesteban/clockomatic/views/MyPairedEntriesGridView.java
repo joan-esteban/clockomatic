@@ -41,10 +41,29 @@ public class MyPairedEntriesGridView extends GridView implements  MyPairedEntrie
         //ViewGroup.LayoutParams params = gridView.getLayoutParams();
         //params.height = LayoutParams.WRAP_CONTENT;
         //gridView.setLayoutParams(params);
+        /*
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
         gridView.setNumColumns(2);
         else
             gridView.setNumColumns(4);
+            */
+    }
+    // If not is affected by ListView scroll and only show 1 row
+    //https://stackoverflow.com/questions/16819135/set-fixed-gridview-row-height
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int heightSpec;
+
+        if (getLayoutParams().height == LayoutParams.WRAP_CONTENT) {
+            // The great Android "hackatlon", the love, the magic.
+            // The two leftmost bits in the height measure spec have
+            // a special meaning, hence we can't use them to describe height.
+            heightSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,MeasureSpec.AT_MOST);
+        } else {
+            heightSpec = heightMeasureSpec;
+        }
+
+        super.onMeasure(widthMeasureSpec, heightSpec);
     }
 
     @Override
@@ -71,6 +90,14 @@ public class MyPairedEntriesGridView extends GridView implements  MyPairedEntrie
             mContext = c;
             MyPairedEntryViewContract.PairedEntryVisualData entriesExample = new MyPairedEntryViewContract.PairedEntryVisualData("10:00","20:00");
             entries.add(entriesExample);
+            entries.add(new MyPairedEntryViewContract.PairedEntryVisualData("10:00","20:00"));
+            entries.add(new MyPairedEntryViewContract.PairedEntryVisualData("10:00","20:00"));
+            entries.add(new MyPairedEntryViewContract.PairedEntryVisualData("10:00","20:00"));
+            entries.add(new MyPairedEntryViewContract.PairedEntryVisualData("10:00","20:00"));
+            entries.add(new MyPairedEntryViewContract.PairedEntryVisualData("10:00","20:00"));
+            entries.add(new MyPairedEntryViewContract.PairedEntryVisualData("10:00","20:00"));
+            entries.add(new MyPairedEntryViewContract.PairedEntryVisualData("10:00","20:00"));
+
         }
 
         public int getCount() {

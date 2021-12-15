@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="msg_reload_companies">Companies have change, reloading...</string>
+    <string name="msg_changed_companies">Set company to %s</string>
+    <string name="msg_error_empty_company_name">Company name must be set!</string>
+    <string name="msg_undo">UNDO</string>
+
+
+    <string name="msg_undo_delete_data_company">Deleted company data</string>
+    <string name="msg_undo_disabled_company">Disabled company %s</string>
+    <string name="msg_undo_removed_company">Removed company %s</string>
+    <string name="msg_undo_modified_company">Modified company %s</string>
+    <string name="msg_undo_add_company">Add company %s</string>
+    <string name="msg_undo_register_date">Register date %s</string>
+    <string name="msg_undo_remove_date">Delete date %s</string>
+    <string name="msg_undo_modified_date">Modified entry %s</string>
+
+    <string name="msg_undo_set_ws">Modified Working Schedule</string>
+    <string name="msg_undo_clear_ws">Cleared Working Schedule</string>
+
+
+</resources>

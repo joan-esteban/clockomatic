@@ -1,56 +1,70 @@
 package org.jesteban.clockomatic.providers;
 
 
-import org.jesteban.clockomatic.StateController;
 import org.jesteban.clockomatic.helpers.ObservableDispatcher;
+import org.jesteban.clockomatic.model.EntriesDb;
 import org.jesteban.clockomatic.model.Entry;
 import org.jesteban.clockomatic.model.EntrySet;
-import org.jesteban.clockomatic.model.State;
+import org.jesteban.clockomatic.model.UndoAction;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Logger;
 
 
 public class EntriesProvider implements EntriesProviderContract,Observer {
-    private StateController state = null;
+    private static final Logger LOGGER = Logger.getLogger(EntriesProvider.class.getName());
+
+    private EntriesDb entriesDb = null;
     private ObservableDispatcher<Listener> observable = new ObservableDispatcher<>();
+    int companyId=0;
+    public EntriesProvider(){
 
-    public EntriesProvider(StateController parent){
-        state = parent;
-        state.addObserver(this);
     }
-    @Override
-    public Boolean register(Entry date) {
-        return state.register(date);
-    }
-
-    @Override
-    public Boolean remove(Entry date) {
-        return state.remove(date);
+    public EntriesProvider(EntriesDb entriesDb){
+        this.entriesDb=entriesDb;
+        entriesDb.addObserver(this);
     }
 
+
+
     @Override
-    public EntrySet getEntries() {
-        State st = state.getState();
-        if (st!=null) return st.getEntries();
-        return null;
+    public UndoAction register(Entry date) {
+        return entriesDb.register(companyId,date);
     }
 
     @Override
-    public EntrySet getEntriesBelongingDay(Calendar day) {
-        DateFormat df = new SimpleDateFormat(Entry.FORMAT_BELONGING_DAY);
-        String filter = df.format(day.getTime());
-        return getEntries().getEntriesBelongingDayStartWith(filter);
+    public UndoAction remove(Entry date) throws ParseException {
+        return entriesDb.remove(companyId,date);
     }
 
     @Override
-    public EntrySet getEntriesBelongingMonth(Calendar day) {
-        DateFormat df = new SimpleDateFormat(Entry.FORMAT_BELONGING_MONTH);
-        String filter = df.format(day.getTime());
-        return getEntries().getEntriesBelongingDayStartWith(filter);
+    public UndoAction wipeStore() throws ParseException {
+        return entriesDb.wipeStore(companyId);
+    }
+
+
+    @Override
+    public EntrySet getEntriesBelongingDay(Calendar day) throws ParseException {
+        return entriesDb.getEntriesBelongingDay(companyId,day);
+    }
+
+    @Override
+    public EntrySet getEntriesBelongingMonth(Calendar day) throws ParseException {
+        return entriesDb.getEntriesBelongingMonth(companyId,day);
+    }
+    @Override
+    public EntrySet getEntriesBelongingDayStartWith(String prefixBelongingDay) throws ParseException{
+        return entriesDb.getEntriesBelongingDayStartWith(companyId,prefixBelongingDay);
+    }
+
+    @Override
+    public void setCompanyId(int companyId) {
+        if (this.companyId == companyId) return;
+        this.companyId = companyId;
+        notifyChange();
     }
 
     @Override
@@ -61,12 +75,17 @@ public class EntriesProvider implements EntriesProviderContract,Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
-        observable.notify("onChangeEntries");
+        LOGGER.info("EntriesDb send a update!");
+        notifyChange();
     }
 
     @Override
     public String getName() {
         return EntriesProviderContract.KEY_PROVIDER;
     }
+
+    private void notifyChange(){
+        LOGGER.info("EntriesProvider send a update!");
+        observable.notify("onChangeEntries");}
+
 }

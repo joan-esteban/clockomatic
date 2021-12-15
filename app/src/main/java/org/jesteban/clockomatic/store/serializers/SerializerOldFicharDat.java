@@ -11,15 +11,15 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
-public class SerializerOldFicharDat implements Serializer {
+public class SerializerOldFicharDat implements Serializer<EntrySet> {
     @Override
     public String serialize(EntrySet entries) throws Exception {
         return null;
     }
 
     @Override
-    public EntrySet deserialize(String lines) throws Exception {
-        EntrySet result = new EntrySet();
+    public void deserialize(String lines, EntrySet destination) throws Exception {
+        EntrySet result = destination;
         // https://stackoverflow.com/questions/13464954/how-do-i-split-a-string-by-line-break
         String lstLines[] = lines.split(REGISTER_SEPARATOR_SPLITER);
         for (String line : lstLines){
@@ -33,9 +33,6 @@ public class SerializerOldFicharDat implements Serializer {
                 }
             }
         }
-        return result;
-
-
     }
 
     protected Entry deserializeEntry(String line) throws Exception {
@@ -51,7 +48,7 @@ public class SerializerOldFicharDat implements Serializer {
             //Date date = new Date(Long.parseLong(fields[4]));
             //cal.setTime(date);
             return new Entry(cal);
-        };
+        }
         return null;
     }
 

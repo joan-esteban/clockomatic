@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 
-
+/*
 public class EditClocksDayFragment extends Fragment implements EditClockDayContract.View {
     private static final Logger LOGGER = Logger.getLogger(EditClocksDayFragment.class.getName());
     private EditClockDayContract.Presenter presenter = null;
@@ -155,3 +155,4 @@ public class EditClocksDayFragment extends Fragment implements EditClockDayContr
         syncWithState(entries);
     }
 }
+*/

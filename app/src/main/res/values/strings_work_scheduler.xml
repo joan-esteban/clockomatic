@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="limited_working_time">Expected working time</string>
+    <string name="limited_enter">Limited enter scheduler</string>
+    <string name="limited_midday">Limited midday scheduler</string>
+    <string name="limited_leave">Limited leave scheduler</string>
+    <string name="early_time">Early</string>
+    <string name="later_time">Later</string>
+    <string name="minimum_time">Minimum Time</string>
+</resources>
