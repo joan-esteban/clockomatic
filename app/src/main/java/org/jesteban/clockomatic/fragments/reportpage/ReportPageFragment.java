@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.jesteban.clockomatic.R;
+import org.jesteban.clockomatic.fragments.infoperiodview.InfoPeriodView;
+import org.jesteban.clockomatic.fragments.infoperiodview.InfoPeriodViewContract;
+import org.jesteban.clockomatic.fragments.infoperiodview.InfoPeriodViewPresenterNoProviderLink;
 import org.jesteban.clockomatic.fragments.registerpage.RegisterPageFragment;
 import org.jesteban.clockomatic.helpers.SewingBox;
 import org.jesteban.clockomatic.fragments.showlistdaysclocks.ShowListDaysClocksContract;
@@ -64,6 +67,8 @@ public class ReportPageFragment extends Fragment implements MyDatePickerFragment
         showListDaysClocksMonthPresenter = new ShowListDaysClocksMonthPresenter(viewClocksMonthFragment, getContext());
         SewingBox.sewPresentersView(showListDaysClocksMonthPresenter,presenter,viewClocksMonthFragment);
         myDatePickerFragment.setMonthMode();
+
+
         //presenter.startUi();
         return view;
     }
@@ -78,6 +83,11 @@ public class ReportPageFragment extends Fragment implements MyDatePickerFragment
         assert(presenter!=null);
         LOGGER.info("calling Presenter selectedMonth");
         presenter.selectedMonth(day);
+    }
+
+    @Override
+    public void onClickTextDay() {
+
     }
 
     @Override

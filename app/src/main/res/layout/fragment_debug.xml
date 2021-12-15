@@ -5,157 +5,79 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+    <org.jesteban.clockomatic.fragments.choosecompany.ChooseCompanyView
+        android:id="@+id/spinner3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DEBUG SAND BOX "
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@android:color/holo_red_dark" />
+        android:spinnerMode="dialog"
+        android:visibility="visible" />
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:visibility="visible" />
+
+
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/debug_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
-
+        android:text="Do something" />
     <Button
-        android:id="@+id/button_debug_2"
+        android:id="@+id/debug_button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
-
-
-
-    <TableLayout
-        android:id="@+id/debug_layout_table"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <TableRow
-            android:id="@+id/debug_layout_row_3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <org.jesteban.clockomatic.views.MyCalendarDayView
-                id="@+id/view555"
-                layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                auto:sizeStyle="BIG"
-                auto:textBottom="el mes"
-                auto:textMiddle="dia"
-                auto:textUpper="hola" />
-
-            <view
-                class="org.jesteban.clockomatic.views.MyPairedEntryView"
-                id="@+id/view_link1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal" />
-
-
-
-            <view
-                class="org.jesteban.clockomatic.views.MyCalendarDayView"
-                layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/debug_layout_row_4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <org.jesteban.clockomatic.views.MyCalendarDayView
-                id="@+id/view5555"
-                layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                auto:textUpper="hola"
-                auto:textMiddle="dia"
-                auto:textBottom="el mes"
-                auto:sizeStyle="BIG"/>
-
-            <GridView
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:id="@+id/grid_view_link"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:horizontalSpacing="0dp"
-                android:numColumns="auto_fit"
-                android:columnWidth="90dp"
-                android:gravity="center"
-                android:verticalSpacing="1dp"></GridView>
-            <org.jesteban.clockomatic.views.MyCalendarDayView
-                layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                auto:sizeStyle="BIG"/>
-        </TableRow>
-
-
-        <TableRow
-            android:id="@+id/debug_layout_row_6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <org.jesteban.clockomatic.views.MyCalendarDayView
-                layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                auto:textUpper="hola"
-                auto:textMiddle="dia"
-                auto:textBottom="el mes"
-                auto:sizeStyle="BIG"/>
-
-            <org.jesteban.clockomatic.views.MyPairedEntriesGridView
-                android:id="@+id/debug_my_link_entries_grid_view"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:horizontalSpacing="0dp"
-                android:numColumns="auto_fit"
-                android:columnWidth="90dp"
-                android:gravity="center"
-                android:verticalSpacing="1dp"></org.jesteban.clockomatic.views.MyPairedEntriesGridView>
-            <org.jesteban.clockomatic.views.MyCalendarDayView
-                layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                auto:sizeStyle="BIG"/>
-        </TableRow>
-
-        <org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView
-            android:id="@+id/debug_info_day_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
-
+        android:text="Do something" />
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/debut_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView4354354354354354354354" />
+        android:text="TextView" />
+<!--
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        auto:cardCornerRadius="2dp"
+        auto:cardElevation="5dp"
+        auto:cardUseCompatPadding="true">
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <org.jesteban.clockomatic.fragments.infodayvieew.InfoDayView
+            <ImageView
+                android:id="@+id/icon_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
+                auto:srcCompat="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/main_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/icon_image"
+                android:text="16:00"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/detail_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_text"
+                android:layout_toRightOf="@+id/icon_image"
+                android:text="In/Out" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+-->
+
 
 </LinearLayout>

@@ -1,9 +1,8 @@
 package org.jesteban.clockomatic.fragments.registerpage;
 
-import org.jesteban.clockomatic.controllers.PresenterBase;
-import org.jesteban.clockomatic.controllers.ViewBase;
+import org.jesteban.clockomatic.helpers.PresenterBase;
+import org.jesteban.clockomatic.helpers.ViewBase;
 import org.jesteban.clockomatic.model.Entry;
-import org.jesteban.clockomatic.model.EntrySet;
 
 import java.util.Calendar;
 
@@ -11,6 +10,7 @@ import java.util.Calendar;
 public class RegisterPageContract {
     public interface View extends ViewBase<Presenter> {
         void showDate(Calendar date);
+        void showMessage(String text);
     }
 
     public interface Presenter extends PresenterBase {

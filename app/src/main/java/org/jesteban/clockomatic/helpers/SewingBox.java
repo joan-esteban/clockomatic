@@ -1,9 +1,6 @@
 package org.jesteban.clockomatic.helpers;
 
 
-import org.jesteban.clockomatic.controllers.PresenterBase;
-import org.jesteban.clockomatic.controllers.ViewBase;
-
 import java.util.logging.Logger;
 
 public class SewingBox {

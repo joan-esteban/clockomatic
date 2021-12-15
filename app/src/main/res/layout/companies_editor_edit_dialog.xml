@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_edit_company_main_layout"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/layout_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text_company_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/edit_text_company_name"
+                    android:text="@string/company_editor_name_title" />
+
+            <EditText
+                android:id="@+id/edit_text_company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Write name here..." />
+
+
+                <TextView
+                    android:id="@+id/text_company_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/edit_text_company_desc"
+                    android:layout_below="@id/text_company_name"
+                    android:text="@string/company_editor_desc_title" />
+
+            <EditText
+                android:id="@+id/edit_text_company_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_text_company_name"
+                android:layout_alignParentEnd="true"
+                android:ems="10"
+                android:inputType="textPersonName"
+
+                android:text="Write name here..." />
+
+                <TextView
+                    android:id="@+id/text_company_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/edit_text_company_color"
+                    android:layout_below="@id/text_company_desc"
+
+                    android:text="@string/company_editor_color_title" />
+
+            <Button
+                android:id="@+id/edit_text_company_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+
+                android:layout_below="@id/text_company_desc"
+                android:layout_alignParentEnd="true"
+                />
+
+            </TableLayout>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            >
+
+            <ImageButton
+                android:id="@+id/button_edit_company_remove"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_below="@+id/layout_company_desc"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/remove"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+
+            <Button
+                android:id="@+id/button_edit_company_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:text="@android:string/ok"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -3,23 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.reportpage.ReportPageFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_entry_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            auto:cardCornerRadius="2dp"
+            auto:cardElevation="5dp"
+            auto:cardUseCompatPadding="true"
+            android:animateLayoutChanges="true"
+            android:layout_alignParentTop="true"
+            >
         <fragment
             android:id="@+id/fragment_report_page_date_picker"
             android:name="org.jesteban.clockomatic.views.MyDatePickerFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_my_date_picker"/>
-
+        </android.support.v7.widget.CardView>
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -28,9 +38,12 @@
             android:id="@+id/fragment_view_clocks_month"
             android:name="org.jesteban.clockomatic.fragments.showlistdaysclocks.ShowListDaysClocksFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_view_clocks_month" />
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_view_clocks_month"
+            android:layout_below="@id/card_entry_picker"
+            />
 
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>

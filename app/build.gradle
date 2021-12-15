@@ -2,15 +2,21 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword '3d2d30e32b'
+            storeFile file('D:/work/android/android_studio_workspace/clockomatic_svn/releases/android.jks')
+            storePassword 'RTVUDwTEiqHMhDYgdm2I'
+        }
     }
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "org.jesteban.clock_o_matic"
         minSdkVersion 22
-        targetSdkVersion 22
-        versionCode 3
-        versionName '0.3'
+        targetSdkVersion 28
+        versionCode 10
+        versionName '0.101beta'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         versionNameSuffix 'beta'
     }
@@ -18,6 +24,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         debug {
             applicationIdSuffix ".debug"
@@ -30,6 +37,13 @@ android {
     }
 }
 
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -38,5 +52,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.github.QuadFlask:colorpicker:0.0.13'
     testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:cardview-v7:27.0.2'
 }

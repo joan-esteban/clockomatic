@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Clock-o-matic</string>
+    <string name="title_activity_settings">Configuració</string>
+    <string name="title_companies_editor_settings">Editor d\'empreses</string>
+    <string name="title_companies_editor_add_new_company">Nova empresa</string>
+    <string name="default_company_name">Empresa</string>
+    <string name="default_company_desc">Aixó és una nova empresa</string>
+    <string name="pref_header_general">General</string>
+    <string name="pref_title_setalarm">Alarma</string>
+    <string name="pref_description_setalarm">Generar una alarma per l\'hora de sortir</string>
+    <string name="pref_title_display_name">Nom</string>
+    <string name="import_old_data_checkbox_description">Importació automatica de dades antigues</string>
+    <string name="import_old_data_checkbox_name">Importació automatica</string>
+    <string name="error_entry_duplicated">Ja existeix el registre</string>
+    <string name="view_info_full_time_title">Temps total</string>
+    <string name="view_info_hr_time_title">Temps RRHH</string>
+    <string name="action_undo">Desfer</string>
+    <string name="action_settings">Configuració</string>
+    <string name="action_configure_companies">Editor d\'empreses</string>
+    <string name="action_wipe_data">Borra totes les dades</string>
+    <string name="action_about">Sobre la aplicació</string>
+    <string name="error_title">Error</string>
+    <string name="dialog_wipe_all_are_you_sure">Es borraran totes les dades, proseguir?</string>
+    <string name="work_schedule_title">Horari</string>
+    <string-array name="name_days_short_array">
+        <item> </item>
+        <item>dg</item>
+        <item>dl</item>
+        <item>dt</item>
+        <item>dc</item>
+        <item>dj</item>
+        <item>dv</item>
+        <item>ds</item>
+    </string-array>
+
+    <string-array name="name_months_short_array">
+        <item>gener</item>
+        <item>febrer</item>
+        <item>març</item>
+        <item>abril</item>
+        <item>maig</item>
+        <item>juny</item>
+        <item>juliol</item>
+        <item>agost</item>
+        <item>setembre</item>
+        <item>octubre</item>
+        <item>novembre</item>
+        <item>desembre</item>
+    </string-array>
+
+    <string name="msg_reload_companies">Recarregant empreses...</string>
+    <string name="msg_changed_companies">Activa empresa %s</string>
+    <string name="msg_error_empty_company_name">Has de posar un nom a l\'empresa!</string>
+    <string name="msg_undo">DESFER</string>
+    <string name="msg_undo_delete_data_company">Borrades les dades de l\'empresa</string>
+    <string name="msg_undo_disabled_company">Deshabilitada l\'empresa %s</string>
+    <string name="msg_undo_register_date">Registat %s</string>
+    <string name="msg_undo_remove_date">Borrat %s</string>
+    <string name="msg_undo_modified_date">Modificat %s</string>
+    <string name="msg_undo_set_ws">Modificat horari</string>
+    <string name="msg_undo_clear_ws">Tret l\'horari</string>
+    <string name="msg_undo_removed_company">Empresa [%s] esborrada</string>
+    <string name="msg_undo_modified_company">Empresa [%s] modificada</string>
+    <string name="msg_undo_add_company">Empresa [%s] afegida</string>
+    <string name="company_editor_name_title">Nom</string>
+    <string name="company_editor_desc_title">Descripció</string>
+    <string name="company_editor_color_title">Color</string>
+    <string name="label_company">Empresa</string>
+
+    <string-array name="kind_array">
+        <item>Treball</item>
+        <item>Altres</item>
+    </string-array>
+    <string name="limited_enter">Horari d\'entrada limitat</string>
+    <string name="limited_midday">Horari del mig dia limitat</string>
+    <string name="limited_leave">Horari de sortida limitat</string>
+    <string name="minimum_time">Temps minim</string>
+    <string name="limited_working_time">Temps de treball fixat</string>
+</resources>

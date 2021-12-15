@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import org.jesteban.clockomatic.providers.EntriesProviderContract;
 import org.jesteban.clockomatic.providers.Provider;
 import org.jesteban.clockomatic.providers.SelectedMonthProviderContract;
-import org.jesteban.clockomatic.controllers.PresenterBase;
+import org.jesteban.clockomatic.helpers.PresenterBase;
 
 import java.util.Calendar;
 import java.util.List;

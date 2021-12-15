@@ -17,4 +17,15 @@
         android:paddingTop="20dip"
         android:text="@string/app_about"
         android:textAppearance="@style/TextAppearance.AppCompat" />
+
+    <TextView
+        android:id="@+id/about_credits_others"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:autoLink="web"
+        android:paddingTop="20dip"
+        android:text="@string/app_about_line_2"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
+
 </LinearLayout>

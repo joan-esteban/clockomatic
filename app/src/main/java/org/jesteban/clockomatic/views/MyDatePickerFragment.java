@@ -12,6 +12,7 @@ import android.widget.TextView;
 import org.jesteban.clockomatic.R;
 
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Logger;
@@ -25,7 +26,7 @@ public class MyDatePickerFragment extends Fragment {
     private TextView currentDayTextView = null;
     private int whatCalendarChange = Calendar.DATE;
     private String patternToShow = "yyyy/MM/dd";
-
+    private Boolean monthMode = false;
     public MyDatePickerFragment() {
         // Required empty public constructor
     }
@@ -37,6 +38,7 @@ public class MyDatePickerFragment extends Fragment {
     public void setMonthMode() {
         whatCalendarChange = Calendar.MONTH;
         patternToShow = "yyyy/MM";
+        monthMode=true;
         refresh();
     }
 
@@ -65,9 +67,19 @@ public class MyDatePickerFragment extends Fragment {
     }
 
     private void refresh() {
-        SimpleDateFormat sdf = new SimpleDateFormat(patternToShow);
-        String dateText = sdf.format(this.currentDate.getTime());
-        if (currentDayTextView != null) currentDayTextView.setText(dateText);
+        if (monthMode){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MMMM");
+            String dateText = sdf.format(this.currentDate.getTime());
+            //String dateText = DateFormat.getDateInstance(DateFormat.SHORT).format(currentDate.getTime());
+            if (currentDayTextView != null) currentDayTextView.setText(dateText);
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("EE, MMMM d,yyyy");
+            String dateText = sdf.format(this.currentDate.getTime());
+
+            //String dateText = DateFormat.getDateInstance(DateFormat.FULL).format(currentDate.getTime());
+            if (currentDayTextView != null) currentDayTextView.setText(dateText);
+        }
+
     }
 
     @Override
@@ -95,7 +107,12 @@ public class MyDatePickerFragment extends Fragment {
                 setNextDay();
             }
         });
-
+        currentDayTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onClickTextDay();
+            }
+        });
         refresh();
 
         return view;
@@ -121,5 +138,6 @@ public class MyDatePickerFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onChangedSelectedDay(Calendar day);
+        void onClickTextDay();
     }
 }

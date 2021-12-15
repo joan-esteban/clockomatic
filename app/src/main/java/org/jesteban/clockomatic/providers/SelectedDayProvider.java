@@ -39,7 +39,7 @@ public class SelectedDayProvider implements SelectedDayProviderContract {
         if (showBelongingDayPrefix==null) {
             DateFormat df = new SimpleDateFormat(Entry.FORMAT_BELONGING_DAY);
             showBelongingDayPrefix = df.format(selectedDay.getTime());
-        };
+        }
         return showBelongingDayPrefix;
     }
 

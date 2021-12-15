@@ -232,7 +232,7 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
         private int factorTextUpper=11;
         private int factorMiddleUpper=28;
         private int factorBottonUpper=9;
-        private int radiusBg= 20;
+        private int radiusBg= 10;
 
         void init(int colorBg, int colorText, MyCalendarDayViewContract.SizeStyle sizeStyle){
             if (sizeStyle== MyCalendarDayViewContract.SizeStyle.SMALL){
@@ -282,8 +282,8 @@ public class MyCalendarDayView extends View implements MyCalendarDayViewContract
             canvas.drawText(upper, where.centerX(), where.top + ((where.bottom-where.top)/4), this.paintUpperText);
             if (data.sizeStyle == MyCalendarDayViewContract.SizeStyle.SMALL){
                 canvas.drawText(middle, where.centerX(), (int)(where.bottom*0.77), this.paintMiddleText);
-            } else canvas.drawText(middle, where.centerX(), (int)(where.bottom*0.80), this.paintMiddleText);
-            if (data.sizeStyle == MyCalendarDayViewContract.SizeStyle.BIG) canvas.drawText(bottom, where.centerX() , (int)(where.bottom*0.95), this.paintBottomText);
+            } else canvas.drawText(middle, where.centerX(), (int)(where.bottom*0.77), this.paintMiddleText);
+            if (data.sizeStyle == MyCalendarDayViewContract.SizeStyle.BIG) canvas.drawText(bottom, where.centerX() , (int)(where.bottom*0.92), this.paintBottomText);
         }
 
         void drawBg(Canvas canvas, Rect where){

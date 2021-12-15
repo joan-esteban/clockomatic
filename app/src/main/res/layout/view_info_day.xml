@@ -3,53 +3,157 @@
     xmlns:auto="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="vertical">
 
-    >
-
-    <org.jesteban.clockomatic.views.MyCalendarDayView
-        android:id="@+id/calendar_day_view"
-        layout_weight="1"
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:auto="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/view_info_day_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        auto:sizeStyle="BIG"
-        auto:textBottom="el mes"
-        auto:textMiddle="dia"
-        auto:textUpper="hola"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
+        auto:cardCornerRadius="2dp"
+        auto:cardElevation="2dp"
+        auto:cardUseCompatPadding="true"
+        android:padding="1dp"
+        android:animateLayoutChanges="true"
+        >
 
-        />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:animateLayoutChanges="true">
 
-    <org.jesteban.clockomatic.views.MyPairedEntriesGridView
-        android:id="@+id/paired_entries_grid_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:columnWidth="90dp"
-        android:gravity="center"
-        android:horizontalSpacing="0dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="1dp"
-        android:visibility="visible"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
-        android:background="@drawable/layout_bg_line_bottom"
-        />
+            <RelativeLayout
+                android:id="@+id/view_info_day_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp">
 
-    <org.jesteban.clockomatic.views.MyCalendarDayView
-        android:id="@+id/calendar_day_info_view"
-        layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        auto:sizeStyle="BIG"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
-        />
+                <TextView
+                    android:id="@+id/working_schedule_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="right"
+                    android:paddingLeft="4dp"
+                    android:text="PARTTIME"
+                    android:textSize="6sp" />
 
+                <org.jesteban.clockomatic.views.MyCalendarDayView
+                    android:id="@+id/calendar_day_view"
+                    layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:visibility="visible"
+                    auto:sizeStyle="SMALL"
+                    auto:textBottom="el mes"
+                    auto:textMiddle="dia"
+                    auto:textUpper="hola"
+
+                    />
+
+                <org.jesteban.clockomatic.views.MyPairedEntriesGridView
+                    android:id="@+id/paired_entries_grid_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_toLeftOf="@id/working_time_layout"
+                    android:layout_toRightOf="@id/calendar_day_view"
+
+                    android:columnWidth="90dp"
+                    android:gravity="center"
+                    android:horizontalSpacing="0dp"
+                    android:numColumns="auto_fit"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:verticalSpacing="1dp"
+                    android:visibility="visible" />
+
+
+                <LinearLayout
+                    android:id="@+id/working_time_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/calendar_info_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingEnd="5dp"
+                        android:text="RH time"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                    <TextView
+                        android:id="@+id/calendar_day_info_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="right"
+                        android:padding="0dp"
+                        android:paddingEnd="5dp"
+                        android:text="20:00"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/calendar_info_title_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingEnd="5dp"
+                        android:text="Real time"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/calendar_day_info_view_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="right"
+                        android:padding="0dp"
+                        android:paddingEnd="5dp"
+                        android:text="20:00"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption">
+
+                    </TextView>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_extended_contents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_extra_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Show information" />
+            </LinearLayout>
+            <ImageButton
+                android:id="@+id/button_expand"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="20dip"
+                android:src="@drawable/ic_expand_less_black_24dp" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 </merge>

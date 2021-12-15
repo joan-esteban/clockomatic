@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:id="@+id/text_title_belong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Belongs"
+            android:textAlignment="textEnd"
+            android:paddingRight="5dp"
+            android:layout_alignBaseline="@id/text_belonging"
+            android:ems="5"
+            />
+
+            <TextView
+                android:id="@+id/text_belonging"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/01/2018"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+
+
+                android:layout_toEndOf="@id/text_title_belong"
+                />
+
+
+
+            <TextView
+                android:id="@+id/text_title_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day"
+                android:textAlignment="textEnd"
+                android:layout_below="@id/text_title_belong"
+                android:layout_alignEnd="@id/text_title_belong"
+                android:layout_alignBaseline="@id/edit_day"
+                />
+
+            <EditText
+                android:id="@+id/edit_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:text="2/1/2018"
+                android:layout_below="@id/text_belonging"
+                android:layout_toEndOf="@id/text_title_day"
+
+                />
+
+            <ImageButton
+                android:id="@+id/button_date"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_date_range_black_24dp"
+                android:layout_below="@id/text_belonging"
+                android:layout_toEndOf="@id/edit_day"/>
+
+
+
+
+            <TextView
+                android:id="@+id/text_title_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textAlignment="textEnd"
+                android:layout_below="@id/text_title_day"
+                android:layout_alignEnd="@id/text_title_day"
+                android:layout_alignBaseline="@id/edit_time"
+                />
+
+            <EditText
+                android:id="@+id/edit_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                android:ems="5"
+                android:layout_below="@id/edit_day"
+                android:layout_toEndOf="@id/text_title_time"
+                />
+
+            <ImageButton
+                android:id="@+id/button_time"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_schedule_black_24dp"
+                android:layout_below="@id/button_date"
+                android:layout_toEndOf="@id/edit_time"
+                />
+
+
+
+
+            <TextView
+                android:id="@+id/text_title_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textAlignment="textEnd"
+                android:layout_below="@id/text_title_time"
+                android:layout_alignEnd="@id/text_title_time"
+                android:layout_alignBaseline="@id/edit_description"
+                />
+
+            <EditText
+                android:id="@+id/edit_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="Name"
+                android:maxLines="10"
+                android:layout_below="@id/edit_time"
+                android:layout_toEndOf="@id/text_title_description"
+                android:lines="3"
+                />
+
+
+
+        <TextView
+            android:id="@+id/text_title_kind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textAlignment="textEnd"
+            android:layout_below="@id/text_title_description"
+            android:layout_alignEnd="@id/text_title_description"
+            android:layout_alignBaseline="@id/spinner_kind"
+            />
+
+            <Spinner
+                android:id="@+id/spinner_kind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_description"
+                android:layout_toEndOf="@id/text_title_kind"/>
+
+            <ImageView
+                android:id="@+id/image_kind"
+                android:layout_width="25dip"
+                android:layout_height="25dip"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/working_time_icon"
+                android:layout_below="@id/edit_description"
+                android:layout_toEndOf="@id/spinner_kind"/>
+
+
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right">
+
+        <ImageButton
+            android:id="@+id/button_refresh"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_refresh_black_24dp" />
+
+
+        <ImageButton
+            android:id="@+id/button_remove"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/remove"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:id="@+id/button_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK"
+             />
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:id="@+id/button_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            />
+    </LinearLayout>
+
+</LinearLayout>

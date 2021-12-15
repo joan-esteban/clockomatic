@@ -3,6 +3,7 @@ package org.jesteban.clockomatic;
 import org.jesteban.clockomatic.model.Entry;
 import org.junit.Test;
 
+import java.text.ParseException;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
@@ -60,6 +61,22 @@ public class EntryTest {
     }
 
     @Test
+    public void equals_are_different_entry_if_have_same_value_and_different_kind(){
+        Calendar cal = Calendar.getInstance();
+        Entry entry1 = new Entry(cal, "day1", Entry.Kind.WORKING,"");
+        Entry entry2 = new Entry(cal, "day1",Entry.Kind.OTHER,"");
+        assertFalse(entry1.equals(entry2));
+    }
+
+    @Test
+    public void equals_are_different_entry_if_have_same_value_and_different_comment(){
+        Calendar cal = Calendar.getInstance();
+        Entry entry1 = new Entry(cal, "day1", Entry.Kind.WORKING,"comment A");
+        Entry entry2 = new Entry(cal, "day1",Entry.Kind.WORKING,"comment B");
+        assertFalse(entry1.equals(entry2));
+    }
+
+    @Test
     public void create_a_entry_with_null_is_like_create_a_empty() throws Exception {
         Entry entryNull = new Entry((Calendar)null);
         Entry entryEmpty = new Entry();
@@ -75,5 +92,49 @@ public class EntryTest {
     public void toString_a_non_empty_entry_dont_return_empty_string(){
         Entry entryEmpty = new Entry(Calendar.getInstance());
         assertFalse(entryEmpty.toString().equals(Entry.EMPTY_STRING));
+    }
+
+    @Test
+    public void OffsetDays_same_belonging_day_offset_is_0(){
+        Entry entryEmpty = new Entry(Calendar.getInstance());
+        try {
+            assertEquals(entryEmpty.getDayOffsetBetweenBelongingDayAndRegister(),  0);
+        } catch (ParseException e) {
+            assertTrue("throw a exception!!", false);
+        }
+    }
+    private Calendar createCalendar(int year, int month, int day, int hour, int minute){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH,day);
+        cal.set(Calendar.MONTH,month);
+        cal.set(Calendar.YEAR,year);
+        cal.set(Calendar.HOUR_OF_DAY,hour);
+        cal.set(Calendar.MINUTE,minute);
+        return cal;
+    }
+    @Test
+    public void OffsetDays_belonging_day_is_previous_offset_is_plus1(){
+        Calendar cal = createCalendar(2018,1,2,23,59);
+        Calendar calBd = createCalendar(2018,1,1,01,59);
+        try {
+            Entry.BelongingDay bd = new Entry.BelongingDay(calBd);
+            Entry entryEmpty = new Entry(cal, bd.getDay());
+            assertEquals(entryEmpty.getDayOffsetBetweenBelongingDayAndRegister(),  1);
+        } catch (ParseException e) {
+            assertTrue("throw a exception!!", false);
+        }
+    }
+
+    @Test
+    public void OffsetDays_belonging_day_is_previous_offset_is_minus1(){
+        Calendar cal = createCalendar(2018,1,1,23,59);
+        Calendar calBd = createCalendar(2018,1,2,01,59);
+        try {
+            Entry.BelongingDay bd = new Entry.BelongingDay(calBd);
+            Entry entryEmpty = new Entry(cal, bd.getDay());
+            assertEquals(entryEmpty.getDayOffsetBetweenBelongingDayAndRegister(),  -1);
+        } catch (ParseException e) {
+            assertTrue("throw a exception!!", false);
+        }
     }
 }
