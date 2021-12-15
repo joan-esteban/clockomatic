@@ -18,6 +18,7 @@ android {
         versionCode 10
         versionName '0.101beta'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionNameSuffix 'beta'
     }
     buildTypes {
         release {
@@ -31,6 +32,8 @@ android {
     }
     lintOptions {
         abortOnError false
+    }
+    productFlavors {
     }
 }
 
